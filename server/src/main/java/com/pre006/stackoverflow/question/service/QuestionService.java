@@ -2,9 +2,14 @@ package com.pre006.stackoverflow.question.service;
 
 import com.pre006.stackoverflow.question.entity.Question;
 import com.pre006.stackoverflow.question.repository.QuestionRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Transactional
@@ -25,6 +30,11 @@ public class QuestionService {
         Question question = findVerifiedQuestion(questionId);
 
         return question;
+    }
+
+    public Page<Question> findQuestions(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("questionId").descending());
+        return questionRepository.findAll(pageable);
     }
 
     private Question findVerifiedQuestion(long questionId) {
