@@ -32,6 +32,7 @@ public class AnswerController {
 
         return ResponseEntity.created(location).build();
     }
+
     @PatchMapping("/{answer-id}")
     public ResponseEntity patchAnswer(@PathVariable("answer-id") long answerId,
                                       @RequestBody AnswerDto.Patch patch){
@@ -59,6 +60,13 @@ public class AnswerController {
     public ResponseEntity deleteAnswer(@PathVariable("answer-id") long answerId){
         answerService.deleteAnswer(answerId);
         System.out.println("삭제가 완료됐습니다.");
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @DeleteMapping
+    public ResponseEntity deleteAnswers(){
+        answerService.deleteAnswers();
+
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

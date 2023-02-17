@@ -44,9 +44,14 @@ public class AnswerService {
 
     }
 
+    public void deleteAnswers(){
+
+        answerRepository.deleteAll();
+    }
+
     public Answer findVerifiedAnswer(long answerId){
         Optional<Answer> optionalAnswer = answerRepository.findById(answerId);
-        Answer findAnswer = optionalAnswer.orElseThrow(() -> new BusinessLogicException(ExceptionCode.ANSWER_NOT_FOUND));
+        Answer findAnswer = optionalAnswer.orElseThrow(() -> new BusinessLogicException(ExceptionCode.NOT_FOUND));
         return findAnswer;
     }
 }
