@@ -27,7 +27,6 @@ public class QuestionController {
     private final static String QUESTION_DEFAULT_URL = "/questions";
 
     private final QuestionService questionService;
-
     private final QuestionMapper mapper;
 
     public QuestionController(QuestionService questionService, QuestionMapper mapper) {
@@ -40,7 +39,7 @@ public class QuestionController {
         Question createQuestion = questionService.createQuestion(mapper.PostDtoToQuestion(requestBody));
         QuestionDto.ResponseDto response = mapper.questionToResponseDto(createQuestion);
 
-        URI location = UriCreator.createUri(QUESTION_DEFAULT_URL);
+        URI location = UriCreator.createUri(QUESTION_DEFAULT_URL, createQuestion.getQuestionId());
 
         return ResponseEntity.created(location).body(response);
     }
@@ -50,11 +49,7 @@ public class QuestionController {
         Question findQuestion = questionService.findQuestion(questionId);
         QuestionDto.ResponseDto response = mapper.questionToResponseDto(findQuestion);
 
-        String location = String.valueOf(UriCreator.createUri(QUESTION_DEFAULT_URL, questionId));
-
-        return ResponseEntity.status(HttpStatus.OK)
-                .header("Location", location)
-                .body(response);
+        return new ResponseEntity(response, HttpStatus.OK);
     }
 
     @GetMapping
@@ -63,10 +58,9 @@ public class QuestionController {
         Page<Question> questionPage = questionService.findQuestions(page - 1, size);
         List<Question> questions = questionPage.getContent();
 
-        String location = String.valueOf(UriCreator.createUri(QUESTION_DEFAULT_URL));
-
-        return ResponseEntity.status(HttpStatus.OK)
-                .header("Location", location)
-                .body(new MultiResponseDto<>(questions, questionPage));
+        return new ResponseEntity(
+                new MultiResponseDto<>(questions, questionPage),
+                HttpStatus.OK
+        );
     }
 }
