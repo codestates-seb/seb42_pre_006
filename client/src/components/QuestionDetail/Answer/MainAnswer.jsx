@@ -1,0 +1,1 @@
+// answer vote와 questionbody 불러오기
