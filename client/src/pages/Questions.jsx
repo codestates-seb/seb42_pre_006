@@ -4,11 +4,11 @@ import QuestionsPagination from "../components/QuestionsPagination";
 
 function Questions() {
     return (
-        <article>
+        <main>
             <QuestionsHeader />
             <QuestionsList />
             <QuestionsPagination />
-        </article>
+        </main>
     );
 }
 

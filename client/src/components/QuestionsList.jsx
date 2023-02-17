@@ -23,13 +23,22 @@ function QuestionsList() {
                     </p>
 
                     <div className="mt-2">
-                        <button className="mr-2 text-sm text-[#39739d] bg-[#E1ECF4] px-2 py-1 rounded hover:bg-[#cfdbe5]">
+                        <button
+                            type="button"
+                            className="mr-2 text-sm text-[#39739d] bg-[#E1ECF4] px-2 py-1 rounded hover:bg-[#cfdbe5]"
+                        >
                             tag1
                         </button>
-                        <button className="mr-2 text-sm text-[#39739d] bg-[#E1ECF4] px-2 py-1 rounded hover:bg-[#cfdbe5]">
+                        <button
+                            type="button"
+                            className="mr-2 text-sm text-[#39739d] bg-[#E1ECF4] px-2 py-1 rounded hover:bg-[#cfdbe5]"
+                        >
                             tag2
                         </button>
-                        <button className="text-sm text-[#39739d] bg-[#E1ECF4] px-2 py-1 rounded hover:bg-[#cfdbe5]">
+                        <button
+                            type="button"
+                            className="text-sm text-[#39739d] bg-[#E1ECF4] px-2 py-1 rounded hover:bg-[#cfdbe5]"
+                        >
                             tag3
                         </button>
                     </div>
@@ -67,13 +76,22 @@ function QuestionsList() {
                     </p>
 
                     <div className="mt-2">
-                        <button className="mr-2 text-sm text-[#39739d] bg-[#E1ECF4] px-2 py-1 rounded hover:bg-[#cfdbe5]">
+                        <button
+                            type="button"
+                            className="mr-2 text-sm text-[#39739d] bg-[#E1ECF4] px-2 py-1 rounded hover:bg-[#cfdbe5]"
+                        >
                             tag1
                         </button>
-                        <button className="mr-2 text-sm text-[#39739d] bg-[#E1ECF4] px-2 py-1 rounded hover:bg-[#cfdbe5]">
+                        <button
+                            type="button"
+                            className="mr-2 text-sm text-[#39739d] bg-[#E1ECF4] px-2 py-1 rounded hover:bg-[#cfdbe5]"
+                        >
                             tag2
                         </button>
-                        <button className="text-sm text-[#39739d] bg-[#E1ECF4] px-2 py-1 rounded hover:bg-[#cfdbe5]">
+                        <button
+                            type="button"
+                            className="text-sm text-[#39739d] bg-[#E1ECF4] px-2 py-1 rounded hover:bg-[#cfdbe5]"
+                        >
                             tag3
                         </button>
                     </div>
