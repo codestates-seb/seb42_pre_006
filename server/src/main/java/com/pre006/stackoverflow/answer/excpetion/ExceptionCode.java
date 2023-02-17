@@ -6,8 +6,8 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum ExceptionCode {
-    ANSWER_NOT_FOUND(404, "Answer not found");
-
+    NOT_FOUND(404, "Answer not found");
     private int status;
     private String message;
+
 }

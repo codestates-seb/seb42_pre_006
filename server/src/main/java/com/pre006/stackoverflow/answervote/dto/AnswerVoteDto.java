@@ -1,33 +1,36 @@
-package com.pre006.stackoverflow.answer.dto;
+package com.pre006.stackoverflow.answervote.dto;
 
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
 
-import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
-public class AnswerDto {
+public class AnswerVoteDto {
     @Getter
     @AllArgsConstructor
     @NoArgsConstructor
     public static class Post{
-        @NotBlank(message = "내용을 적어주세요.")
-        private String answerContent;
+        private long memberId;
+        private long answerId;
+        private boolean answerVoteStatus;
     }
     @Getter
     @Setter
     @AllArgsConstructor
     public static class Patch{
+        private long memberId;
         private long answerId;
-        @NotBlank(message = "내용을 적어주세요.")
-        private String answerContent;
+        private boolean answerVoteStatus;
     }
     @Getter
     @Builder
     public static class Response{
         private long answerId;
-        private String answerContent;
+        private boolean answerVoteStatus;
+        private long answerVoteCount;
         private LocalDateTime createdAt;
         private LocalDateTime modifiedAt;
+
+
     }
+
 }
