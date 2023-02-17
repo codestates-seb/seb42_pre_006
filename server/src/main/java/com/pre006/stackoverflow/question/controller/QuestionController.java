@@ -8,11 +8,6 @@ import com.pre006.stackoverflow.question.service.QuestionService;
 import com.pre006.stackoverflow.question.utils.UriCreator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
-import org.springframework.data.web.SortDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +31,7 @@ public class QuestionController {
 
     @PostMapping
     public ResponseEntity postQuestion(@RequestBody QuestionDto.PostDto requestBody) {
-        Question createQuestion = questionService.createQuestion(mapper.PostDtoToQuestion(requestBody));
+        Question createQuestion = questionService.createQuestion(mapper.postDtoToQuestion(requestBody));
         QuestionDto.ResponseDto response = mapper.questionToResponseDto(createQuestion);
 
         URI location = UriCreator.createUri(QUESTION_DEFAULT_URL, createQuestion.getQuestionId());
@@ -62,5 +57,19 @@ public class QuestionController {
                 new MultiResponseDto<>(questions, questionPage),
                 HttpStatus.OK
         );
+    }
+
+    @PatchMapping("/{question-id}")
+    public ResponseEntity patchQuestion(@PathVariable("question-id") Long questionId,
+                                        @RequestBody QuestionDto.PatchDto requestBody) {
+        requestBody.setQuestionId(questionId);
+        Question updateQuestion = questionService.updateQuestion(mapper.patchDtoToQuestion(requestBody));
+        QuestionDto.ResponseDto response = mapper.questionToResponseDto(updateQuestion);
+
+        URI location = UriCreator.createUri(QUESTION_DEFAULT_URL, updateQuestion.getQuestionId());
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .location(location)
+                .body(response);
     }
 }

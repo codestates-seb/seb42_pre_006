@@ -6,7 +6,9 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface QuestionMapper {
-    Question PostDtoToQuestion(QuestionDto.PostDto requestBody);
+    Question postDtoToQuestion(QuestionDto.PostDto requestBody);
+
+    Question patchDtoToQuestion(QuestionDto.PatchDto requestBody);
 
     QuestionDto.ResponseDto questionToResponseDto(Question question);
 }
