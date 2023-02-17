@@ -1,7 +1,7 @@
 function QuestionsPagination() {
     return (
         <section>
-            {/* TODO: 페이지네이션 구현하기 */}
+            {/* TODO: 페이지네이션 기능작업 */}
             <ul className="ml-8 my-20 flex text-sm">
                 <li className="border rounded mx-0.5 flex content-center justify-center hover:bg-[#D6D9DC]">
                     <button type="button" className="px-2 py-1">
