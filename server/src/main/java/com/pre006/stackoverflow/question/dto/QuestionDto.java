@@ -36,7 +36,7 @@ public class QuestionDto {
         private String questionTitle;
         private String questionContent;
         private String questionStatus;
-        private int questionHits;
+        private int viewCount;
         private int questionVoteCount;
         private LocalDateTime createAt;
         private LocalDateTime modifiedAt;

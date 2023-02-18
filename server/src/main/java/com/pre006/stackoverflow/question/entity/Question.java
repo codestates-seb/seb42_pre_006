@@ -28,7 +28,7 @@ public class Question extends Auditable {
     private QuestionStatus questionStatus = QuestionStatus.QUESTION_REGISTRATION;
 
     @Column(nullable = false)
-    private int questionHits;
+    private int viewCount;
 
     @Column(nullable = false)
     private int questionVoteCount;
