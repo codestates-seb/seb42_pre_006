@@ -10,7 +10,7 @@ const QuestionBody = () => {
     <div className=" mt-5 flex flex-col">
       <QuestionBodyTxt />
       <QuestionTags />
-      <div className="flex justify-between ">
+      <div className="flex justify-between mt-7">
         <QuestionBodyBtns />
         <QuestionUserinfo />
       </div>

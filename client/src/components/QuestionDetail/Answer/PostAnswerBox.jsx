@@ -5,7 +5,7 @@ import Toastinput from './Toastinput'
 const PostAnswerBox = () => {
     return (
         <div className=' flex flex-col items-start mt-16'>
-            <div className=' mb-4'>Your Answer</div>
+            <div className=' mb-4 text-lg'>Your Answer</div>
             <Toastinput />
         </div>
     )
