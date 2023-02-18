@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import QuestionEditAside from "../components/QuestionEditAside";
-import QuestionEditFormBody from "../components/QuestionEditFormBody";
-import QuestionEditFormTags from "../components/QuestionEditFormTags";
-import QuestionEditFormTitle from "../components/QuestionEditFormTitle";
+import QuestionEditAside from "../components/QuestionEdit/QuestionEditAside";
+import QuestionEditFormBody from "../components/QuestionEdit/QuestionEditFormBody";
+import QuestionEditFormTags from "../components/QuestionEdit/QuestionEditFormTags";
+import QuestionEditFormTitle from "../components/QuestionEdit/QuestionEditFormTitle";
 
 function QuestionEdit() {
     return (

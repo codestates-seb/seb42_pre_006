@@ -1,6 +1,6 @@
-import QuestionsHeader from "../components/QuestionsHeader";
-import QuestionsList from "../components/QuestionsList";
-import QuestionsPagination from "../components/QuestionsPagination";
+import QuestionsHeader from "../components/Questions/QuestionsHeader";
+import QuestionsList from "../components/Questions/QuestionsList";
+import QuestionsPagination from "../components/Questions/QuestionsPagination";
 
 function Questions() {
     return (

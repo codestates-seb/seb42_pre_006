@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import QuestionAskFormBody from "../components/QuestionAskFormBody";
-import QuestionAskFormTags from "../components/QuestionAskFormTags";
-import QuestionAskFormTitle from "../components/QuestionAskFormTitle";
-import QuestionAskHeader from "../components/QuestionAskHeader";
+import QuestionAskFormBody from "../components/QuestionAsk/QuestionAskFormBody";
+import QuestionAskFormTags from "../components/QuestionAsk/QuestionAskFormTags";
+import QuestionAskFormTitle from "../components/QuestionAsk/QuestionAskFormTitle";
+import QuestionAskHeader from "../components/QuestionAsk/QuestionAskHeader";
 
 function QuestionAsk() {
     return (

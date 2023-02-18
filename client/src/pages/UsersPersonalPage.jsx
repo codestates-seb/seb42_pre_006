@@ -1,9 +1,9 @@
-import UsersPersonalPageList from "../components/UsersPersonalPageList";
-import UsersPersonalPageHeader from "../components/UsersPersonalPageHeader";
-import UsersPersonalPageNav from "../components/UsersPersonalPageNav";
-import UsersPersonalPageSummary from "../components/UsersPersonalPageSummary";
-import UsersPersonalPageAnswers from "../components/UsersPersonalPageAnswers";
-import UsersPersonalPageQuestions from "../components/UsersPersonalPageQuestions";
+import UsersPersonalPageList from "../components/UsersPersonalPage/UsersPersonalPageList";
+import UsersPersonalPageHeader from "../components/UsersPersonalPage/UsersPersonalPageHeader";
+import UsersPersonalPageNav from "../components/UsersPersonalPage/UsersPersonalPageNav";
+import UsersPersonalPageSummary from "../components/UsersPersonalPage/UsersPersonalPageSummary";
+import UsersPersonalPageAnswers from "../components/UsersPersonalPage/UsersPersonalPageAnswers";
+import UsersPersonalPageQuestions from "../components/UsersPersonalPage/UsersPersonalPageQuestions";
 
 function UsersPersonalPage() {
     return (
