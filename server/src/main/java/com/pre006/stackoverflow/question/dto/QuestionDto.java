@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 public class QuestionDto {
     @Getter
     @AllArgsConstructor
@@ -34,6 +36,10 @@ public class QuestionDto {
         private String questionTitle;
         private String questionContent;
         private String questionStatus;
+        private int questionHits;
+        private int questionVoteCount;
+        private LocalDateTime createAt;
+        private LocalDateTime modifiedAt;
         private String editComment;
 
         // todo: Member Response Dto

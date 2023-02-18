@@ -1,5 +1,6 @@
 package com.pre006.stackoverflow.question.entity;
 
+import com.pre006.stackoverflow.question.audit.Auditable;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,7 +13,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-public class Question {
+public class Question extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long questionId;
