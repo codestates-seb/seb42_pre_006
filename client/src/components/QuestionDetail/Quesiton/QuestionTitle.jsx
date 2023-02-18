@@ -5,7 +5,7 @@ const QuestionTitle = () => {
         <h1 className=" text-3xl text-left">
           MySql/mariadb - SELECT 0 = 'N;' returns true
         </h1>
-        <button className="w-28 h-10 ml-3 text-sm px-1 py-1 rounded bg-sky-500 text-white font-medium">
+        <button className="w-28 h-10 ml-3 text-sm px-1 py-1 rounded bg-sky-500 text-white font-medium hover:bg-sky-700">
           Ask Question
         </button>
       </div>
