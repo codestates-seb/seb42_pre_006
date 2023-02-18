@@ -29,7 +29,7 @@ function InputFeild({
         className={classNames(
           "flex items-center border border-gray-300 rounded-sm mt-2",
           {
-            "border-2 border-danger": isValidError,
+            "border-2 !border-danger": isValidError,
           },
           {
             "bg-gray-100": disabled,
