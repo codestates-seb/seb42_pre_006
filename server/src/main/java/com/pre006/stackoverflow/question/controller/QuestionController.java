@@ -54,7 +54,7 @@ public class QuestionController {
         List<Question> questions = questionPage.getContent();
 
         return new ResponseEntity(
-                new MultiResponseDto<>(questions, questionPage),
+                new MultiResponseDto<>(mapper.questionsToResponseDtos(questions), questionPage),
                 HttpStatus.OK
         );
     }
