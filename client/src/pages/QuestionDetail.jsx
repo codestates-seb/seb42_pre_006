@@ -2,6 +2,7 @@
 
 import QuestionTitle from "../components/QuestionDetail/Quesiton/QuestionTitle";
 import MainQuestion from "../components/QuestionDetail/Quesiton/MainQuestion";
+import QuesitonAnswer from "../components/QuestionDetail/Answer/QuesitonAnswer";
 
 
 const QuestionDetail = () => {
@@ -9,6 +10,7 @@ const QuestionDetail = () => {
     <>
       <QuestionTitle />
       <MainQuestion />
+      <QuesitonAnswer />
     </>
   );
 };

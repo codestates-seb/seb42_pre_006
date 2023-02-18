@@ -3,14 +3,14 @@ import { FiBookmark, FiClock } from "react-icons/fi";
 
 const QuestionVote = () => {
   return (
-    <article className=" flex flex-col justify-center items-center  text-gray-400">
+    <article className=" flex flex-col justify-top items-center  text-gray-300">
       <div className="">
         <button className=" text-7xl">
-          <MdArrowDropUp />
+          <MdArrowDropUp className=" -mb-6" />
         </button>
         <div className="text-gray-500  font-medium text-xl">0</div>
         <button className=" text-7xl ">
-          <MdArrowDropDown />
+          <MdArrowDropDown className=" -mt-4 -mb-5" />
         </button>
       </div>
       <div>
