@@ -8,7 +8,7 @@ const QuestionVote = () => {
         <button className=" text-7xl ">
           <MdArrowDropUp className=" -mb-6" />
         </button>
-        <div className="text-gray-500  font-medium text-xl">0</div>
+        <div className="text-gray-500  font-medium text-xl">0 {/* 투표수 반영 기능 작업 */}</div>
         <button className=" text-7xl ">
           <MdArrowDropDown className=" -mt-4 -mb-5" />
         </button>
