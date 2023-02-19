@@ -1,8 +1,8 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { ReactComponent as LogoSymbol } from "../../../assets/images/symbol.svg";
-import SiteMap from "./SiteMap";
-import SocialNav from "./SocialNav";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { ReactComponent as LogoSymbol } from '../../../assets/images/symbol.svg';
+import SiteMap from './SiteMap';
+import SocialNav from './SocialNav';
 
 function Footer() {
   return (

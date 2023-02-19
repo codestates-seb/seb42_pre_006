@@ -1,6 +1,6 @@
-import classNames from "classnames";
-import React from "react";
-import { MdError } from "react-icons/md";
+import classNames from 'classnames';
+import React from 'react';
+import { MdError } from 'react-icons/md';
 
 function InputFeild({
   id,
@@ -16,7 +16,7 @@ function InputFeild({
   onChange,
 }) {
   return (
-    <div className={classNames("my-4", className)}>
+    <div className={classNames('my-4', className)}>
       <label htmlFor={id} className="block text-left font-semibold text-sm">
         {label}
         {labelDetail && (
@@ -27,13 +27,13 @@ function InputFeild({
       </label>
       <div
         className={classNames(
-          "flex items-center border border-gray-300 rounded-sm mt-2",
+          'flex items-center border border-gray-300 rounded-sm mt-2',
           {
-            "border-2 !border-danger": isValidError,
+            'border-2 !border-danger': isValidError,
           },
           {
-            "bg-gray-100": disabled,
-          }
+            'bg-gray-100': disabled,
+          },
         )}
       >
         <input
@@ -44,8 +44,8 @@ function InputFeild({
           placeholder={placeholder}
           onChange={onChange}
           disabled={disabled}
-          className={classNames("w-full h-8 p-2", {
-            "outline-none": isValidError,
+          className={classNames('w-full h-8 p-2', {
+            'outline-none': isValidError,
           })}
         />
         {isValidError && <MdError className="text-danger mx-4 text-2xl" />}

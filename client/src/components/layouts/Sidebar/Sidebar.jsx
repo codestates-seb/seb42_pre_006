@@ -1,7 +1,7 @@
-import React from "react";
-import { MdRemoveRedEye, MdSearch } from "react-icons/md";
-import Button from "../../UI/Button";
-import SidebarWidget from "./SidebarWidget";
+import React from 'react';
+import { MdRemoveRedEye, MdSearch } from 'react-icons/md';
+import Button from '../../UI/Button';
+import SidebarWidget from './SidebarWidget';
 
 function Sidebar() {
   return (

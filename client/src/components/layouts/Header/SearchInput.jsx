@@ -1,21 +1,21 @@
-import classNames from "classnames";
-import React, { useState } from "react";
-import { MdSearch } from "react-icons/md";
-import SearchExpand from "./SearchExpand";
+import classNames from 'classnames';
+import React, { useState } from 'react';
+import { MdSearch } from 'react-icons/md';
+import SearchExpand from './SearchExpand';
 
 function SearchInput() {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const handleFounsSearchInput = () => {
-    setIsExpanded((prevState) => !prevState);
+    setIsExpanded(prevState => !prevState);
   };
 
   return (
     <div className="relative">
       <form>
         <div
-          className={classNames("flex items-center border p-1", {
-            "shadow-md shadow-sky-400 outline outline-2 outline-sky-400":
+          className={classNames('flex items-center border p-1', {
+            'shadow-md shadow-sky-400 outline outline-2 outline-sky-400':
               isExpanded,
           })}
         >

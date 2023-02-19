@@ -1,8 +1,8 @@
-import React from "react";
-import { BsGithub } from "react-icons/bs";
-import { FcGoogle } from "react-icons/fc";
-import { ImFacebook2 } from "react-icons/im";
-import Button from "./Button";
+import React from 'react';
+import { BsGithub } from 'react-icons/bs';
+import { FcGoogle } from 'react-icons/fc';
+import { ImFacebook2 } from 'react-icons/im';
+import Button from './Button';
 
 function SocialLogin() {
   return (
