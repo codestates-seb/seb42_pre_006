@@ -1,13 +1,16 @@
+import Button from "../../UI/Button";
+
 const QuestionTitle = () => {
   return (
-    <div className=" flex flex-col">
+    <article className=" flex flex-col">
       <div className=" flex justify-between mb-2">
         <h1 className=" text-3xl text-left">
           MySql/mariadb - SELECT 0 = 'N;' returns true
         </h1>
-        <button className="w-28 h-10 ml-3 text-sm px-1 py-1 rounded bg-sky-500 text-white font-medium hover:bg-sky-700">
-          Ask Question
-        </button>
+        <Button to="/questions" variant="primary" size="md">
+          Ask a question
+        </Button>
+
       </div>
 
       <div className=" flex justify-start text-sm">
@@ -25,7 +28,7 @@ const QuestionTitle = () => {
         </div>
       </div>
       <div className="w-screen h-px text-center bg-gray-200 mt-3"></div>
-    </div>
+    </article>
   );
 };
 

@@ -13,6 +13,8 @@ import Guide from "./pages/Guide";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
+import QuestionDetail from "./pages/QuestionDetail";
+
 function App() {
   return (
     <BrowserRouter>
@@ -23,6 +25,7 @@ function App() {
           <Route path="/ask" element={<QuestionAsk />} />
           <Route path="/edit" element={<QuestionEdit />} />
           <Route path="/guide" element={<Guide />} />
+          <Route path="/detail" element={<QuestionDetail />} />
         </Route>
         <Route element={<MainLayout />}>
           <Route path="/tags" element={<Tags />} />
