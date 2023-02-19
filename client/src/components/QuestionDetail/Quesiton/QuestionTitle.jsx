@@ -27,7 +27,7 @@ const QuestionTitle = () => {
           <span>4 times</span>
         </div>
       </div>
-      <div className="w-screen h-px text-center bg-gray-200 mt-3"></div>
+      <div className=" flex w-full h-px text-center bg-gray-200 mt-3"></div>
     </article>
   );
 };
