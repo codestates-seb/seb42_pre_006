@@ -7,11 +7,11 @@ import QuesitonAnswer from "../components/QuestionDetail/Answer/QuesitonAnswer";
 
 const QuestionDetail = () => {
   return (
-    <>
+    <div className=" py-2 px-5">
       <QuestionTitle />
       <MainQuestion />
       <QuesitonAnswer />
-    </>
+    </div>
   );
 };
 
