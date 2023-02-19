@@ -57,12 +57,12 @@ const QuestionVote = () => {
       <div>
         {bookMark ? (
           <MdOutlineBookmark
-            className=" text-2xl mb-2 text-orange-400"
+            className=" cursor-pointer text-2xl mb-2 text-orange-400"
             onClick={onBookMarkHandler}
           />
         ) : (
           <MdOutlineBookmarkBorder
-            className=" text-2xl mb-2"
+            className=" cursor-pointer text-2xl mb-2"
             onClick={onBookMarkHandler}
           />
         )}
