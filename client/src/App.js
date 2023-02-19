@@ -1,18 +1,18 @@
-import "./theme.scss";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import QuestionAsk from "./pages/QuestionAsk";
-import Questions from "./pages/Questions";
-import QuestionEdit from "./pages/QuestionEdit";
-import UsersPersonalPage from "./pages/UsersPersonalPage";
-import Tags from "./pages/Tags";
-import Users from "./pages/Users";
-import Search from "./components/Search";
-import BaseLayout from "./components/layouts/BaseLayout";
-import MainLayout from "./components/layouts/MainLayout";
-import Guide from "./pages/Guide";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import SignUp from "./pages/SignUp";
+import React from 'react';
+import './theme.scss';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import QuestionAsk from './pages/QuestionAsk';
+import Questions from './pages/Questions';
+import QuestionEdit from './pages/QuestionEdit';
+import UsersPersonalPage from './pages/UsersPersonalPage';
+import Tags from './pages/Tags';
+import Users from './pages/Users';
+import BaseLayout from './components/layouts/BaseLayout';
+import MainLayout from './components/layouts/MainLayout';
+import Guide from './pages/Guide';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import SignUp from './pages/SignUp';
 function App() {
   return (
     <BrowserRouter>

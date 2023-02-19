@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import LogoText from "../../UI/LogoText";
-import SearchInput from "./SearchInput";
-import TopNav from "./TopNav";
-import UserNav from "./UserNav";
+import React, { useState } from 'react';
+import LogoText from '../../UI/LogoText';
+import SearchInput from './SearchInput';
+import TopNav from './TopNav';
+import UserNav from './UserNav';
 
 function Header() {
   // 화면 전환 테스트 용 useState (삭제 예정)

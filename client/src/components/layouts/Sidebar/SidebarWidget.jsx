@@ -1,16 +1,16 @@
-import React from "react";
-import classNames from "classnames";
-import { BsPencilFill, BsStackOverflow } from "react-icons/bs";
-import { MdChatBubbleOutline } from "react-icons/md";
+import React from 'react';
+import classNames from 'classnames';
+import { BsPencilFill, BsStackOverflow } from 'react-icons/bs';
+import { MdChatBubbleOutline } from 'react-icons/md';
 
 const COLOR_TYPES = {
   default: {
-    header: "bg-gray-50 text-gray-500",
-    content: "bg-white",
+    header: 'bg-gray-50 text-gray-500',
+    content: 'bg-white',
   },
   yellow: {
-    header: "bg-yellow-100 text-gray-black text-semibold",
-    content: "bg-yellow-50",
+    header: 'bg-yellow-100 text-gray-black text-semibold',
+    content: 'bg-yellow-50',
   },
 };
 
@@ -20,25 +20,25 @@ const ICON_TYPES = {
   meta: <MdChatBubbleOutline className="text-blue-600" />,
 };
 
-function SidebarWidgetBox({ title, children, color = "default" }) {
+function SidebarWidgetBox({ title, children, color = 'default' }) {
   return (
     <>
       <h3
         className={classNames(
-          "border-b px-4 py-2 text-sm font-semibold",
-          COLOR_TYPES[color].header
+          'border-b px-4 py-2 text-sm font-semibold',
+          COLOR_TYPES[color].header,
         )}
       >
         {title}
       </h3>
-      <div className={classNames("px-4 py-4", COLOR_TYPES[color].content)}>
+      <div className={classNames('px-4 py-4', COLOR_TYPES[color].content)}>
         {children}
       </div>
     </>
   );
 }
 
-function SidebarWidgetIconListItem({ type = "overflow", url, children }) {
+function SidebarWidgetIconListItem({ type = 'overflow', url, children }) {
   return (
     <div className="mt-2 first:mt-0">
       <a
