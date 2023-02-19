@@ -1,6 +1,6 @@
-import React from "react";
-import AsideNavItem from "./AsideNavItem";
-import { FaGlobeAmericas } from "react-icons/fa";
+import React from 'react';
+import AsideNavItem from './AsideNavItem';
+import { FaGlobeAmericas } from 'react-icons/fa';
 
 function Aside() {
   return (

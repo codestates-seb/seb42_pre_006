@@ -1,11 +1,11 @@
-import React from "react";
-import { MdAllInbox } from "react-icons/md";
-import { ImTrophy } from "react-icons/im";
-import { BsFillQuestionCircleFill } from "react-icons/bs";
-import { HiChatBubbleBottomCenterText } from "react-icons/hi2";
-import { FaUserCircle } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
-import Button from "../../UI/Button";
+import React from 'react';
+import { MdAllInbox } from 'react-icons/md';
+import { ImTrophy } from 'react-icons/im';
+import { BsFillQuestionCircleFill } from 'react-icons/bs';
+import { HiChatBubbleBottomCenterText } from 'react-icons/hi2';
+import { FaUserCircle } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
+import Button from '../../UI/Button';
 
 function UserNavItem({ onClick, children }) {
   return (
@@ -28,13 +28,13 @@ function UserNav({ isLogin, onLogout }) {
         <Button
           variant="secondary"
           size="sm"
-          onClick={() => navigate("/login")}
+          onClick={() => navigate('/login')}
         >
           Log in
         </Button>
       </div>
       <div className="mx-1 ">
-        <Button variant="primary" size="sm" onClick={() => navigate("/signup")}>
+        <Button variant="primary" size="sm" onClick={() => navigate('/signup')}>
           Sign up
         </Button>
       </div>
