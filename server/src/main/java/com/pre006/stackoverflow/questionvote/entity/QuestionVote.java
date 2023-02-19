@@ -18,7 +18,7 @@ public class QuestionVote extends Auditable {
     private long questionVoteId;
 
     @Column(nullable = false)
-    private Boolean questionStatus;
+    private Boolean questionVoteStatus;
 
     @ManyToOne
     @JoinColumn(name = "question_id")
