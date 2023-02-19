@@ -41,6 +41,9 @@ public class Question extends Auditable {
 
     // todo: QuestionVote 연관 관계 매핑
 
+    public void addViewCount() {
+        this.viewCount++;
+    }
 
     public Question(String questionTitle, String questionContent) {
         this.questionTitle = questionTitle;

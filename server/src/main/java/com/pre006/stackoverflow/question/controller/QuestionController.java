@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.net.URI;
 import java.util.List;
 
@@ -40,9 +42,13 @@ public class QuestionController {
     }
 
     @GetMapping("/{question-id}")
-    public ResponseEntity getQuestion(@PathVariable("question-id") Long questionId) {
+    public ResponseEntity getQuestion(@PathVariable("question-id") Long questionId,
+                                      HttpServletRequest servletRequest,
+                                      HttpServletResponse servletResponse) {
         Question findQuestion = questionService.findQuestion(questionId);
         QuestionDto.ResponseDto response = mapper.questionToResponseDto(findQuestion);
+
+        questionService.viewCountValidation(findQuestion, servletRequest, servletResponse);
 
         return new ResponseEntity(response, HttpStatus.OK);
     }
