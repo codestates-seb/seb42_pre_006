@@ -7,6 +7,8 @@ import Tags from "./pages/Tags";
 import Users from "./pages/Users";
 import Search from "./components/Search";
 
+import QuestionDetail from './pages/QuestionDetail'
+
 function App() {
     return (
         <div className="App">
