@@ -5,11 +5,13 @@ import QuestionEdit from "./pages/QuestionEdit";
 import UsersPersonalPage from "./pages/UsersPersonalPage";
 import Tags from "./pages/Tags";
 import Users from "./pages/Users";
+import Search from "./components/Search";
 
 function App() {
     return (
         <div className="App">
             <BrowserRouter>
+                <Search />
                 <Routes>
                     <Route path="/" element={<Questions />} />
                     <Route path="/ask" element={<QuestionAsk />} />
