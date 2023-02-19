@@ -12,4 +12,19 @@ public class UriCreator {
                 .buildAndExpand(resourceId)
                 .toUri();
     }
+
+    /**
+     * questionVote post 요청 시 응답하는 location 생성 메소드
+     * @param defaultUrl
+     * @param questionId
+     * @param questionVoteId
+     * @return
+     */
+    public static URI createUri(String defaultUrl, long questionId, long questionVoteId) {
+        return UriComponentsBuilder
+                .newInstance()
+                .path(defaultUrl + "/{question-id}/vote/{question-vote-id}")
+                .buildAndExpand(questionId, questionVoteId)
+                .toUri();
+    }
 }
