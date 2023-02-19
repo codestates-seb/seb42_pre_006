@@ -4,6 +4,7 @@ import Questions from "./pages/Questions";
 import QuestionEdit from "./pages/QuestionEdit";
 import UsersPersonalPage from "./pages/UsersPersonalPage";
 import Tags from "./pages/Tags";
+import Users from "./pages/Users";
 
 function App() {
     return (
@@ -15,6 +16,7 @@ function App() {
                     <Route path="/edit" element={<QuestionEdit />} />
                     <Route path="/users/1" element={<UsersPersonalPage />} />
                     <Route path="/tags" element={<Tags />} />
+                    <Route path="/users" element={<Users />} />
                 </Routes>
             </BrowserRouter>
         </div>
