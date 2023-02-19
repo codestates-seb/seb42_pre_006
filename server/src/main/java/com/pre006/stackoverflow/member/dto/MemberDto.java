@@ -36,6 +36,11 @@ public class MemberDto {
         private String MemberTitle;
         private String aboutMe;
     }
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
     public static class Response {
         private Long memberId;
         private String email;
