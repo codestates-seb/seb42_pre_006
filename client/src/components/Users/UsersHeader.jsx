@@ -3,7 +3,7 @@ function UsersHeader() {
   return (
     <section>
       <div>
-        <h1 className="text-3xl font-medium mb-4">Users</h1>
+        <h1 className="text-3xl font-medium mb-6 text-left">Users</h1>
       </div>
 
       <div className="flex items-center justify-between">

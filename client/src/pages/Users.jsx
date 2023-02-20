@@ -4,7 +4,7 @@ import UsersPagination from '../components/Users/UsersPagination';
 
 function Users() {
   return (
-    <article className="mx-8 my-8">
+    <article className="ml-6">
       <UsersHeader />
       <UsersList />
       <UsersPagination />
