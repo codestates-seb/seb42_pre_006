@@ -4,7 +4,7 @@ import { ImTrophy } from 'react-icons/im';
 import { BsFillQuestionCircleFill } from 'react-icons/bs';
 import { HiChatBubbleBottomCenterText } from 'react-icons/hi2';
 import { FaUserCircle } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import Button from '../../UI/Button';
 
 function UserNavItem({ onClick, children }) {
@@ -47,10 +47,12 @@ function UserNav({ isLogin, onLogout }) {
   const isLoggedInComponent = (
     <>
       <div className="mx-1 mr-4">
-        <UserNavItem>
-          <FaUserCircle className=" text-violet-900" />
-          <span className="ml-2 leading-none font-semibold">1</span>
-        </UserNavItem>
+        <Link to="/users/1">
+          <UserNavItem>
+            <FaUserCircle className=" text-violet-900" />
+            <span className="ml-2 leading-none font-semibold">1</span>
+          </UserNavItem>
+        </Link>
       </div>
       <div className="mx-1">
         <UserNavItem>
