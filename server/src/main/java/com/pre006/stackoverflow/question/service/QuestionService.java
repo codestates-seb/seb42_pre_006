@@ -93,12 +93,12 @@ public class QuestionService {
         servletResponse.addCookie(cookie);
     }
 
-    private Question findVerifiedQuestion(long questionId) {
+    public Question findVerifiedQuestion(long questionId) {
         Optional<Question> optionalQuestion = questionRepository.findById(questionId);
 
         // todo : Custom ErrorResponse 필요
         Question findQuestion = optionalQuestion.orElseThrow(() ->
-                new NullPointerException());
+                new RuntimeException("NOT_EXIST_QUESTION"));
 
         return findQuestion;
     }
