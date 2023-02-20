@@ -7,9 +7,7 @@ function BaseLayout() {
     <main className="bg-gray-100">
       <Header />
       <div className="container grid min-h-[calc(100vh-4rem)] py-6">
-        <article className="h-full">
-          <Outlet />
-        </article>
+        <Outlet />
       </div>
     </main>
   );
