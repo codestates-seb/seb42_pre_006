@@ -4,7 +4,7 @@ import QuestionsPagination from '../components/Questions/QuestionsPagination';
 
 function Questions() {
   return (
-    <article>
+    <article className="mr-6">
       <QuestionsHeader />
       <QuestionsList />
       <QuestionsPagination />

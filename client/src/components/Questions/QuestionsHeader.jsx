@@ -1,27 +1,25 @@
 import { Link } from 'react-router-dom';
 import { IoMdArrowDropdown } from 'react-icons/io';
 
+import Button from '../UI/Button';
+
 function QuestionsHeader() {
   return (
-    <section>
-      <div className="flex content-center justify-between mx-8 my-8">
-        <h1 className="text-3xl font-medium">All Questions</h1>
+    <section className="mb-3">
+      <div className="flex content-center justify-between mb-6">
+        <h1 className="text-3xl font-medium ml-6">All Questions</h1>
 
         {/* TODO: 버튼 라우터기능 작업 -> [질문작성페이지]로 이동 */}
         <Link to="/ask">
-          <button
-            type="button"
-            className="text-xs bg-[#0A95FF] hover:bg-[#0074CC] text-white font-semibold py-2.5 px-3 border-t-2 border-[#47aefd] hover:border-[#47aefd] rounded"
-          >
+          <Button variant="primary" size="md">
             Ask Question
-          </button>
+          </Button>
         </Link>
       </div>
 
-      <div className=" flex content-center justify-between mx-8 my-3">
+      <div className=" flex content-center justify-between">
         {/* TODO: 질문갯수 업데이트기능 작업 -> 데이터갯수로 실시간 상태변경 */}
-        <span className="text-lg">123,456,789 questions</span>
-
+        <span className="text-lg ml-6">123,456,789 questions</span>
         {/* TODO: 질문리스트 데이터 랜더링기능 작업 -> 더미 데이터 실시간 업데이트 */}
         <div className=" border border-[#6a737c] rounded text-xs">
           <button

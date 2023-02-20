@@ -2,7 +2,7 @@ function QuestionsList() {
   return (
     <section>
       {/* TODO: 질문리스트 데이터 랜더링기능 작업 -> 더미 데이터 실시간 업데이트 */}
-      <ul className="border-t">
+      <ul className="border-t text-left">
         <li className="border-b py-6 px-8 bg-[#FDF7E2] relative">
           <div className="text-xs mb-2">
             <span className="mr-2 font-medium">0 votes</span>

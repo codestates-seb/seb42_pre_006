@@ -1,9 +1,8 @@
 import { BsSearch } from 'react-icons/bs';
-
 function TagsHeader() {
   return (
     <section>
-      <div>
+      <div className="text-left">
         <h1 className="text-3xl font-medium mb-4">Tags</h1>
         <div>
           <p className="text-sm">

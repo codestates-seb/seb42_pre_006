@@ -6,7 +6,7 @@ import QuestionAskHeader from '../components/QuestionAsk/QuestionAskHeader';
 
 function QuestionAsk() {
   return (
-    <article className="bg-[#F8F9F9] h-screen relative">
+    <article className="h-screen">
       <QuestionAskHeader />
       <QuestionAskFormTitle />
       <QuestionAskFormBody />
