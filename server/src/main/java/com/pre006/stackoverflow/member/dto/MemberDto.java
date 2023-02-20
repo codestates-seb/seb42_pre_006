@@ -17,15 +17,16 @@ public class MemberDto {
     @Builder
     public static class Post{
         @NonNull
-        @Pattern(regexp = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$")
+        @Pattern(regexp = "^[a-zA-Z0-9+.-]+@[a-zA-Z0-9.-]+$")
         private String email;
         @NonNull
         private String password;
         @NonNull
-        @Pattern(regexp = "^[a-zA-Z0-9가-힣+_.-]+$") //영문 숫자 한글
+        @Pattern(regexp = "^[a-zA-Z0-9가-힣+.-]+$") //영문 숫자 한글
         private String displayName;
     }
     @Getter
+    @Setter
     @ToString
     @Builder
     public static class Patch{
@@ -35,7 +36,13 @@ public class MemberDto {
         private String location;
         private String MemberTitle;
         private String aboutMe;
+        private Long memberId;
     }
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
     public static class Response {
         private Long memberId;
         private String email;

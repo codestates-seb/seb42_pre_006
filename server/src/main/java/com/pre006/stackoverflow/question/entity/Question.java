@@ -1,5 +1,7 @@
 package com.pre006.stackoverflow.question.entity;
 
+import com.pre006.stackoverflow.question.audit.Auditable;
+import com.pre006.stackoverflow.questionvote.entity.QuestionVote;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -7,12 +9,14 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
-public class Question {
+public class Question extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long questionId;
@@ -27,7 +31,7 @@ public class Question {
     private QuestionStatus questionStatus = QuestionStatus.QUESTION_REGISTRATION;
 
     @Column(nullable = false)
-    private int questionHits;
+    private int viewCount;
 
     @Column(nullable = false)
     private int questionVoteCount;
@@ -39,7 +43,27 @@ public class Question {
     // todo: Tag 연관 관계 매핑
 
     // todo: QuestionVote 연관 관계 매핑
+    @OneToMany(mappedBy = "question")
+    private List<QuestionVote> questionVotes = new ArrayList<>();
 
+    public void addViewCount() {
+        this.viewCount++;
+    }
+
+    public void addVoteCount() {
+        this.questionVoteCount++;
+    }
+
+    public void subVoteCount() {
+        this.questionVoteCount--;
+    }
+
+    public void setQuestionVote(QuestionVote questionVote) {
+        this.questionVotes.add(questionVote);
+        if (questionVote.getQuestion() != this) {
+            questionVote.setQuestion(this);
+        }
+    }
 
     public Question(String questionTitle, String questionContent) {
         this.questionTitle = questionTitle;
