@@ -14,5 +14,16 @@ public interface MemberMapper {
                 .build();
         return member;
     }
+    default MemberDto.Response memberToResponseMemberDto(Member member){
+        return MemberDto.Response.builder()
+                .memberId(member.getMemberId())
+                .email(member.getEmail())
+                .displayName(member.getDisplayName())
+                .location(member.getLocation())
+                .aboutMe(member.getAboutMe())
+                .memberTitle(member.getMemberTitle())
+                .build();
+    }
+    Member patchMemberDtoToMember(MemberDto.Patch memberDto);
 
 }
