@@ -29,6 +29,9 @@ function Aside() {
         <li>
           <AsideNavItem url="/guide">Guide</AsideNavItem>
         </li>
+        <li>
+          <AsideNavItem url="/detail">Detail</AsideNavItem>
+        </li>
       </ul>
     </aside>
   );
