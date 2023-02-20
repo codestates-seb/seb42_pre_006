@@ -13,10 +13,10 @@ function SiteMapChildren({ children }) {
   return <ul className="mt-3">{children}</ul>;
 }
 
-function SiteMapItem({ url, children }) {
+function SiteMapItem({ to, children }) {
   return (
     <li className="my-1">
-      <Link to={url} className="text-sm text-gray-400">
+      <Link to={to} className="text-sm text-gray-400">
         {children}
       </Link>
     </li>

@@ -13,7 +13,7 @@ function Header() {
   };
 
   return (
-    <header className="sticky top-0 border-t-4 border-t-orange-600 bg-gray-50 border-b h-16">
+    <header className="sticky top-0 border-t-4 border-t-orange-600 bg-gray-50 border-b h-16 z-10">
       <div className="container flex items-center h-full">
         <h1 className="flex-none mb-2">
           <LogoText />

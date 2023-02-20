@@ -112,16 +112,16 @@ function Guide() {
             <Badge variant="dark">dark</Badge>
           </div>
           <div className="my-4 flex flex-wrap gap-2">
-            <Badge url="/" variant="tags">
+            <Badge to="/" variant="tags">
               tags
             </Badge>
-            <Badge url="/" variant="tags">
+            <Badge to="/" variant="tags">
               JavaScript
             </Badge>
-            <Badge url="/" variant="tags">
+            <Badge to="/" variant="tags">
               React
             </Badge>
-            <Badge url="/" variant="tags">
+            <Badge to="/" variant="tags">
               Vue
             </Badge>
           </div>

@@ -5,6 +5,7 @@ function SocialNavItem({ children }) {
     <a
       href="/"
       target="_blank"
+      rel="noreferrer"
       className="inline-block mx-2 first:ml-0 text-gray-400 text-sm leading-none"
     >
       {children}
