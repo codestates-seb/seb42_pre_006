@@ -2,7 +2,7 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Header from './Header/Header';
 
-function BaseLayout({ children }) {
+function BaseLayout() {
   return (
     <main className="bg-gray-100">
       <Header />

@@ -16,8 +16,9 @@ function MainLayout({ hasSidebar }) {
         </div>
         <div className="border-l py-6">
           <div
-            className={classNames('grid h-full', {
-              'grid-cols-[minmax(calc(100%-14rem),_1fr)_14rem]': hasSidebar,
+            className={classNames('h-full', {
+              'grid grid-cols-[minmax(calc(100%-14rem),_1fr)_14rem]':
+                hasSidebar,
             })}
           >
             <Outlet />

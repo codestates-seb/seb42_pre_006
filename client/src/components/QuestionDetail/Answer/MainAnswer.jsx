@@ -3,7 +3,7 @@
 import AnswerVote from './AnswerVote'
 import QuestionBody from '../Quesiton/QuestionBody'
 
-const MainAnswer = () => {
+function MainAnswer() {
     return (
         <div className=' flex mt-3'>
             <AnswerVote/>

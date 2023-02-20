@@ -3,7 +3,7 @@ import { MdArrowDropUp, MdArrowDropDown } from "react-icons/md";
 import { TbClock } from "react-icons/tb";
 import { MdOutlineBookmarkBorder, MdOutlineBookmark } from "react-icons/md";
 
-const QuestionVote = () => {
+function QuestionVote() {
   const [upVoteValue, setUpVoteValue] = useState(false);
   const [downVoteValue, setDownVoteValue] = useState(false);
   const [bookMark, setBookMark] = useState(false);

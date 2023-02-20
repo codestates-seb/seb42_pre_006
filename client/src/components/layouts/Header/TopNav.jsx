@@ -1,10 +1,14 @@
 import React from 'react';
+import Button from '../../UI/Button';
 
 function TopNavItem({ children }) {
   return (
-    <button className="text-sm hover:bg-gray-200 rounded-full px-3 py-2 leading-none">
+    <Button
+      type="button"
+      className="text-sm hover:bg-gray-200 rounded-full px-3 py-2 leading-none"
+    >
       {children}
-    </button>
+    </Button>
   );
 }
 

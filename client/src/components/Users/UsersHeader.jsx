@@ -1,4 +1,5 @@
 import { BsSearch } from 'react-icons/bs';
+
 function UsersHeader() {
   return (
     <section>

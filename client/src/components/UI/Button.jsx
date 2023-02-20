@@ -16,6 +16,7 @@ const VARIANTS = {
 };
 
 function Button({
+  type,
   variant,
   size = 'md',
   icon,
@@ -28,6 +29,7 @@ function Button({
 }) {
   return (
     <button
+      type={type === 'button' ? 'button' : 'submit'}
       className={classNames(
         'btn',
         SIZES[size],

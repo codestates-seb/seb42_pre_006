@@ -1,14 +1,14 @@
-import React from "react";
-import { RiQuestionnaireFill } from "react-icons/ri";
-import { MdThumbsUpDown } from "react-icons/md";
-import { AiFillTags } from "react-icons/ai";
-import { ImTrophy } from "react-icons/im";
-import IconDescListItem from "../components/SignUp/IconDescListItem";
-import Button from "../components/UI/Button";
-import Card from "../components/UI/Card";
-import InputFeild from "../components/UI/InputFeild";
-import { Link } from "react-router-dom";
-import SocialLogin from "../components/UI/SocialLogin";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { RiQuestionnaireFill } from 'react-icons/ri';
+import { MdThumbsUpDown } from 'react-icons/md';
+import { AiFillTags } from 'react-icons/ai';
+import { ImTrophy } from 'react-icons/im';
+import IconDescListItem from '../components/SignUp/IconDescListItem';
+import Button from '../components/UI/Button';
+import Card from '../components/UI/Card';
+import InputFeild from '../components/UI/InputFeild';
+import SocialLogin from '../components/UI/SocialLogin';
 
 function SignUp() {
   return (
@@ -57,10 +57,9 @@ function SignUp() {
                 Passwords must contain at least eight characters, including at
                 least 1 letter and 1 number.
               </p>
-
               <p className="my-2 text-sm text-gray-500">
-                <input type="checkbox" id="checkAgree" />
                 <label htmlFor="checkAgree" className="ml-2">
+                  <input type="checkbox" id="checkAgree" />
                   Opt-in to receive occasional product updates, user research
                   invitations, company announcements, and digests.
                 </label>

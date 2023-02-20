@@ -10,10 +10,10 @@ function QuestionEditAside() {
           <li className="mb-2 text-sm">Clarify meaning without changing it</li>
           <li className="mb-2 text-sm">Add related resources or links</li>
           <li className="mb-2 text-sm">
-            <em>Always</em> respect the author's intent
+            <em>Always</em> respect the author&apos;s intent
           </li>
           <li className="mb-2 text-sm">
-            Don't use edits to reply to the author
+            Don&apos;t use edits to reply to the author
           </li>
         </ul>
       </div>

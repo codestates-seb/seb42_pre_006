@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { IoMdArrowDropdown } from 'react-icons/io';
+
 import Button from '../UI/Button';
 
 function QuestionsHeader() {
@@ -19,7 +20,6 @@ function QuestionsHeader() {
       <div className=" flex content-center justify-between">
         {/* TODO: 질문갯수 업데이트기능 작업 -> 데이터갯수로 실시간 상태변경 */}
         <span className="text-lg ml-6">123,456,789 questions</span>
-
         {/* TODO: 질문리스트 데이터 랜더링기능 작업 -> 더미 데이터 실시간 업데이트 */}
         <div className=" border border-[#6a737c] rounded text-xs">
           <button

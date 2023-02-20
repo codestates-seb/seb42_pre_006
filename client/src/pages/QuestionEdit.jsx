@@ -12,7 +12,7 @@ function QuestionEdit() {
         <QuestionEditFormBody />
         <QuestionEditFormTags />
         <div className="px-8 absolute right-0 mt-8 mr-8">
-          {/* TODO: 버튼 라우터기능 작업 -> [Edit]버튼 클릭시 [질문상세페이지]로 이동, 버튼 타입 [submit]으로 변경*/}
+          {/* TODO: 버튼 라우터기능 작업 -> [Edit]버튼 클릭시 [질문상세페이지]로 이동, 버튼 타입 [submit]으로 변경 */}
           <Link to="/" className="mr-3">
             <button
               type="button"

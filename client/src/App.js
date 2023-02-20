@@ -22,7 +22,6 @@ function App() {
         <Route element={<MainLayout hasSidebar />}>
           <Route path="/" element={<Home />} />
           <Route path="/questions" element={<Questions />} />
-          <Route path="/edit" element={<QuestionEdit />} />
           <Route path="/guide" element={<Guide />} />
           <Route path="/detail" element={<QuestionDetail />} />
         </Route>
@@ -33,6 +32,7 @@ function App() {
         </Route>
         <Route element={<BaseLayout />}>
           <Route path="/ask" element={<QuestionAsk />} />
+          <Route path="/edit" element={<QuestionEdit />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
         </Route>

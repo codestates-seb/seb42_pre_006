@@ -1,4 +1,4 @@
-const QuestionUserinfo = () => {
+function QuestionUserinfo() {
   return (
     <div className=" w-52 px-2 pt-1.5 pb-2.5 bg-blue-100 text-left rounded">
       <div className="flex text-xs text-gray-400 ">asked 2 mins ago</div>
