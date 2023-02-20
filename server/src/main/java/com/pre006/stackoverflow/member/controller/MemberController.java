@@ -6,8 +6,7 @@ import com.pre006.stackoverflow.member.entitiy.Member;
 import com.pre006.stackoverflow.member.mapper.MemberMapper;
 import com.pre006.stackoverflow.member.service.MemberService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.User;
+
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,12 +36,12 @@ public class MemberController {
 //    }
 
     @GetMapping
-    public ResponseEntity getMember(@AuthenticationPrincipal Member members){
+    public ResponseEntity getMember(Member members){
         Member member = memberService.findMember(members);
         return ResponseEntity.ok(new SingleResponse<>(memberMapper.memberToResponseMemberDto(member)));
     }
     @PatchMapping
-    public ResponseEntity patchMember(@AuthenticationPrincipal Member members, @Valid @RequestBody MemberDto.Patch memberDto){
+    public ResponseEntity patchMember(Member members, @Valid @RequestBody MemberDto.Patch memberDto){
         Member member = memberService.findMember(members);
         memberService.updateMember(members);
         return ResponseEntity.noContent().build();
