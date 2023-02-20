@@ -1,7 +1,7 @@
 // 답변 작성 input
 import Button from "../../UI/Button";
 
-const Toastinput = () => {
+function Quillinput() {
   return (
     <div>
       <Button to="/questions" variant="primary" size="md">
@@ -11,4 +11,4 @@ const Toastinput = () => {
   );
 };
 
-export default Toastinput;
+export default Quillinput;

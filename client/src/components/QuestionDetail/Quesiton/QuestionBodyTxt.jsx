@@ -1,6 +1,6 @@
-const QuestionBodyTxt = () => {
+function QuestionBodyTxt() {
   return (
-    <>
+    <section>
       <div className=" text-left">
         {`I was going through some MySql (mariadb) report looking for why I was getting too many rows in a report and found that the column being queried which stores serialized php and matches another column value is falsely matching.
 
@@ -10,7 +10,7 @@ This is fine. m.section contains a number. s.other might have a value a:1:{s:3:"
 
 Then I found that some n.other records are storing null. Php's serialize outputs a capital N followed by a semicolon to represent a null.`}
       </div>
-    </>
+    </section>
   );
 };
 

@@ -1,6 +1,6 @@
-import Button from "../../UI/Button";
+import Button from '../../UI/Button';
 
-const QuestionTitle = () => {
+function QuestionTitle() {
   return (
     <article className=" flex flex-col">
       <div className=" flex justify-between mb-2">
@@ -10,9 +10,7 @@ const QuestionTitle = () => {
         <Button to="/questions" variant="primary" size="md">
           Ask a question
         </Button>
-
       </div>
-
       <div className=" flex justify-start text-sm">
         <div className=" mb-2 mr-4">
           <span className=" text-slate-500 mr-2">Asked</span>

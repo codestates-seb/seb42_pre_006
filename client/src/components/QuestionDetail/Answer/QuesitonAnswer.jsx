@@ -4,7 +4,7 @@ import AnswersInfo from './AnswersInfo'
 import MainAnswer from './MainAnswer'
 import PostAnswerBox from './PostAnswerBox'
 
-const QuesitonAnswer = () => {
+function QuesitonAnswer() {
     return (
         <div className='mt-16'>
             <AnswersInfo />

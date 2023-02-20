@@ -3,7 +3,7 @@
 import QuestionVote from "./QuestionVote";
 import QuestionBody from "./QuestionBody";
 
-const MainQuestion = () => {
+function MainQuestion {
     return (
         <div className=" flex ">
             <QuestionVote />
