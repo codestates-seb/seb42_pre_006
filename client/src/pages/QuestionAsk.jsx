@@ -6,7 +6,7 @@ import QuestionAskHeader from '../components/QuestionAsk/QuestionAskHeader';
 
 function QuestionAsk() {
   return (
-    <main className="bg-[#F8F9F9] h-screen relative">
+    <article className="bg-[#F8F9F9] h-screen relative">
       <QuestionAskHeader />
       <QuestionAskFormTitle />
       <QuestionAskFormBody />
@@ -32,7 +32,7 @@ function QuestionAsk() {
         </Link>
         {/* QUEST: Review post question 페이지 구현 X -> 유효성 검사 실시해야하는지? */}
       </div>
-    </main>
+    </article>
   );
 }
 

@@ -6,7 +6,7 @@ import QuestionEditFormTitle from '../components/QuestionEdit/QuestionEditFormTi
 
 function QuestionEdit() {
   return (
-    <main className="w-full flex h-screen">
+    <article className="w-full flex h-screen">
       <div className="flex-1 relative">
         <QuestionEditFormTitle />
         <QuestionEditFormBody />
@@ -34,7 +34,7 @@ function QuestionEdit() {
         </div>
       </div>
       <QuestionEditAside />
-    </main>
+    </article>
   );
 }
 
