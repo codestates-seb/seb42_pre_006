@@ -10,7 +10,7 @@ function QuestionAskFormBody() {
         20 characters.
       </p>
       {/* TODO: 에디터 modules 수정 작업 -> [textarea] 확장, [focus, outline] css 적용하기  */}
-      <ReactQuill className="" />
+      <ReactQuill className="text-left" />
     </section>
   );
 }
