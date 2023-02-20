@@ -1,6 +1,6 @@
 // 답변 작성 input
-import Button from '../../UI/Button';
 import ReactQuill from 'react-quill';
+import Button from '../../UI/Button';
 import 'react-quill/dist/quill.snow.css';
 
 function Quillinput() {
