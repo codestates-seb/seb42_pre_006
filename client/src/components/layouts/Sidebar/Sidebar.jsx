@@ -22,11 +22,11 @@ function Sidebar() {
               Ticket smash for [status-review] tag: Part Deux
             </SidebarWidget.ListItem>
             <SidebarWidget.ListItem type="meta">
-              We've added a "Necessary cookies only" option to the cookie
-              consent popup
+              We&apos;ve added a &quot;Necessary cookies only&quot; option to
+              the cookie consent popup
             </SidebarWidget.ListItem>
             <SidebarWidget.ListItem type="overflow">
-              We’ve made changes to our Privacy Notice for Collectives™
+              We&apos;ve made changes to our Privacy Notice for Collectives™
             </SidebarWidget.ListItem>
             <SidebarWidget.ListItem type="overflow">
               The [amazon] tag is being burninated
