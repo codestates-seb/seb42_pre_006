@@ -13,11 +13,11 @@ public class UriCreator {
                 .toUri();
     }
 
-    public static URI createUri(String defaultUrl, long questionId, long id) {
+    public static URI createUri(String defaultUrl, long questionId, long questionVoteId) {
         return UriComponentsBuilder
                 .newInstance()
-                .path(defaultUrl + "/{question-id}/vote/{id}")
-                .buildAndExpand(questionId, id)
+                .path(defaultUrl + "/{question-id}/vote/{question-vote-id}")
+                .buildAndExpand(questionId, questionVoteId)
                 .toUri();
     }
 
