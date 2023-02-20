@@ -36,15 +36,15 @@ public class MemberController {
     }
 
     @GetMapping
-    public ResponseEntity getMember(Member members){
+    public ResponseEntity getMember(Member members) {
         Member member = memberService.findMember(members);
         return ResponseEntity.ok(new SingleResponse<>(memberMapper.memberToResponseMemberDto(member)));
     }
+
     @PatchMapping
-    public ResponseEntity patchMember(Member members, @Valid @RequestBody MemberDto.Patch memberDto){
+    public ResponseEntity patchMember(Member members, @Valid @RequestBody MemberDto.Patch memberDto) {
         Member member = memberService.findMember(members);
         memberService.updateMember(members);
         return ResponseEntity.noContent().build();
     }
-
 }
