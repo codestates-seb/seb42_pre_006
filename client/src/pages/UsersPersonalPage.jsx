@@ -7,14 +7,14 @@ import UsersPersonalPageQuestions from '../components/UsersPersonalPage/UsersPer
 
 function UsersPersonalPage() {
   return (
-    <article className="w-auto mt-4 ml-4">
+    <article className="ml-6">
       <UsersPersonalPageHeader />
       <UsersPersonalPageList />
       <div className="flex justify-between">
         <UsersPersonalPageNav />
-        <div className="w-full">
+        <div className="ml-6">
           <UsersPersonalPageSummary />
-          <div className="w-full flex justify-between">
+          <div className=" flex justify-between">
             <UsersPersonalPageAnswers />
             <UsersPersonalPageQuestions />
           </div>

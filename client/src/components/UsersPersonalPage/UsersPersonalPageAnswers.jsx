@@ -4,7 +4,7 @@ function UsersPersonalPageAnswers() {
       {/* TODO: [Answers] 리스트 작업 -> 내가 작성한 답변 데이터 받아오기 */}
       <div className="mt-4 mr-3">
         <div className="flex justify-between items-center mb-2">
-          <h2 className="text-xl font-medium">Answers</h2>
+          <h2 className="text-xl font-normal">Answers</h2>
           <div className=" border border-[#6a737c] rounded text-xs">
             <button
               type="button"
