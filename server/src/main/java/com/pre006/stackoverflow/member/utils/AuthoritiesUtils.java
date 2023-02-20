@@ -12,7 +12,6 @@ public class AuthoritiesUtils {
 
     public static Set<String> ADMINS_EMAIL;
 
-    @Value("${admin.email}")
     public void setKey(String value) {
         ADMINS_EMAIL = Set.of(value.split(","));
     }

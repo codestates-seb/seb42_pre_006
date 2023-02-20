@@ -37,14 +37,14 @@ public class MemberController {
     }
 
     @GetMapping
-    public ResponseEntity getMember(@AuthenticationPrincipal User members){
-        Member member = memberService.findMember(members.getUsername());
+    public ResponseEntity getMember(@AuthenticationPrincipal Member members){
+        Member member = memberService.findMember(members);
         return ResponseEntity.ok(new SingleResponse<>(memberMapper.memberToResponseMemberDto(member)));
     }
     @PatchMapping
-    public ResponseEntity patchMember(@AuthenticationPrincipal User members, @Valid @RequestBody MemberDto.Patch memberDto){
-        Member member = memberService.findMember(members.getUsername());
-        memberService.updateMember(member, memberMapper.patchMemberDtoToMember(memberDto));
+    public ResponseEntity patchMember(@AuthenticationPrincipal Member members, @Valid @RequestBody MemberDto.Patch memberDto){
+        Member member = memberService.findMember(members);
+        memberService.updateMember(members);
         return ResponseEntity.noContent().build();
     }
 
