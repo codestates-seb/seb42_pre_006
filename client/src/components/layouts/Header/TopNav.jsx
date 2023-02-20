@@ -6,6 +6,7 @@ function TopNavItem({ children }) {
     <Button
       type="button"
       className="text-sm hover:bg-gray-200 rounded-full px-3 py-2 leading-none"
+      text
     >
       {children}
     </Button>

@@ -16,12 +16,7 @@ function AsideNavItem({ url, className, children }) {
     );
 
   // to 값이 존재 하지 않는 경우
-  if (!url)
-    return (
-      <h3 to={url} className={defaltClass}>
-        {children}
-      </h3>
-    );
+  if (!url) return <h3 className={defaltClass}>{children}</h3>;
 
   // to 값이 존재 하는 경우
   return (
