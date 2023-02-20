@@ -4,7 +4,7 @@ import QuestionTitle from '../components/QuestionDetail/Quesiton/QuestionTitle';
 import MainQuestion from '../components/QuestionDetail/Quesiton/MainQuestion';
 import QuesitonAnswer from '../components/QuestionDetail/Answer/QuesitonAnswer';
 
-const QuestionDetail = () => {
+function QuestionDetail() {
   return (
     <div className=" py-2 px-5">
       <QuestionTitle />
