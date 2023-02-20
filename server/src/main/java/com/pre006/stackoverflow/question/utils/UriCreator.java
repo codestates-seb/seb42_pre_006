@@ -12,4 +12,14 @@ public class UriCreator {
                 .buildAndExpand(resourceId)
                 .toUri();
     }
+
+    public static URI createUri(String defaultUrl, long questionId, long id) {
+        return UriComponentsBuilder
+                .newInstance()
+                .path(defaultUrl + "/{question-id}/vote/{id}")
+                .buildAndExpand(questionId, id)
+                .toUri();
+    }
+
+
 }

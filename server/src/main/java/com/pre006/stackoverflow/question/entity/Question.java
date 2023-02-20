@@ -50,6 +50,14 @@ public class Question extends Auditable {
         this.viewCount++;
     }
 
+    public void addVoteCount() {
+        this.questionVoteCount++;
+    }
+
+    public void subVoteCount() {
+        this.questionVoteCount--;
+    }
+
     public void setQuestionVote(QuestionVote questionVote) {
         this.questionVotes.add(questionVote);
         if (questionVote.getQuestion() != this) {
