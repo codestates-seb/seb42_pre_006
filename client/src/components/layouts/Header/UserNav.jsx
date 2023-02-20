@@ -9,12 +9,14 @@ import Button from '../../UI/Button';
 
 function UserNavItem({ onClick, children }) {
   return (
-    <button
+    <Button
+      type="button"
       className="text-lg flex items-center p-2 text-gray-500 hover:bg-gray-200 rounded-md"
       onClick={onClick}
+      text
     >
       {children}
-    </button>
+    </Button>
   );
 }
 
