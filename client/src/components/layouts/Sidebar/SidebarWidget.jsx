@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { BsPencilFill, BsStackOverflow } from 'react-icons/bs';
 import { MdChatBubbleOutline } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 
 const COLOR_TYPES = {
   default: {
@@ -38,18 +39,13 @@ function SidebarWidgetBox({ title, children, color = 'default' }) {
   );
 }
 
-function SidebarWidgetIconListItem({ type = 'overflow', url, children }) {
+function SidebarWidgetIconListItem({ type = 'overflow', to, children }) {
   return (
     <div className="mt-2 first:mt-0">
-      <a
-        href={url}
-        target="_blank"
-        rel="noreferrer"
-        className="flex align-top justify-start"
-      >
+      <Link to={to} className="flex align-top justify-start">
         <span className="mr-2 pt-2 text-xs">{ICON_TYPES[type]}</span>
         <span className="text-sm">{children}</span>
-      </a>
+      </Link>
     </div>
   );
 }

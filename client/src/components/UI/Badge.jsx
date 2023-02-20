@@ -14,10 +14,10 @@ const VARIANTS = {
   bounty: 'badge-bounty',
 };
 
-function Badge({ variant, url, children }) {
+function Badge({ variant, to, children }) {
   const iconCheck = variant === 'answered-check' && <MdCheck />;
 
-  if (!url)
+  if (!to)
     return (
       <span className={classNames('badge', VARIANTS[variant])}>
         {iconCheck}
@@ -27,7 +27,7 @@ function Badge({ variant, url, children }) {
 
   return (
     <Link
-      to={url}
+      to={to}
       className={classNames('badge', VARIANTS[variant], 'badge-hover')}
     >
       {iconCheck}
