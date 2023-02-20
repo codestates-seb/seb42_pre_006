@@ -30,7 +30,7 @@ public class QuestionVoteController {
                 mapper.postDtoToQuestionVote(requestBody));
 
         long id = questionVote.getQuestionVoteId();
-        URI location = UriCreator.createUri(DEFAULT_URL, questionId, id);
+        URI location = UriCreator.createUri(DEFAULT_URL, questionId);
 
         QuestionVoteDto.ResponseDto response = mapper.questionVoteToResponseDto(questionVote);
 
