@@ -4,7 +4,7 @@ import TagsPagination from '../components/Tags/TagsPagination';
 
 function Tags() {
   return (
-    <article className="mx-8 my-8">
+    <article className="ml-6">
       <TagsHeader />
       <TagsList />
       <TagsPagination />
