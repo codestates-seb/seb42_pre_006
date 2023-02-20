@@ -1,6 +1,6 @@
 // 필터
 
-const AnswersInfo = () => {
+function AnswersInfo() {
   return (
     <div className="flex justify-between">
       <div className="text-lg">3 Answers</div>

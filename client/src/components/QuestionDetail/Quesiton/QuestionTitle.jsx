@@ -1,18 +1,19 @@
-import Button from "../../UI/Button";
+import Button from '../../UI/Button';
+import { Link } from 'react-router-dom';
 
-const QuestionTitle = () => {
+function QuestionTitle() {
   return (
     <article className=" flex flex-col">
       <div className=" flex justify-between mb-2">
         <h1 className=" text-3xl text-left">
           MySql/mariadb - SELECT 0 = 'N;' returns true
         </h1>
+        <Link to='/ask'>
         <Button to="/questions" variant="primary" size="md">
           Ask a question
         </Button>
-
+        </Link>
       </div>
-
       <div className=" flex justify-start text-sm">
         <div className=" mb-2 mr-4">
           <span className=" text-slate-500 mr-2">Asked</span>
