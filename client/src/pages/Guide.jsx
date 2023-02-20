@@ -166,7 +166,6 @@ function Guide() {
             labelDetail="Be specific and imagine you’re asking a question to another person. Minimum 15 characters."
             placeholder="placeholder"
             disabled
-          />
         </div>
       </section>
     </article>

@@ -9,11 +9,12 @@ function UsersPersonalPageHeader() {
       <div className="flex items-center">
         {/* TODO: 마이페이지 사진작업 -> 데이터에서 사진 주소 불러오기 */}
         <img
-          className="rounded w-28 h-28"
+          className="rounded w-28 h-28 shadow-gray-200 shadow-xl"
           src="https://lh3.googleusercontent.com/a/AEdFTp4WLLEwuSbw_4TUJ_Cv3mcv7u73xF8EnLmV2X2gZQ=k-s192"
           alt="user images"
         />
-        <div className="ml-4">
+
+        <div className="ml-4 text-left">
           <h2 className="text-3xl font-medium mb-2">Mia Lee</h2>
           <ul className="flex text-[#6a737c] text-sm">
             <li className="flex justify-center items-center mr-2">
