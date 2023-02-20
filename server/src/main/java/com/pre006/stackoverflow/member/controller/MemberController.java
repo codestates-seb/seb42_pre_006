@@ -19,32 +19,32 @@ import java.net.URISyntaxException;
 @Validated
 @RequestMapping("/api/v1/members")
 public class MemberController {
-//    private final MemberService memberService;
-//    private final MemberMapper memberMapper;
-//    private static final String BASE_URL = "/api/v1/members";
-//
-//    public MemberController(MemberService memberService, MemberMapper memberMapper) {
-//        this.memberService = memberService;
-//        this.memberMapper = memberMapper;
-//    }
-//
-//    @PostMapping
-//    public ResponseEntity createMember(@Valid @RequestBody MemberDto.Post memberDto) throws URISyntaxException {
-//        memberService.createMember(
-//                memberMapper.postMemberDtoToMember(memberDto));
-//        return ResponseEntity.created(new URI(BASE_URL)).build();
-//    }
+    private final MemberService memberService;
+    private final MemberMapper memberMapper;
+    private static final String BASE_URL = "/api/v1/members";
+
+    public MemberController(MemberService memberService, MemberMapper memberMapper) {
+        this.memberService = memberService;
+        this.memberMapper = memberMapper;
+    }
+
+    @PostMapping
+    public ResponseEntity createMember(@Valid @RequestBody MemberDto.Post memberDto) throws URISyntaxException {
+        memberService.createMember(
+                memberMapper.postMemberDtoToMember(memberDto));
+        return ResponseEntity.created(new URI(BASE_URL)).build();
+    }
 
     @GetMapping
-    public ResponseEntity getMember(Member members){
+    public ResponseEntity getMember(Member members) {
         Member member = memberService.findMember(members);
         return ResponseEntity.ok(new SingleResponse<>(memberMapper.memberToResponseMemberDto(member)));
     }
+
     @PatchMapping
-    public ResponseEntity patchMember(Member members, @Valid @RequestBody MemberDto.Patch memberDto){
+    public ResponseEntity patchMember(Member members, @Valid @RequestBody MemberDto.Patch memberDto) {
         Member member = memberService.findMember(members);
         memberService.updateMember(members);
         return ResponseEntity.noContent().build();
     }
-
 }
