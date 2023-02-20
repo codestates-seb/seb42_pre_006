@@ -13,7 +13,7 @@ import Guide from './pages/Guide';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
-import QuestionDetail from "./pages/QuestionDetail";
+import QuestionDetail from './pages/QuestionDetail';
 
 function App() {
   return (
@@ -22,7 +22,6 @@ function App() {
         <Route element={<MainLayout hasSidebar />}>
           <Route path="/" element={<Home />} />
           <Route path="/questions" element={<Questions />} />
-          <Route path="/ask" element={<QuestionAsk />} />
           <Route path="/edit" element={<QuestionEdit />} />
           <Route path="/guide" element={<Guide />} />
           <Route path="/detail" element={<QuestionDetail />} />
@@ -33,6 +32,7 @@ function App() {
           <Route path="/users/1" element={<UsersPersonalPage />} />
         </Route>
         <Route element={<BaseLayout />}>
+          <Route path="/ask" element={<QuestionAsk />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
         </Route>
