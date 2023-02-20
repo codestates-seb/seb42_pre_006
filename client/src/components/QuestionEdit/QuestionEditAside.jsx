@@ -1,7 +1,7 @@
 function QuestionEditAside() {
   return (
     <section>
-      <div className="mt-8 mr-16 border border-[rgb(228,220,193)] shadow-md">
+      <div className="flex flex-col mt-8 mr-16 border border-[rgb(228,220,193)] shadow-md">
         <h4 className="bg-[#FBF3D5] px-4 py-4 border-b border-[rgb(228,220,193)]">
           How to Edit
         </h4>

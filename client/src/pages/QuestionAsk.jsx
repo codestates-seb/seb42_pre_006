@@ -7,12 +7,12 @@ import Button from '../components/UI/Button';
 
 function QuestionAsk() {
   return (
-    <article className="h-screen">
+    <article>
       <QuestionAskHeader />
       <QuestionAskFormTitle />
       <QuestionAskFormBody />
       <QuestionAskFormTags />
-      <div className="px-8 absolute right-0 bottom-100 flex">
+      <div className="px-8 mb-28 flex">
         {/* TODO: 버튼 라우터기능 작업 -> [Post your question]버튼 클릭시 [질문상세페이지]로 이동, 버튼 타입 [submit]으로 변경 */}
         <Button to="/questions" variant="primary" size="md">
           Post Your Answer
