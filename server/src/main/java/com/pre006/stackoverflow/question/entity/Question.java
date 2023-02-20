@@ -1,5 +1,6 @@
 package com.pre006.stackoverflow.question.entity;
 
+import com.pre006.stackoverflow.question.audit.Auditable;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,7 +13,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-public class Question {
+public class Question extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long questionId;
@@ -27,7 +28,7 @@ public class Question {
     private QuestionStatus questionStatus = QuestionStatus.QUESTION_REGISTRATION;
 
     @Column(nullable = false)
-    private int questionHits;
+    private int viewCount;
 
     @Column(nullable = false)
     private int questionVoteCount;
@@ -40,6 +41,9 @@ public class Question {
 
     // todo: QuestionVote 연관 관계 매핑
 
+    public void addViewCount() {
+        this.viewCount++;
+    }
 
     public Question(String questionTitle, String questionContent) {
         this.questionTitle = questionTitle;
