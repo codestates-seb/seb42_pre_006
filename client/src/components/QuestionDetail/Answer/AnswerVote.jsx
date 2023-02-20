@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { MdArrowDropUp, MdArrowDropDown } from "react-icons/md";
 import { TbClock } from "react-icons/tb";
-import { MdOutlineBookmarkBorder, MdOutlineBookmark } from "react-icons/md";
+import { MdArrowDropUp, MdArrowDropDown, MdOutlineBookmarkBorder, MdOutlineBookmark } from "react-icons/md";
 
 function AnswerVote() {
   const [upVoteValue, setUpVoteValue] = useState(false);
@@ -24,14 +23,14 @@ function AnswerVote() {
     <article className=" flex flex-col justify-top items-center  text-gray-300  -ml-5 -mr-1">
       <div className="">
         {upVoteValue ? (
-          <button className=" text-7xl ">
+          <button className=" text-7xl " type="button">
             <MdArrowDropUp
               className=" -mb-6 text-orange-400"
               onClick={onUpVoteValueHandler}
             />
           </button>
         ) : (
-          <button className=" text-7xl ">
+          <button className=" text-7xl " type="button">
             <MdArrowDropUp className=" -mb-6" onClick={onUpVoteValueHandler} />
           </button>
         )}
@@ -39,14 +38,14 @@ function AnswerVote() {
           0 {/* 투표수 반영 기능 작업 */}
         </div>
         {downVoteValue ? (
-          <button className=" text-7xl ">
+          <button className=" text-7xl " type="button">
             <MdArrowDropDown
               className=" -mt-4 -mb-5 text-orange-400"
               onClick={onDownVoteValueHandler}
             />
           </button>
         ) : (
-          <button className=" text-7xl ">
+          <button className=" text-7xl " type="button">
             <MdArrowDropDown
               className=" -mt-4 -mb-5"
               onClick={onDownVoteValueHandler}

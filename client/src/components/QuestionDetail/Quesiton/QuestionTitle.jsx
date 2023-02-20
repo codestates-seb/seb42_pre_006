@@ -1,12 +1,12 @@
-import Button from '../../UI/Button';
 import { Link } from 'react-router-dom';
+import Button from '../../UI/Button';
 
 function QuestionTitle() {
   return (
     <article className=" flex flex-col">
       <div className=" flex justify-between mb-2">
         <h1 className=" text-3xl text-left">
-          MySql/mariadb - SELECT 0 = 'N;' returns true
+          MySql/mariadb - SELECT 0 = returns true
         </h1>
         <Link to='/ask'>
         <Button to="/questions" variant="primary" size="md">
@@ -28,7 +28,7 @@ function QuestionTitle() {
           <span>4 times</span>
         </div>
       </div>
-      <div className=" flex w-full h-px text-center bg-gray-200 mt-3"></div>
+      <div className=" flex w-full h-px text-center bg-gray-200 mt-3" />
     </article>
   );
 };

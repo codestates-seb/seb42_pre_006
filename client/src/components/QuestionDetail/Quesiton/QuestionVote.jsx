@@ -1,7 +1,11 @@
-import React, { useState } from "react";
-import { MdArrowDropUp, MdArrowDropDown } from "react-icons/md";
-import { TbClock } from "react-icons/tb";
-import { MdOutlineBookmarkBorder, MdOutlineBookmark } from "react-icons/md";
+import React, { useState } from 'react';
+import {
+  MdArrowDropUp,
+  MdArrowDropDown,
+  MdOutlineBookmarkBorder,
+  MdOutlineBookmark,
+} from 'react-icons/md';
+import { TbClock } from 'react-icons/tb';
 
 function QuestionVote() {
   const [upVoteValue, setUpVoteValue] = useState(false);
@@ -9,29 +13,29 @@ function QuestionVote() {
   const [bookMark, setBookMark] = useState(false);
 
   const onUpVoteValueHandler = () => {
-    setUpVoteValue((prev) => !prev);
+    setUpVoteValue(prev => !prev);
   };
 
   const onDownVoteValueHandler = () => {
-    setDownVoteValue((prev) => !prev);
+    setDownVoteValue(prev => !prev);
   };
 
   const onBookMarkHandler = () => {
-    setBookMark((prev) => !prev);
+    setBookMark(prev => !prev);
   };
 
   return (
     <article className=" flex flex-col justify-top items-center  text-gray-300  -ml-5 -mr-1">
       <div className="">
         {upVoteValue ? (
-          <button className=" text-7xl ">
+          <button className=" text-7xl " type="button">
             <MdArrowDropUp
               className=" -mb-6 text-orange-400"
               onClick={onUpVoteValueHandler}
             />
           </button>
         ) : (
-          <button className=" text-7xl ">
+          <button className=" text-7xl " type="button">
             <MdArrowDropUp className=" -mb-6" onClick={onUpVoteValueHandler} />
           </button>
         )}
@@ -39,14 +43,14 @@ function QuestionVote() {
           0 {/* 투표수 반영 기능 작업 */}
         </div>
         {downVoteValue ? (
-          <button className=" text-7xl ">
+          <button className=" text-7xl " type="button">
             <MdArrowDropDown
               className=" -mt-4 -mb-5 text-orange-400"
               onClick={onDownVoteValueHandler}
             />
           </button>
         ) : (
-          <button className=" text-7xl ">
+          <button className=" text-7xl " type="button">
             <MdArrowDropDown
               className=" -mt-4 -mb-5"
               onClick={onDownVoteValueHandler}
@@ -71,6 +75,6 @@ function QuestionVote() {
       </div>
     </article>
   );
-};
+}
 
 export default QuestionVote;
