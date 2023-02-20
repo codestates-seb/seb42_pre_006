@@ -32,6 +32,14 @@ function Aside() {
         <li>
           <AsideNavItem url="/detail">Detail</AsideNavItem>
         </li>
+        <li>
+          <AsideNavItem url="/ask">Ask</AsideNavItem>
+        </li>
+        <li>
+          <AsideNavItem url="/edit">Edit</AsideNavItem>
+        </li>
+
+
       </ul>
     </aside>
   );

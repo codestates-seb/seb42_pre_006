@@ -1,4 +1,5 @@
 import Button from '../../UI/Button';
+import { Link } from 'react-router-dom';
 
 function QuestionTitle() {
   return (
@@ -7,9 +8,11 @@ function QuestionTitle() {
         <h1 className=" text-3xl text-left">
           MySql/mariadb - SELECT 0 = 'N;' returns true
         </h1>
+        <Link to='/ask'>
         <Button to="/questions" variant="primary" size="md">
           Ask a question
         </Button>
+        </Link>
       </div>
       <div className=" flex justify-start text-sm">
         <div className=" mb-2 mr-4">
