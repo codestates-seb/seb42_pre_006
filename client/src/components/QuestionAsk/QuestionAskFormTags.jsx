@@ -1,8 +1,8 @@
 function QuestionAskFormTags() {
   return (
     <section className="border rounded px-8 py-8 mx-8 my-8 bg-white">
-      <h2 className="font-semibold">Tags</h2>
-      <p className="text-sm mb-2">
+      <h2 className="font-semibold text-left">Tags</h2>
+      <p className="text-sm mb-2 text-left">
         Add up to 5 tags to describe what your question is about. Start typing
         to see suggestions.
       </p>

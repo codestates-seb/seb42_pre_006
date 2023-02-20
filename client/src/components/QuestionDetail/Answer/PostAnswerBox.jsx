@@ -4,7 +4,7 @@ import Quillinput from "./Quillinput";
 function PostAnswerBox()  {
   return (
     <div className=" flex flex-col items-start mt-16">
-      <div className=" mb-4 text-lg">Your Answer</div>
+      <div className=" mb-4 text-lg text-left w-full">Your Answer</div>
       <Quillinput />
       <div className=" mt-8 text-lg">
         Browse other questions tagged {/* Tags */} or ask

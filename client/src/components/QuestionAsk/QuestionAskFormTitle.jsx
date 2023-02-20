@@ -1,6 +1,6 @@
 function QuestionAskFormTitle() {
   return (
-    <section className="border rounded px-8 py-8 mx-8 my-8 bg-white">
+    <section className="border rounded px-8 py-8 mx-8 my-8 bg-white text-left">
       <h2 className="font-semibold">Title</h2>
       <p className="text-sm mb-2">
         Be specific and imagine you’re asking a question to another person.
