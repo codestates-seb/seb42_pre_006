@@ -1,7 +1,5 @@
 package com.pre006.stackoverflow.member.utils;
 
-import com.pre006.stackoverflow.member.entitiy.Member;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
