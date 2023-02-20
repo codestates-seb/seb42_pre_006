@@ -1,8 +1,8 @@
-import React from "react";
-import { MdAccountBox } from "react-icons/md";
-import Button from "../components/UI/Button";
-import Card from "../components/UI/Card";
-import InputFeild from "../components/UI/InputFeild";
+import React from 'react';
+import { MdAccountBox } from 'react-icons/md';
+import Button from '../components/UI/Button';
+import Card from '../components/UI/Card';
+import InputFeild from '../components/UI/InputFeild';
 
 function Guide() {
   return (
@@ -114,7 +114,7 @@ function Guide() {
             label="Label"
             labelDetail="Be specific and imagine you’re asking a question to another person. Minimum 15 characters."
             placeholder="placeholder"
-            isValidError={true}
+            isValidError="true"
           />
         </div>
         <div className="my-4">
@@ -122,7 +122,7 @@ function Guide() {
             label="Label"
             labelDetail="Be specific and imagine you’re asking a question to another person. Minimum 15 characters."
             placeholder="placeholder"
-            disabled={true}
+            disabled="true"
           />
         </div>
       </section>
