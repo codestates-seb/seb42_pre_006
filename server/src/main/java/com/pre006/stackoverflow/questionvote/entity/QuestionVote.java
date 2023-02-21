@@ -1,5 +1,6 @@
 package com.pre006.stackoverflow.questionvote.entity;
 
+import com.pre006.stackoverflow.member.entitiy.Member;
 import com.pre006.stackoverflow.question.audit.Auditable;
 import com.pre006.stackoverflow.question.entity.Question;
 import lombok.Getter;
@@ -21,8 +22,20 @@ public class QuestionVote extends Auditable {
     private Boolean questionVoteStatus;
 
     @ManyToOne
-    @JoinColumn(name = "question_id")
+    @JoinColumn(name = "QUESTION_ID")
     private Question question;
+
+    public void addQuestion(Question question){
+        this.question = question;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "MEMBER_ID")
+    private Member member;
+
+    public void addMember(Member member){
+        this.member = member;
+    }
 
     // todo: Member 연관 관계 매핑
 
