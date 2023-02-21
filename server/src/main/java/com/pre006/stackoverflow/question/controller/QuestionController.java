@@ -19,6 +19,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
+@CrossOrigin
 @RequestMapping("/questions")
 public class QuestionController {
     private final static String QUESTION_DEFAULT_URL = "/questions";
