@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import ReactQuill from 'react-quill';
 import Button from '../../UI/Button';
@@ -7,44 +7,49 @@ import 'react-quill/dist/quill.snow.css';
 function Quillinput() {
   const [quillValue, setQuillValue] = useState('');
 
-  const BASE_URL = 'http://localhost:8080';
+  const url = 'http://ec2-3-38-211-158.ap-northeast-2.compute.amazonaws.com:8080'
+  console.log(quillValue);
+  // const config = {"Content-Type": 'application/json'};
 
-  const questionInput = useCallback(async () => {
+  async function getPost() {
     try {
-      await axios.post(`${BASE_URL}/answer`, {
-        answerContent: 'Test Post 02',
+      const response = await axios.post(`${url}/answer`, {
+        answerContent: quillValue,
       });
-      console.log('good!');
-      console.log('quillValue');
-      setQuillValue('');
+      console.log(response);
+      // serAnswerLength(response.data.length)
     } catch (error) {
-      console.log('error');
+      console.error(error);
     }
-  });
+  }
 
-  function onQuillChange(e) {
-    setQuillValue(e.target.value);
-    console.log(quillValue);
+  function onSubmit() {
+    if (quillValue === '') {
+      alert('빈 칸을 작성해 주세요');
+    } else {
+      getPost();
+      setQuillValue('');
+    }
   }
 
   return (
     <div className=" w-full">
       {/* TODO: 에디터 modules 수정 작업 -> [textarea] 확장, [focus, outline] css 적용하기  */}
-      <div className=" w-full">
-        <ReactQuill
-          className="text-left"
-          onChange={() => onQuillChange()}
-          value={quillValue}
-        />
-      </div>
+      <form onSubmit={onSubmit}>
+        <div className=" w-full">
+          <ReactQuill
+            className="text-left"
+            onChange={setQuillValue}
+            value={quillValue}
+          />
+        </div>
 
-      <button onClick={questionInput} type="button">
-        button
-      </button>
+        <button type="submit">button</button>
 
-      <Button variant="primary" size="md" className="flex mt-8">
-        Post Your Answer
-      </Button>
+        <Button variant="primary" size="md" className="flex mt-8">
+          Post Your Answer
+        </Button>
+      </form>
     </div>
   );
 }

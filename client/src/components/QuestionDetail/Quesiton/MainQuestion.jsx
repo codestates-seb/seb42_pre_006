@@ -1,5 +1,3 @@
-// 모든 Quesiton 합치기
-
 import QuestionVote from "./QuestionVote";
 import QuestionBody from "./QuestionBody";
 

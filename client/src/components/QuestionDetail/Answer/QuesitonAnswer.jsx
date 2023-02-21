@@ -8,8 +8,7 @@ import PostAnswerBox from './PostAnswerBox';
 function QuesitonAnswer() {
   const [answerContents, serAnswerContents] = useState('');
 
-  const url =
-    'http://ec2-43-201-16-212.ap-northeast-2.compute.amazonaws.com:8080';
+  const url = 'http://ec2-3-38-211-158.ap-northeast-2.compute.amazonaws.com:8080'
   const config = { 'Content-Type': 'application/json' };
 
   useEffect(() => {
@@ -26,24 +25,6 @@ function QuesitonAnswer() {
     getData();
   }, []);
 
-  //   useEffect(() => {
-  //     async function getPost() {
-  //       try {
-  //         const response = await axios.post(`${url}/api/v1/members`, {
-  //             "email" : "min@st.com",
-  //             "password" : "1234",
-  //             "displayName": "choi"
-  //            });
-  //         // const { data } = response;
-  //         // serAnswerContents(data);
-  //         console.log(response);
-  //       } catch (error) {
-  //         console.error(error);
-  //       }
-  //     }
-  //     getPost();
-  //   }, []);
-
   return (
     <div className="mt-16">
       <AnswersInfo />
@@ -51,7 +32,8 @@ function QuesitonAnswer() {
 
       {answerContents ? (
         <div>
-          {answerContents.map(el => {
+          {/* eslint-disable-next-line */}
+          {answerContents.map(function(el) {
             return (
               <MainAnswer key={el.answerId} answerContent={el.answerContent} />
             );
@@ -59,13 +41,6 @@ function QuesitonAnswer() {
         </div>
       ) : null}
 
-      {/* {answerContents ? (
-        <div>
-          {answerContents.map((el, idx) => {
-            return <div key={idx}>{el.answerContent}</div>;
-          })}
-        </div>
-      ) : null} */}
       <PostAnswerBox />
     </div>
   );
