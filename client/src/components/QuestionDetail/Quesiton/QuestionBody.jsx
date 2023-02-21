@@ -5,10 +5,10 @@ import QuestionUserinfo from "./QuestionUserinfo";
 
 function QuestionBody({ answerContent }) {
   return (
-    <div className=" mt-5 flex flex-col">
-      <QuestionBodyTxt answerContent={ answerContent }/>
+    <div className=" mt-5 flex flex-col w-full">
+      <QuestionBodyTxt answerContent={answerContent}/>
       <QuestionTags />
-      <div className="flex justify-between mt-7">
+      <div className="flex w-full justify-between mt-7">
         <QuestionBodyBtns />
         <QuestionUserinfo />
       </div>
