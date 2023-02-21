@@ -21,7 +21,7 @@ public class Answer {
     private String answerContent;
 
     @Column(nullable = false)
-    private LocalDateTime createAt = LocalDateTime.now();
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     @Column(nullable = false)
     private LocalDateTime modifiedAt = LocalDateTime.now();
@@ -29,3 +29,6 @@ public class Answer {
     @Column(nullable = false)
     private int voteCount;
 }
+//Member - question - answer
+
+
