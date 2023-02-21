@@ -1,5 +1,3 @@
-// bodytxt, tags, btns, userinfo
-
 import QuestionBodyTxt from "./QuestionBodyTxt";
 import QuestionTags from "./QuestionTags";
 import QuestionBodyBtns from "./QuestionBodyBtns";
