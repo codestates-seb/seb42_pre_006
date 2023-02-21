@@ -2,7 +2,6 @@ package com.pre006.stackoverflow.member.utils;
 
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.Set;
 
 @Component
@@ -14,3 +13,4 @@ public class AuthoritiesUtils {
         ADMINS_EMAIL = Set.of(value.split(","));
     }
 }
+

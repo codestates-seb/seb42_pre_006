@@ -1,9 +1,15 @@
 package com.pre006.stackoverflow.member.entitiy;
 
+import com.pre006.stackoverflow.answer.entity.Answer;
+import com.pre006.stackoverflow.answervote.entity.AnswerVote;
+import com.pre006.stackoverflow.question.entity.Question;
+import com.pre006.stackoverflow.questionvote.entity.QuestionVote;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -37,5 +43,17 @@ public class Member {
 
     @Lob
     private String aboutMe;
+
+    @OneToMany(mappedBy = "member")
+    private List<Question> questions = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member")
+    private List<QuestionVote> questionVotes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member")
+    private List<Answer> answers = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member")
+    private List<AnswerVote> answerVotes = new ArrayList<>();
 
 }

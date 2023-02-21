@@ -1,5 +1,9 @@
 package com.pre006.stackoverflow.question.entity;
 
+import com.pre006.stackoverflow.answer.entity.Answer;
+import com.pre006.stackoverflow.member.entitiy.Member;
+import com.pre006.stackoverflow.question.audit.Auditable;
+import com.pre006.stackoverflow.questionvote.entity.QuestionVote;
 import com.pre006.stackoverflow.question.audit.Auditable;
 import com.pre006.stackoverflow.questionvote.entity.QuestionVote;
 import lombok.Getter;
@@ -9,6 +13,8 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,4 +89,14 @@ public class Question extends Auditable {
             this.status = status;
         }
     }
+    @ManyToOne
+    @JoinColumn(name = "MEMBER_ID")
+    private Member member;
+
+    public void addMember(Member member){
+        this.member = member;
+    }
+
+    @OneToMany(mappedBy = "question")
+    private List<Answer> answers = new ArrayList<>();
 }
