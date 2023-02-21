@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { MdAllInbox } from 'react-icons/md';
 import { ImTrophy } from 'react-icons/im';
 import { BsFillQuestionCircleFill } from 'react-icons/bs';
 import { HiChatBubbleBottomCenterText } from 'react-icons/hi2';
 import { FaUserCircle } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
 import Button from '../../UI/Button';
+import { AuthContext } from '../../../context/auth-context';
 
 function UserNavItem({ onClick, children }) {
   return (
@@ -20,23 +20,19 @@ function UserNavItem({ onClick, children }) {
   );
 }
 
-function UserNav({ isLogin, onLogout }) {
-  const navigate = useNavigate();
+function UserNav() {
+  const { isLoggedIn, handleLogout } = useContext(AuthContext);
 
   // 로그인 전
   const isNotLoginComponent = (
     <>
       <div className="mx-1">
-        <Button
-          variant="secondary"
-          size="sm"
-          onClick={() => navigate('/login')}
-        >
+        <Button variant="secondary" size="sm" to="/login">
           Log in
         </Button>
       </div>
       <div className="mx-1 ">
-        <Button variant="primary" size="sm" onClick={() => navigate('/signup')}>
+        <Button variant="primary" size="sm" to="/signup">
           Sign up
         </Button>
       </div>
@@ -68,7 +64,7 @@ function UserNav({ isLogin, onLogout }) {
         </UserNavItem>
       </div>
       <div className="mx-1">
-        <UserNavItem onClick={onLogout}>
+        <UserNavItem onClick={handleLogout}>
           <HiChatBubbleBottomCenterText />
         </UserNavItem>
       </div>
@@ -77,7 +73,7 @@ function UserNav({ isLogin, onLogout }) {
 
   return (
     <nav className="flex">
-      {!isLogin ? isNotLoginComponent : isLoggedInComponent}
+      {!isLoggedIn ? isNotLoginComponent : isLoggedInComponent}
     </nav>
   );
 }
