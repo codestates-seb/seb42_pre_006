@@ -1,5 +1,6 @@
 package com.pre006.stackoverflow.member.controller;
 
+import com.pre006.stackoverflow.global.SingleResponse;
 import com.pre006.stackoverflow.member.dto.MemberDto;
 import com.pre006.stackoverflow.member.entitiy.Member;
 import com.pre006.stackoverflow.member.mapper.MemberMapper;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+
 import java.util.List;
+
 
 @SuppressWarnings("rawtypes")
 @RestController

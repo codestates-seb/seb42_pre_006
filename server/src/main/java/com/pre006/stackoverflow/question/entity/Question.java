@@ -2,6 +2,8 @@ package com.pre006.stackoverflow.question.entity;
 
 import com.pre006.stackoverflow.question.audit.Auditable;
 import com.pre006.stackoverflow.questionvote.entity.QuestionVote;
+import com.pre006.stackoverflow.question.audit.Auditable;
+import com.pre006.stackoverflow.questionvote.entity.QuestionVote;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,6 +11,8 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.List;
 

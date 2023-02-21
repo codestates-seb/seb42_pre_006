@@ -30,7 +30,6 @@ public class QuestionController {
         this.questionService = questionService;
         this.mapper = mapper;
     }
-
     @PostMapping
     public ResponseEntity postQuestion(@RequestBody QuestionDto.PostDto requestBody) {
         Question createQuestion = questionService.createQuestion(mapper.postDtoToQuestion(requestBody));
@@ -64,7 +63,6 @@ public class QuestionController {
                 HttpStatus.OK
         );
     }
-
     @PatchMapping("/{question-id}")
     public ResponseEntity patchQuestion(@PathVariable("question-id") Long questionId,
                                         @RequestBody QuestionDto.PatchDto requestBody) {
