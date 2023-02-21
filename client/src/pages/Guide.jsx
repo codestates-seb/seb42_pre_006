@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { MdAccountBox } from 'react-icons/md';
 import Badge from '../components/UI/Badge';
 import Button from '../components/UI/Button';
 import Card from '../components/UI/Card';
 import InputFeild from '../components/UI/InputFeild';
+import Pagination from '../components/UI/Pagination';
 import Title from '../components/UI/Title';
 
 function Guide() {
@@ -17,6 +18,10 @@ function Guide() {
   const onSubmit = data => {
     console.log(data);
   };
+
+  const [page, setPage] = useState(1);
+
+  const handleClickPage = pageNum => setPage(pageNum);
 
   return (
     <article className="text-left px-6">
@@ -204,6 +209,19 @@ function Guide() {
             </Button>
           </div>
         </form>
+      </section>
+      <section className="py-10 border-t">
+        <header>
+          <h2 className="text-2xl font-semibold">Pagination</h2>
+        </header>
+        <div className="my-4 text-center">
+          <Pagination
+            total={50}
+            page={page}
+            onClick={handleClickPage}
+            limit={10}
+          />
+        </div>
       </section>
     </article>
   );
