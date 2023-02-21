@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { IoMdArrowDropdown } from 'react-icons/io';
-
 import Button from '../UI/Button';
 
 function QuestionsHeader() {
