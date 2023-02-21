@@ -2,7 +2,6 @@ package com.pre006.stackoverflow.question.service;
 
 import com.pre006.stackoverflow.question.entity.Question;
 import com.pre006.stackoverflow.question.repository.QuestionRepository;
-<<<<<<< HEAD
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -20,11 +19,6 @@ import java.time.ZoneOffset;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-=======
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
->>>>>>> e2b88ac0eb63365d4354a19408517ec912ea0a0a
 import java.util.Optional;
 
 @Transactional
@@ -47,12 +41,10 @@ public class QuestionService {
         return question;
     }
 
-<<<<<<< HEAD
     public Page<Question> findQuestions(int page, int size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("questionId").descending());
         return questionRepository.findAll(pageable);
     }
-
     public Question updateQuestion(Question question) {
         // todo: 수정 시 검증을 해야하는 부분이 있는지      ex) 내용이 완전히 같을 경우 ERROR
         // todo: 질문 상태 수정을 해당 로직에서 처리할건지
@@ -68,9 +60,8 @@ public class QuestionService {
 
         return questionRepository.save(findQuestion);
     }
-
     public void viewCountValidation(Question question,
-                           HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
+                                    HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
         long id = question.getQuestionId();
 
         Cookie cookie = null;
@@ -106,13 +97,6 @@ public class QuestionService {
         // todo : Custom ErrorResponse 필요
         Question findQuestion = optionalQuestion.orElseThrow(() ->
                 new RuntimeException("NOT_EXIST_QUESTION"));
-=======
-    private Question findVerifiedQuestion(long questionId) {
-        Optional<Question> optionalQuestion = questionRepository.findById(questionId);
-
-        Question findQuestion = optionalQuestion.orElseThrow(() ->
-                new NullPointerException());
->>>>>>> e2b88ac0eb63365d4354a19408517ec912ea0a0a
 
         return findQuestion;
     }

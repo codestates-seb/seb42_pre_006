@@ -38,8 +38,4 @@ public class Member {
     @Lob
     private String aboutMe;
 
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> e2b88ac0eb63365d4354a19408517ec912ea0a0a
