@@ -124,7 +124,7 @@ function SiteMap() {
           <SiteMapNav.Title>{nav.title}</SiteMapNav.Title>
           <SiteMapNav.Children>
             {nav.items.map((item, itemIndex) => (
-              <SiteMapNav.Item url={item.url} key={itemIndex}>
+              <SiteMapNav.Item to={item.url} key={itemIndex}>
                 {item.text}
               </SiteMapNav.Item>
             ))}

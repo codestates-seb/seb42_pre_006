@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './theme.scss';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import QuestionAsk from './pages/QuestionAsk';
 import Questions from './pages/Questions';
 import QuestionEdit from './pages/QuestionEdit';
@@ -14,30 +14,42 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import QuestionDetail from './pages/QuestionDetail';
+import { AuthContext } from './context/auth-context';
 
 function App() {
+  const { isLoggedIn } = useContext(AuthContext);
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<MainLayout hasSidebar />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/questions" element={<Questions />} />
-          <Route path="/guide" element={<Guide />} />
-          <Route path="/detail" element={<QuestionDetail />} />
-        </Route>
-        <Route element={<MainLayout />}>
-          <Route path="/tags" element={<Tags />} />
-          <Route path="/users" element={<Users />} />
-          <Route path="/users/1" element={<UsersPersonalPage />} />
-          <Route path="/edit" element={<QuestionEdit />} />
-        </Route>
-        <Route element={<BaseLayout />}>
-          <Route path="/ask" element={<QuestionAsk />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route element={<MainLayout hasSidebar />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/questions" element={<Questions />} />
+        <Route path="/guide" element={<Guide />} />
+        <Route path="/detail" element={<QuestionDetail />} />
+      </Route>
+      <Route element={<MainLayout />}>
+        <Route path="/tags" element={<Tags />} />
+        <Route path="/users" element={<Users />} />
+        <Route path="/users/1" element={<UsersPersonalPage />} />
+        <Route path="/edit" element={<QuestionEdit />} />
+      </Route>
+      <Route element={<BaseLayout />}>
+        <Route path="/ask" element={<QuestionAsk />} />
+        {!isLoggedIn ? (
+          <>
+            {/** 로그인 전 상태 */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
+          </>
+        ) : (
+          <>
+            {/** 로그인된 상태에서 로그인, 회원페이지 접근 시도시 홈으로 리다이렉트 */}
+            <Route path="/login" element={<Navigate replace to="/" />} />
+            <Route path="/signup" element={<Navigate replace to="/" />} />
+          </>
+        )}
+      </Route>
+    </Routes>
   );
 }
 

@@ -7,14 +7,18 @@ function InputFeild({
   name,
   label,
   labelDetail,
-  type,
+  type = 'text',
   value,
   placeholder,
-  isValidError,
+  errors,
+  validation,
+  register,
   disabled,
   className,
   onChange,
 }) {
+  const setRegister = register ? register(name, validation) : null;
+
   return (
     <div className={classNames('my-4', className)}>
       <label htmlFor={id} className="block text-left font-semibold text-sm">
@@ -29,7 +33,7 @@ function InputFeild({
         className={classNames(
           'flex items-center border border-gray-300 rounded-sm mt-2',
           {
-            'border-2 !border-danger': isValidError,
+            'border-2 !border-danger': errors && errors[name]?.type,
           },
           {
             'bg-gray-100': disabled,
@@ -44,14 +48,19 @@ function InputFeild({
           placeholder={placeholder}
           onChange={onChange}
           disabled={disabled}
+          {...setRegister}
           className={classNames('w-full h-8 p-2', {
-            'outline-none': isValidError,
+            'outline-none': errors,
           })}
         />
-        {isValidError && <MdError className="text-danger mx-4 text-2xl" />}
+        {errors && errors[name]?.type && (
+          <MdError className="text-danger mx-4 text-2xl" />
+        )}
       </div>
-      {isValidError && (
-        <p className="mt-1 text-sm text-danger">Error Message</p>
+      {errors && errors[name]?.type && (
+        <p className="mt-1 text-sm text-danger text-left">
+          {errors[name].message}
+        </p>
       )}
     </div>
   );
