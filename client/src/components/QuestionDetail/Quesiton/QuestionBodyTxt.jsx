@@ -1,14 +1,39 @@
-function QuestionBodyTxt() {
+function QuestionBodyTxt({ answerContent }) {
+
+  // const [answerContents, serAnswerContents] = useState('')
+
+  // const url = 'http://ec2-43-201-16-212.ap-northeast-2.compute.amazonaws.com:8080';
+  // const config = {"Content-Type": 'application/json'};
+  
+  // useEffect(() => {
+  //   async function getData() {
+  //     try {
+  //       const response = await axios.get(`${url}/answer`, config)
+  //       const { data } = response
+  //       serAnswerContents(data)
+  //     } catch (error) {
+  //       console.error(error)
+  //     }
+  //   }
+  //   getData()
+  // }, [])
+
   return (
     <section>
       <div className=" text-left">
-        {`I was going through some MySql (mariadb) report looking for why I was getting too many rows in a report and found that the column being queried which stores serialized php and matches another column value is falsely matching.
+        {answerContent}
+{/* {answerContents.answerContents} */}
 
-where m.section = SUBSTRING_INDEX(SUBSTRING_INDEX(s.other,CHAR(59),2),CHAR(58),-1)
-
-This is fine. m.section contains a number. s.other might have a value a:1:{s:3:"foo";i:4;}, so it is matching the 4 in that data.
-
-Then I found that some n.other records are storing null. Php's serialize outputs a capital N followed by a semicolon to represent a null.`}
+        {/* {answerContents
+        ? (<div>
+          {answerContents.map((el, idx) => {
+            return (
+              <div key={idx}>{el.answerContent}</div>
+            )
+          })}
+        </div>)
+        : null
+        } */}
       </div>
     </section>
   );

@@ -3,10 +3,10 @@ import QuestionTags from "./QuestionTags";
 import QuestionBodyBtns from "./QuestionBodyBtns";
 import QuestionUserinfo from "./QuestionUserinfo";
 
-function QuestionBody() {
+function QuestionBody({ answerContent }) {
   return (
     <div className=" mt-5 flex flex-col">
-      <QuestionBodyTxt />
+      <QuestionBodyTxt answerContent={ answerContent }/>
       <QuestionTags />
       <div className="flex justify-between mt-7">
         <QuestionBodyBtns />
