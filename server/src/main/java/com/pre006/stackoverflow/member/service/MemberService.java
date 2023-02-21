@@ -1,15 +1,21 @@
 package com.pre006.stackoverflow.member.service;
 
+<<<<<<< HEAD
 import com.pre006.stackoverflow.answer.entity.Answer;
 import com.pre006.stackoverflow.answer.excpetion.BusinessLogicException;
 import com.pre006.stackoverflow.answer.excpetion.ExceptionCode;
+=======
+>>>>>>> e2b88ac0eb63365d4354a19408517ec912ea0a0a
 import com.pre006.stackoverflow.member.entitiy.Member;
 import com.pre006.stackoverflow.member.repository.MemberRepository;
 import org.springframework.stereotype.Service;
 
+<<<<<<< HEAD
 import java.util.List;
 import java.util.Optional;
 
+=======
+>>>>>>> e2b88ac0eb63365d4354a19408517ec912ea0a0a
 @Service
 public class MemberService {
     private final MemberRepository memberRepository;
@@ -20,6 +26,7 @@ public class MemberService {
         return memberRepository.save(member);
     }
     public Member updateMember(Member member) {
+<<<<<<< HEAD
         Member findMember = findVerifiedMember(member.getMemberId());
         Optional.ofNullable(member.getDisplayName()).ifPresent(content -> findMember.setDisplayName(content));
         Optional.ofNullable(member.getLocation()).ifPresent(content -> findMember.setLocation(content));
@@ -46,3 +53,15 @@ public class MemberService {
     }
 
 }
+=======
+        return memberRepository.save(member);
+    }
+    public Member findMember(Member member) {
+        return memberRepository.save(member);
+    }
+    public Member deleteMember(Member member) {
+        return memberRepository.save(member);
+    }
+
+}
+>>>>>>> e2b88ac0eb63365d4354a19408517ec912ea0a0a

@@ -3,19 +3,29 @@ package com.pre006.stackoverflow.question.controller;
 import com.pre006.stackoverflow.question.dto.QuestionDto;
 import com.pre006.stackoverflow.question.entity.Question;
 import com.pre006.stackoverflow.question.mapper.QuestionMapper;
+<<<<<<< HEAD
 import com.pre006.stackoverflow.question.response.MultiResponseDto;
 import com.pre006.stackoverflow.question.service.QuestionService;
 import com.pre006.stackoverflow.question.utils.UriCreator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+=======
+import com.pre006.stackoverflow.question.service.QuestionService;
+import com.pre006.stackoverflow.question.utils.UriCreator;
+import lombok.extern.slf4j.Slf4j;
+>>>>>>> e2b88ac0eb63365d4354a19408517ec912ea0a0a
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+<<<<<<< HEAD
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.net.URI;
 import java.util.List;
+=======
+import java.net.URI;
+>>>>>>> e2b88ac0eb63365d4354a19408517ec912ea0a0a
 
 @Slf4j
 @RestController
@@ -24,6 +34,10 @@ public class QuestionController {
     private final static String QUESTION_DEFAULT_URL = "/questions";
 
     private final QuestionService questionService;
+<<<<<<< HEAD
+=======
+
+>>>>>>> e2b88ac0eb63365d4354a19408517ec912ea0a0a
     private final QuestionMapper mapper;
 
     public QuestionController(QuestionService questionService, QuestionMapper mapper) {
@@ -33,15 +47,23 @@ public class QuestionController {
 
     @PostMapping
     public ResponseEntity postQuestion(@RequestBody QuestionDto.PostDto requestBody) {
+<<<<<<< HEAD
         Question createQuestion = questionService.createQuestion(mapper.postDtoToQuestion(requestBody));
         QuestionDto.ResponseDto response = mapper.questionToResponseDto(createQuestion);
 
         URI location = UriCreator.createUri(QUESTION_DEFAULT_URL, createQuestion.getQuestionId());
+=======
+        Question createQuestion = questionService.createQuestion(mapper.PostDtoToQuestion(requestBody));
+        QuestionDto.ResponseDto response = mapper.questionToResponseDto(createQuestion);
+
+        URI location = UriCreator.createUri(QUESTION_DEFAULT_URL);
+>>>>>>> e2b88ac0eb63365d4354a19408517ec912ea0a0a
 
         return ResponseEntity.created(location).body(response);
     }
 
     @GetMapping("/{question-id}")
+<<<<<<< HEAD
     public ResponseEntity getQuestion(@PathVariable("question-id") Long questionId,
                                       HttpServletRequest servletRequest,
                                       HttpServletResponse servletResponse) {
@@ -78,4 +100,15 @@ public class QuestionController {
                 .location(location)
                 .body(response);
     }
+=======
+    public ResponseEntity getQuestion(@PathVariable("question-id") Long questionId) {
+        Question findQuestion = questionService.findQuestion(questionId);
+        QuestionDto.ResponseDto response = mapper.questionToResponseDto(findQuestion);
+
+        URI location = UriCreator.createUri(QUESTION_DEFAULT_URL, questionId);
+
+        return ResponseEntity.created(location).body(response);
+    }
+
+>>>>>>> e2b88ac0eb63365d4354a19408517ec912ea0a0a
 }
