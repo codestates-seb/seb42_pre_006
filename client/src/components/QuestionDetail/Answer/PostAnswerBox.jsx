@@ -1,7 +1,8 @@
 // Toastinput 감싼 후 YourAnswer
 import Quillinput from "./Quillinput";
 
-function PostAnswerBox()  {
+function PostAnswerBox() {
+
   return (
     <div className=" flex flex-col items-start mt-16">
       <div className=" mb-4 text-lg text-left w-full">Your Answer</div>
