@@ -43,10 +43,12 @@ function UserNav() {
   const isLoggedInComponent = (
     <>
       <div className="mx-1 mr-4">
-        <UserNavItem>
-          <FaUserCircle className=" text-violet-900" />
-          <span className="ml-2 leading-none font-semibold">1</span>
-        </UserNavItem>
+        <Link to="/users/1">
+          <UserNavItem>
+            <FaUserCircle className=" text-violet-900" />
+            <span className="ml-2 leading-none font-semibold">1</span>
+          </UserNavItem>
+        </Link>
       </div>
       <div className="mx-1">
         <UserNavItem>

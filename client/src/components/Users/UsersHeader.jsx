@@ -2,7 +2,7 @@ import { BsSearch } from 'react-icons/bs';
 
 function UsersHeader() {
   return (
-    <section>
+    <>
       <div>
         <h1 className="text-3xl font-medium mb-6 text-left">Users</h1>
       </div>
@@ -50,7 +50,7 @@ function UsersHeader() {
           </button>
         </div>
       </div>
-    </section>
+    </>
   );
 }
 
