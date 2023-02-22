@@ -1,41 +1,14 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 import { RiQuestionnaireFill } from 'react-icons/ri';
 import { MdThumbsUpDown } from 'react-icons/md';
 import { AiFillTags } from 'react-icons/ai';
 import { ImTrophy } from 'react-icons/im';
-import axios from 'axios';
 import IconDescListItem from '../components/SignUp/IconDescListItem';
-import Button from '../components/UI/Button';
-import Card from '../components/UI/Card';
-import InputFeild from '../components/UI/InputFeild';
 import SocialLogin from '../components/UI/SocialLogin';
+import SignUpForm from '../components/SignUp/SignUpForm';
 
 function SignUp() {
-  const navigate = useNavigate();
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
-  const handleSubmitSignUp = async ({ displayName, email, password }) => {
-    try {
-      const response = await axios.post('/api/v1/members', {
-        email,
-        password,
-        displayName,
-      });
-      if (response) {
-        navigate('/', { replace: true });
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   return (
     <article>
       <section className="flex items-center justify-center h-full">
@@ -71,61 +44,7 @@ function SignUp() {
           <div className="mb-4">
             <SocialLogin />
           </div>
-          <Card className="mt-4 mb-10">
-            <form onSubmit={handleSubmit(handleSubmitSignUp)}>
-              <div>
-                <InputFeild
-                  label="Display name"
-                  type="text"
-                  name="displayName"
-                  register={register}
-                  errors={errors}
-                  validation={{ required: '이름을 입력해주세요' }}
-                  className="mt-0"
-                />
-                <InputFeild
-                  label="Email"
-                  type="text"
-                  name="email"
-                  register={register}
-                  errors={errors}
-                  validation={{ required: '이메일을 입력해주세요' }}
-                />
-                <InputFeild
-                  label="Password"
-                  type="password"
-                  name="password"
-                  register={register}
-                  errors={errors}
-                  validation={{ required: '비밀번호를 입력해주세요' }}
-                />
-              </div>
-              <div className="mb-4 text-left">
-                <p className="my-2 text-sm text-gray-500">
-                  Passwords must contain at least eight characters, including at
-                  least 1 letter and 1 number.
-                </p>
-                <p className="my-2 text-sm text-gray-500">
-                  <label htmlFor="checkAgree" className="ml-2">
-                    <input type="checkbox" id="checkAgree" />
-                    Opt-in to receive occasional product updates, user research
-                    invitations, company announcements, and digests.
-                  </label>
-                </p>
-              </div>
-              <Button variant="primary" size="md" block>
-                Sign up
-              </Button>
-              <div className="mt-10 text-left">
-                <p className="text-xs">
-                  By clicking “Sign up”, you agree to our&nbsp;
-                  <span className=" text-blue-500">
-                    terms of service, privacy policy and cookie policy
-                  </span>
-                </p>
-              </div>
-            </form>
-          </Card>
+          <SignUpForm />
           <div className="text-sm">
             <p className="my-1">
               <span className="mr-2">Already have an account?</span>
