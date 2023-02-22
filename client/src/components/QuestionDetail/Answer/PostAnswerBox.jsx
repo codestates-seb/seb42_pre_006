@@ -1,4 +1,3 @@
-// Toastinput 감싼 후 YourAnswer
 import Quillinput from "./Quillinput";
 
 function PostAnswerBox() {
