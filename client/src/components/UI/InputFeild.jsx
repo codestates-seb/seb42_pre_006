@@ -17,7 +17,7 @@ function InputFeild({
   className,
   onChange,
 }) {
-  const setRegister = register ? register(name, validation) : null;
+  const setRegister = register && register(name, validation);
 
   return (
     <div className={classNames('my-4', className)}>

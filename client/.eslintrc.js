@@ -30,7 +30,7 @@ module.exports = {
     ],
     'react/jsx-props-no-spreading': 'off',
     'react/no-array-index-key': 'off',
-    'react/jsx-no-useless-fragment': 'on',
+    'react/jsx-no-useless-fragment': 0,
   },
   settings: {
     'import/core-modules': ['styled-components', 'react-router-dom'],

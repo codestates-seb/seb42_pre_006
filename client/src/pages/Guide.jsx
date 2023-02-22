@@ -1,12 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { MdAccountBox } from 'react-icons/md';
 import Badge from '../components/UI/Badge';
 import Button from '../components/UI/Button';
 import Card from '../components/UI/Card';
 import InputFeild from '../components/UI/InputFeild';
+import Pagination from '../components/UI/Pagination';
 import Title from '../components/UI/Title';
 
 function Guide() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = data => {
+    console.log(data);
+  };
+
+  const [page, setPage] = useState(1);
+
+  const handleClickPage = pageNum => setPage(pageNum);
+
   return (
     <article className="text-left px-6">
       <header className="pb-6">
@@ -145,27 +161,65 @@ function Guide() {
         <header>
           <h2 className="text-2xl font-semibold">Input Feild</h2>
         </header>
-        <div className="my-4">
-          <InputFeild
-            label="Label"
-            labelDetail="Be specific and imagine you’re asking a question to another person. Minimum 15 characters."
-            placeholder="placeholder"
-          />
-        </div>
-        <div className="my-4">
-          <InputFeild
-            label="Label"
-            labelDetail="Be specific and imagine you’re asking a question to another person. Minimum 15 characters."
-            placeholder="placeholder"
-            isValidError
-          />
-        </div>
-        <div className="my-4">
-          <InputFeild
-            label="Label"
-            labelDetail="Be specific and imagine you’re asking a question to another person. Minimum 15 characters."
-            placeholder="placeholder"
-            disabled
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="my-4">
+            <InputFeild
+              label="Email"
+              labelDetail="Be specific and imagine you’re asking a question to another person. Minimum 15 characters."
+              placeholder="placeholder"
+              name="email"
+              type="text"
+              register={register}
+              validation={{ required: '필수 입력 항목입니다' }}
+              errors={errors}
+            />
+          </div>
+          <div className="my-4">
+            <InputFeild
+              label="Password"
+              labelDetail="Be specific and imagine you’re asking a question to another person. Minimum 15 characters."
+              placeholder="placeholder"
+              name="password"
+              type="password"
+              register={register}
+              errors={{
+                password: {
+                  type: 'required',
+                  message: '필수 입력 항목입니다',
+                },
+              }} // errors={errors} 로 작성
+              validation={{ required: '필수 입력 항목입니다' }}
+            />
+          </div>
+          <div className="my-4">
+            <InputFeild
+              label="Display Name"
+              labelDetail="Be specific and imagine you’re asking a question to another person. Minimum 15 characters."
+              placeholder="placeholder"
+              type="text"
+              name="displayName"
+              register={register}
+              errors={errors}
+              disabled
+            />
+          </div>
+          <div className="my-4 text-right">
+            <Button variant="primary" size="md" className="w-40">
+              Submit
+            </Button>
+          </div>
+        </form>
+      </section>
+      <section className="py-10 border-t">
+        <header>
+          <h2 className="text-2xl font-semibold">Pagination</h2>
+        </header>
+        <div className="my-4 text-center">
+          <Pagination
+            total={50}
+            page={page}
+            onClick={handleClickPage}
+            limit={10}
           />
         </div>
       </section>

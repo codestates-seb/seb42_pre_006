@@ -29,8 +29,11 @@ function App() {
       </Route>
       <Route element={<MainLayout />}>
         <Route path="/tags" element={<Tags />} />
-        <Route path="/users" element={<Users />} />
-        <Route path="/users/1" element={<UsersPersonalPage />} />
+        <Route path="/users">
+          <Route index element={<Users />} />
+          <Route path=":id" element={<UsersPersonalPage />} />
+        </Route>
+        {/* <Route path="/users/1" element={<UsersPersonalPage />} /> */}
         <Route path="/edit" element={<QuestionEdit />} />
       </Route>
       <Route element={<BaseLayout />}>

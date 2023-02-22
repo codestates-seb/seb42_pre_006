@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import Button from '../components/UI/Button';
@@ -25,8 +25,6 @@ function Login() {
   const onSubmit = () => {
     handleLogin();
   };
-
-  useCallback(() => {}, [errors]);
 
   return (
     <article>
