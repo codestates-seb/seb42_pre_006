@@ -2,6 +2,7 @@ package com.pre006.stackoverflow.question.service;
 
 import com.pre006.stackoverflow.question.entity.Question;
 import com.pre006.stackoverflow.question.repository.QuestionRepository;
+import org.apache.catalina.security.SecurityUtil;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -38,11 +39,16 @@ public class QuestionService {
     public Question findQuestion(long questionId) {
         Question question = findVerifiedQuestion(questionId);
 
+        // todo: 조회한 질문의 상태가 '질문 삭제'인 경우 예외 처리
+
         return question;
     }
 
     public Page<Question> findQuestions(int page, int size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("questionId").descending());
+
+        // todo: 삭제된 질문 filter 처리
+
         return questionRepository.findAll(pageable);
     }
     public Question updateQuestion(Question question) {
@@ -59,6 +65,18 @@ public class QuestionService {
                 .ifPresent(editComment -> findQuestion.setEditComment(editComment));
 
         return questionRepository.save(findQuestion);
+    }
+
+    public void deleteQuestion(long questionId) {
+        // todo: 삭제를 요청한 유저가 작성자인지 확인
+
+        Question deleteQuestion = findVerifiedQuestion(questionId);
+
+        // todo: 제목, 내용, 수정코멘트 등에도 dummy data 넣을건지 고민
+
+        deleteQuestion.setQuestionStatus(Question.QuestionStatus.QUESTION_DELETE);
+
+        questionRepository.save(deleteQuestion);
     }
     public void viewCountValidation(Question question,
                                     HttpServletRequest servletRequest, HttpServletResponse servletResponse) {

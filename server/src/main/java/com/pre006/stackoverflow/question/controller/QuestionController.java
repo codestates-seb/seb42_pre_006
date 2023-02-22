@@ -23,7 +23,6 @@ import java.util.List;
 @RequestMapping("/questions")
 public class QuestionController {
     private final static String QUESTION_DEFAULT_URL = "/questions";
-
     private final QuestionService questionService;
     private final QuestionMapper mapper;
 
@@ -76,5 +75,14 @@ public class QuestionController {
         return ResponseEntity.status(HttpStatus.OK)
                 .location(location)
                 .body(response);
+    }
+
+    @DeleteMapping("/{question-id}")
+    public ResponseEntity deleteQuestion(@PathVariable("question-id") Long questionId) {
+        // todo: jwt 에서 memberId 파싱
+
+        questionService.deleteQuestion(questionId);
+
+        return ResponseEntity.noContent().build();
     }
 }
