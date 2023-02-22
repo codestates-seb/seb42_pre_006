@@ -3,7 +3,7 @@ package com.pre006.stackoverflow.question.controller;
 import com.pre006.stackoverflow.question.dto.QuestionDto;
 import com.pre006.stackoverflow.question.entity.Question;
 import com.pre006.stackoverflow.question.mapper.QuestionMapper;
-import com.pre006.stackoverflow.question.response.MultiResponseDto;
+import com.pre006.stackoverflow.global.response.MultiResponseDto;
 import com.pre006.stackoverflow.question.service.QuestionService;
 import com.pre006.stackoverflow.question.utils.UriCreator;
 import lombok.extern.slf4j.Slf4j;

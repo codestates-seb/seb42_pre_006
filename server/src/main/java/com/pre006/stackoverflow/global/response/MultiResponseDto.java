@@ -1,6 +1,5 @@
-package com.pre006.stackoverflow.question.response;
+package com.pre006.stackoverflow.global.response;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.data.domain.Page;
 
