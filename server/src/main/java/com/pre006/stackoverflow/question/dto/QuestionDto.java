@@ -1,10 +1,12 @@
 package com.pre006.stackoverflow.question.dto;
 
+import com.pre006.stackoverflow.tag.dto.TagDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class QuestionDto {
     @Getter
@@ -12,6 +14,7 @@ public class QuestionDto {
     public static class PostDto {
         private String questionTitle;
         private String questionContent;
+        private List<TagDto.PostDto> tags;
 
     }
 

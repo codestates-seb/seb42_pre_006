@@ -47,4 +47,10 @@ public class TagService {
         return optionalTag.orElseThrow(() ->
                 new RuntimeException("NOT_EXIST_TAG"));
     }
+
+    public Tag isExistTag(String tagName) {
+        Optional<Tag> optionalTag = tagRepository.findByTagName(tagName);
+
+        return optionalTag.isPresent() ? optionalTag.get() : null;
+    }
 }
