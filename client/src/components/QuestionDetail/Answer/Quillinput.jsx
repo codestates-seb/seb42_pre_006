@@ -7,13 +7,12 @@ import 'react-quill/dist/quill.snow.css';
 function Quillinput() {
   const [quillValue, setQuillValue] = useState('');
 
-  const url = 'http://ec2-3-38-211-158.ap-northeast-2.compute.amazonaws.com:8080'
-  console.log(quillValue);
-  // const config = {"Content-Type": 'application/json'};
+  // const url = 'http://ec2-3-38-211-158.ap-northeast-2.compute.amazonaws.com:8080'
+  // console.log(quillValue);
 
   async function getPost() {
     try {
-      const response = await axios.post(`${url}/answer`, {
+      const response = await axios.post('/answer', {
         answerContent: quillValue,
       });
       console.log(response);
@@ -43,8 +42,6 @@ function Quillinput() {
             value={quillValue}
           />
         </div>
-
-        <button type="submit">button</button>
 
         <Button variant="primary" size="md" className="flex mt-8">
           Post Your Answer

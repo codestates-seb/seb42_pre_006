@@ -8,16 +8,12 @@ import PostAnswerBox from './PostAnswerBox';
 function QuesitonAnswer() {
   const [answerContents, serAnswerContents] = useState('');
 
-  const url = 'http://ec2-3-38-211-158.ap-northeast-2.compute.amazonaws.com:8080'
-  const config = { 'Content-Type': 'application/json' };
-
   useEffect(() => {
     async function getData() {
       try {
-        const response = await axios.get(`${url}/answer`, config);
+        const response = await axios.get('/answer');
         const { data } = response;
         serAnswerContents(data);
-        console.log(data);
       } catch (error) {
         console.error(error);
       }

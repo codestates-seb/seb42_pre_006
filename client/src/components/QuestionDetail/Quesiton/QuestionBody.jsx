@@ -6,7 +6,7 @@ import QuestionUserinfo from "./QuestionUserinfo";
 function QuestionBody({ answerContent }) {
   return (
     <div className=" mt-5 flex flex-col w-full">
-      <QuestionBodyTxt answerContent={answerContent}/>
+      <QuestionBodyTxt answerContent={answerContent} />
       <QuestionTags />
       <div className="flex w-full justify-between mt-7">
         <QuestionBodyBtns />
