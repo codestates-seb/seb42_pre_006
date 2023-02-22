@@ -19,12 +19,12 @@ server:
   servlet:
     encoding:
       force-response: true
-<<<<<<< HEAD
 
 jwt:
   secret: randomTestValueItisNotUsedInProdEnv
   expiration: 1800000
   refresh:
    expiration: 604800000
-=======
->>>>>>> e2b88ac0eb63365d4354a19408517ec912ea0a0a
+
+admin:
+  email : test@gmail.com,test1@gmail.com

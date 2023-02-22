@@ -21,6 +21,7 @@ public class MemberService {
     }
     public Member updateMember(Member member) {
         Member findMember = findVerifiedMember(member.getMemberId());
+        Optional.ofNullable(member.getPassword()).ifPresent(content -> findMember.setPassword(content));
         Optional.ofNullable(member.getDisplayName()).ifPresent(content -> findMember.setDisplayName(content));
         Optional.ofNullable(member.getLocation()).ifPresent(content -> findMember.setLocation(content));
         Optional.ofNullable(member.getMemberTitle()).ifPresent(content -> findMember.setMemberTitle(content));
