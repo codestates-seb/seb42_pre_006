@@ -18,10 +18,8 @@ server:
     encoding:
       force-response: true
 
-
 jwt:
   secret: randomTestValueItisNotUsedInProdEnv
   expiration: 1800000
   refresh:
    expiration: 604800000
-
