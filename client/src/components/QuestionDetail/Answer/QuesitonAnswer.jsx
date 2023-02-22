@@ -6,14 +6,14 @@ import MainAnswer from './MainAnswer';
 import PostAnswerBox from './PostAnswerBox';
 
 function QuesitonAnswer() {
-  const [answerContents, serAnswerContents] = useState('');
+  const [answers, setAnswers] = useState('');
 
   useEffect(() => {
     async function getData() {
       try {
         const response = await axios.get('/answer');
         const { data } = response;
-        serAnswerContents(data);
+        setAnswers(data);
       } catch (error) {
         console.error(error);
       }
@@ -24,14 +24,13 @@ function QuesitonAnswer() {
   return (
     <div className="mt-16">
       <AnswersInfo />
-      {/* <MainAnswer /> */}
 
-      {answerContents ? (
+      {answers ? (
         <div>
           {/* eslint-disable-next-line */}
-          {answerContents.map(function(el) {
+          {answers.map(function(el) {
             return (
-              <MainAnswer key={el.answerId} answerContent={el.answerContent} />
+              <MainAnswer key={el.answerId} answerId={el.answerId} answerContent={el.answerContent} />
             );
           })}
         </div>
