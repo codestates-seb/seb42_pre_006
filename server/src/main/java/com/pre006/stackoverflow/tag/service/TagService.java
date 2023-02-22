@@ -5,6 +5,7 @@ import com.pre006.stackoverflow.tag.repository.TagRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -17,6 +18,7 @@ public class TagService {
     }
 
     public Tag createTag(Tag tag) {
+        // todo: 중복 태그 등록 안되게 할지 확인 필요
         existVerifiedTag(tag.getTagName());
 
         return tagRepository.save(tag);
@@ -25,6 +27,11 @@ public class TagService {
     public Tag findTag(long tagId) {
 
         return findVerifiedTag(tagId);
+    }
+
+    public List<Tag> findTags() {
+
+        return tagRepository.findAll();
     }
 
     private void existVerifiedTag(String tagName) {

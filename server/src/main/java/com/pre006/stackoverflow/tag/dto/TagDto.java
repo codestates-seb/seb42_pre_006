@@ -11,7 +11,7 @@ public class TagDto {
     @Getter
     @NoArgsConstructor
     public static class PostDto {
-        @Pattern(regexp = "^(?=.*[a-z])[a-z\\d-]{1,10}$",
+        @Pattern(regexp = "^(?=.*[a-z])[a-z\\d-]{1,20}$",
                 message = "태그 이름은 영소문자 10자 이하여야 합니다. (특수문자는 '-'만 허용)")
         private String tagName;
 

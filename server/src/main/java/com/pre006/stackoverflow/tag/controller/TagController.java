@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.net.URI;
+import java.util.List;
 
 @Slf4j
 @Validated
@@ -41,9 +42,17 @@ public class TagController {
     }
 
     @GetMapping("/{tag-id}")
-    public ResponseEntity getTag(@PathVariable("tag-id") Long tagId) {
+    public ResponseEntity getTag(@Positive @PathVariable("tag-id") Long tagId) {
         Tag tag = tagService.findTag(tagId);
         TagDto.ResponseDto response = mapper.tagToResponseDto(tag);
+
+        return new ResponseEntity(response, HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity getTags() {
+        List<Tag> tags = tagService.findTags();
+        List<TagDto.ResponseDto> response = mapper.tagsToResponseDtos(tags);
 
         return new ResponseEntity(response, HttpStatus.OK);
     }
