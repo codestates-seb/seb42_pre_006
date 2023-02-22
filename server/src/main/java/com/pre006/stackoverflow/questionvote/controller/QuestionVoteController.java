@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/questions")
 public class QuestionVoteController {
     private final String DEFAULT_URL = "/questions";
@@ -35,5 +36,16 @@ public class QuestionVoteController {
         QuestionVoteDto.ResponseDto response = mapper.questionVoteToResponseDto(questionVote);
 
         return ResponseEntity.created(location).body(response);
+    }
+
+    @DeleteMapping("/{question-vote-id}/vote")
+    public ResponseEntity deleteQuestionVote(@PathVariable("question-vote-id") Long questionVoteId) {
+        // todo: JWT 에서 memberId 파싱
+
+        questionVoteService.deleteVote(questionVoteId);
+
+        // todo: 삭제된 투표 상태에 따라 questionVoteCount 가감하는 로직 필요
+
+        return ResponseEntity.noContent().build();
     }
 }

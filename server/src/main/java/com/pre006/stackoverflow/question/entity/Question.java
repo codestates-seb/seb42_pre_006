@@ -2,19 +2,14 @@ package com.pre006.stackoverflow.question.entity;
 
 import com.pre006.stackoverflow.answer.entity.Answer;
 import com.pre006.stackoverflow.member.entitiy.Member;
-import com.pre006.stackoverflow.question.audit.Auditable;
+import com.pre006.stackoverflow.global.audit.Auditable;
 import com.pre006.stackoverflow.questionvote.entity.QuestionVote;
-import com.pre006.stackoverflow.question.audit.Auditable;
-import com.pre006.stackoverflow.questionvote.entity.QuestionVote;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,13 +39,31 @@ public class Question extends Auditable {
 
     private String editComment;
 
-    // todo: Member 연관 관계 매핑
+    @OneToMany(mappedBy = "question")
+    private List<QuestionVote> questionVotes = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "MEMBER_ID")
+    private Member member;
+
+    @OneToMany(mappedBy = "question")
+    private List<Answer> answers = new ArrayList<>();
 
     // todo: Tag 연관 관계 매핑
 
-    // todo: QuestionVote 연관 관계 매핑
-    @OneToMany(mappedBy = "question")
-    private List<QuestionVote> questionVotes = new ArrayList<>();
+    public void setMember(Member member){
+        this.member = member;
+        if (!this.member.getQuestions().contains(this)) {
+            this.member.getQuestions().add(this);
+        }
+    }
+
+    public void setQuestionVote(QuestionVote questionVote) {
+        this.questionVotes.add(questionVote);
+        if (questionVote.getQuestion() != this) {
+            questionVote.setQuestion(this);
+        }
+    }
 
     public void addViewCount() {
         this.viewCount++;
@@ -62,13 +75,6 @@ public class Question extends Auditable {
 
     public void subVoteCount() {
         this.questionVoteCount--;
-    }
-
-    public void setQuestionVote(QuestionVote questionVote) {
-        this.questionVotes.add(questionVote);
-        if (questionVote.getQuestion() != this) {
-            questionVote.setQuestion(this);
-        }
     }
 
     public Question(String questionTitle, String questionContent) {
@@ -89,14 +95,4 @@ public class Question extends Auditable {
             this.status = status;
         }
     }
-    @ManyToOne
-    @JoinColumn(name = "MEMBER_ID")
-    private Member member;
-
-    public void addMember(Member member){
-        this.member = member;
-    }
-
-    @OneToMany(mappedBy = "question")
-    private List<Answer> answers = new ArrayList<>();
 }
