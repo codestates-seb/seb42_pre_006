@@ -76,4 +76,13 @@ public class QuestionController {
                 .location(location)
                 .body(response);
     }
+
+    @DeleteMapping("/{question-id}")
+    public ResponseEntity deleteQuestion(@PathVariable("question-id") Long questionId) {
+        // todo: jwt 에서 memberId 파싱
+
+        questionService.deleteQuestion(questionId);
+
+        return ResponseEntity.noContent().build();
+    }
 }
