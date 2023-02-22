@@ -20,6 +20,7 @@ bin/
 !**/src/test/**/bin/
 
 ### IntelliJ IDEA ###
+application.yml
 .idea
 *.iws
 *.iml
@@ -28,7 +29,7 @@ out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 *.yml
-application.yml
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
