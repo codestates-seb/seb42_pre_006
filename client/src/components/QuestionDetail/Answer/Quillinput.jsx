@@ -7,10 +7,7 @@ import 'react-quill/dist/quill.snow.css';
 function Quillinput() {
   const [quillValue, setQuillValue] = useState('');
 
-  // const url = 'http://ec2-3-38-211-158.ap-northeast-2.compute.amazonaws.com:8080'
-  // console.log(quillValue);
-
-  async function getPost() {
+ const handleAnswerPost = async() => {
     try {
       const response = await axios.post('/answer', {
         answerContent: quillValue,
@@ -22,11 +19,11 @@ function Quillinput() {
     }
   }
 
-  function onSubmit() {
+  function onSubmitHandler() {
     if (quillValue === '') {
       alert('빈 칸을 작성해 주세요');
     } else {
-      getPost();
+      handleAnswerPost();
       setQuillValue('');
     }
   }
@@ -34,7 +31,7 @@ function Quillinput() {
   return (
     <div className=" w-full">
       {/* TODO: 에디터 modules 수정 작업 -> [textarea] 확장, [focus, outline] css 적용하기  */}
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmitHandler}>
         <div className=" w-full">
           <ReactQuill
             className="text-left"

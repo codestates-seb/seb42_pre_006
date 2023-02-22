@@ -5,7 +5,7 @@ function AnswersInfo() {
   const [answerLength, serAnswerLength] = useState(0)
   
   useEffect(() => {
-    async function getData() {
+    const handleAnswerDate = async() => {
       try {
         const response = await axios.get('/answer')
           serAnswerLength(response.data.length)
@@ -13,7 +13,7 @@ function AnswersInfo() {
         console.error(error)
       }
     }
-    getData()
+    handleAnswerDate()
   }, [answerLength])
   
   return (

@@ -7,9 +7,10 @@ import PostAnswerBox from './PostAnswerBox';
 
 function QuesitonAnswer() {
   const [answers, setAnswers] = useState('');
+  const [selectedAnswers, setSelectedAnswers] = useState(null)
 
   useEffect(() => {
-    async function getData() {
+    const handleAnswerData = async() => {
       try {
         const response = await axios.get('/answer');
         const { data } = response;
@@ -18,8 +19,12 @@ function QuesitonAnswer() {
         console.error(error);
       }
     }
-    getData();
+    handleAnswerData();
   }, []);
+
+  const onChangeSelectedAnswers = (answer) => {
+    setSelectedAnswers(answer)
+  }
 
   return (
     <div className="mt-16">
@@ -27,12 +32,9 @@ function QuesitonAnswer() {
 
       {answers ? (
         <div>
-          {/* eslint-disable-next-line */}
-          {answers.map(function(el) {
-            return (
-              <MainAnswer key={el.answerId} answerId={el.answerId} answerContent={el.answerContent} />
-            );
-          })}
+          {answers.map((el) =>
+              <MainAnswer key={el.answerId} answerId={el.answerId} answerContent={el.answerContent} onClick={onChangeSelectedAnswers} selectedAnswers={selectedAnswers} />
+          )}
         </div>
       ) : null}
 

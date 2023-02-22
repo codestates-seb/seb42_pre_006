@@ -5,8 +5,6 @@ import QuestionUserinfo from "./QuestionUserinfo";
 
 function QuestionBody({ answerId, answerContent }) {
 
-  // console.log(answers.length)
-
   return (
     <div className=" mt-5 flex flex-col w-full">
       <QuestionBodyTxt answerContent={answerContent} />

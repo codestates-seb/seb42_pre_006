@@ -4,6 +4,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import QuestionAsk from './pages/QuestionAsk';
 import Questions from './pages/Questions';
 import QuestionEdit from './pages/QuestionEdit';
+import AnswerEdit from './components/QuestionDetail/Answer/AnswerEdit';
 import UsersPersonalPage from './pages/UsersPersonalPage';
 import Tags from './pages/Tags';
 import Users from './pages/Users';
@@ -35,6 +36,7 @@ function App() {
         </Route>
         {/* <Route path="/users/1" element={<UsersPersonalPage />} /> */}
         <Route path="/edit" element={<QuestionEdit />} />
+        <Route path="/answeredit/:answerId" element={<AnswerEdit />} />
       </Route>
       <Route element={<BaseLayout />}>
         <Route path="/ask" element={<QuestionAsk />} />
