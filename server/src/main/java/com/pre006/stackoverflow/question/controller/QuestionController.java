@@ -22,7 +22,6 @@ import java.util.List;
 @RequestMapping("/questions")
 public class QuestionController {
     private final static String QUESTION_DEFAULT_URL = "/questions";
-
     private final QuestionService questionService;
     private final QuestionMapper mapper;
 

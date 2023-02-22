@@ -36,4 +36,13 @@ public class QuestionVoteController {
 
         return ResponseEntity.created(location).body(response);
     }
+
+    @DeleteMapping("/{question-vote-id}/vote")
+    public ResponseEntity deleteQuestion(@PathVariable("question-vote-id") Long questionVoteId) {
+        // todo: JWT 에서 memberId 파싱
+
+        questionVoteService.deleteVote(questionVoteId);
+
+        return ResponseEntity.noContent().build();
+    }
 }
