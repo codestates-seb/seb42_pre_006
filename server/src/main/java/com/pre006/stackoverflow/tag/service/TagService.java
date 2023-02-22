@@ -17,15 +17,27 @@ public class TagService {
     }
 
     public Tag createTag(Tag tag) {
-        verifiedExistTag(tag.getTagName());
+        existVerifiedTag(tag.getTagName());
 
         return tagRepository.save(tag);
     }
 
-    private void verifiedExistTag(String tagName) {
+    public Tag findTag(long tagId) {
+
+        return findVerifiedTag(tagId);
+    }
+
+    private void existVerifiedTag(String tagName) {
         Optional<Tag> optionalTag = tagRepository.findByTagName(tagName);
 
         if (optionalTag.isPresent())
             throw new RuntimeException("ALREADY_EXIST_TAG");
+    }
+
+    private Tag findVerifiedTag(long tagId) {
+        Optional<Tag> optionalTag = tagRepository.findById(tagId);
+
+        return optionalTag.orElseThrow(() ->
+                new RuntimeException("NOT_EXIST_TAG"));
     }
 }

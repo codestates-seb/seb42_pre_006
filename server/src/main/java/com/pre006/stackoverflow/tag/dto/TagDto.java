@@ -1,13 +1,11 @@
 package com.pre006.stackoverflow.tag.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Positive;
 
 public class TagDto {
     @Getter
@@ -20,6 +18,9 @@ public class TagDto {
         // todo: questionTag 구현 후 추가
     }
 
+    @AllArgsConstructor
+    @Getter
+    @Setter
     public static class ResponseDto {
         private long tagId;
         private String tagName;

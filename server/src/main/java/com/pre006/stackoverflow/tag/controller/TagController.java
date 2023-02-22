@@ -6,6 +6,7 @@ import com.pre006.stackoverflow.tag.entity.Tag;
 import com.pre006.stackoverflow.tag.mapper.TagMapper;
 import com.pre006.stackoverflow.tag.service.TagService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -37,5 +38,13 @@ public class TagController {
         URI location = UriCreator.createUri(DEFAULT_URL, id);
 
         return ResponseEntity.created(location).build();
+    }
+
+    @GetMapping("/{tag-id}")
+    public ResponseEntity getTag(@PathVariable("tag-id") Long tagId) {
+        Tag tag = tagService.findTag(tagId);
+        TagDto.ResponseDto response = mapper.tagToResponseDto(tag);
+
+        return new ResponseEntity(response, HttpStatus.OK);
     }
 }
