@@ -35,8 +35,6 @@ public class QuestionVoteService {
         if (optionalQuestionVote.isPresent())
             throw new RuntimeException("ALREADY_EXIST_VOTE");
 
-        // todo: 만약 투표를 바꾸고 싶은 경우
-        // todo: 1. 바로 다른 상태값으로 바꾼다       2. 먼저 취소 후 다른 상태값으로 바꿔야 한다
         if (questionVote.getQuestionVoteStatus()) {
             question.addVoteCount();
         } else {
@@ -44,5 +42,20 @@ public class QuestionVoteService {
         }
 
         return questionVoteRepository.save(questionVote);
+    }
+
+    public void deleteVote(long questionVoteId) {
+        // todo: 존재하는 회원인지 확인
+
+        QuestionVote questionVote = findVerifiedQuestionVote(questionVoteId);
+
+        questionVoteRepository.delete(questionVote);
+    }
+
+    private QuestionVote findVerifiedQuestionVote(long questionVoteId) {
+        Optional<QuestionVote> optionalQuestionVote = questionVoteRepository.findById(questionVoteId);
+
+        return optionalQuestionVote.orElseThrow(() ->
+                new RuntimeException("NOT_EXIST_VOTE"));
     }
 }
