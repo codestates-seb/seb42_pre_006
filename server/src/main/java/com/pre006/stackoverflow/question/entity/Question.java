@@ -2,7 +2,7 @@ package com.pre006.stackoverflow.question.entity;
 
 import com.pre006.stackoverflow.answer.entity.Answer;
 import com.pre006.stackoverflow.member.entitiy.Member;
-import com.pre006.stackoverflow.question.audit.Auditable;
+import com.pre006.stackoverflow.global.audit.Auditable;
 import com.pre006.stackoverflow.questionvote.entity.QuestionVote;
 
 import lombok.Getter;

@@ -1,7 +1,7 @@
 package com.pre006.stackoverflow.questionvote.entity;
 
 import com.pre006.stackoverflow.member.entitiy.Member;
-import com.pre006.stackoverflow.question.audit.Auditable;
+import com.pre006.stackoverflow.global.audit.Auditable;
 import com.pre006.stackoverflow.question.entity.Question;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
