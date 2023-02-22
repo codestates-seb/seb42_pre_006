@@ -4,6 +4,7 @@ import { MdAccountBox } from 'react-icons/md';
 import Badge from '../components/UI/Badge';
 import Button from '../components/UI/Button';
 import Card from '../components/UI/Card';
+import EmptyData from '../components/UI/EmptyData';
 import InputFeild from '../components/UI/InputFeild';
 import Pagination from '../components/UI/Pagination';
 import Title from '../components/UI/Title';
@@ -221,6 +222,14 @@ function Guide() {
             onClick={handleClickPage}
             limit={10}
           />
+        </div>
+      </section>
+      <section className="py-10 border-t">
+        <header>
+          <h2 className="text-2xl font-semibold">Empty Data</h2>
+        </header>
+        <div className="my-4 text-center">
+          <EmptyData />
         </div>
       </section>
     </article>

@@ -1,9 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import { RiQuestionnaireFill } from 'react-icons/ri';
 import { MdThumbsUpDown } from 'react-icons/md';
 import { AiFillTags } from 'react-icons/ai';
 import { ImTrophy } from 'react-icons/im';
+import axios from 'axios';
 import IconDescListItem from '../components/SignUp/IconDescListItem';
 import Button from '../components/UI/Button';
 import Card from '../components/UI/Card';
@@ -11,6 +13,29 @@ import InputFeild from '../components/UI/InputFeild';
 import SocialLogin from '../components/UI/SocialLogin';
 
 function SignUp() {
+  const navigate = useNavigate();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const handleSubmitSignUp = async ({ displayName, email, password }) => {
+    try {
+      const response = await axios.post('/api/v1/members', {
+        email,
+        password,
+        displayName,
+      });
+      if (response) {
+        navigate('/', { replace: true });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <article>
       <section className="flex items-center justify-center h-full">
@@ -47,11 +72,33 @@ function SignUp() {
             <SocialLogin />
           </div>
           <Card className="mt-4 mb-10">
-            <form>
+            <form onSubmit={handleSubmit(handleSubmitSignUp)}>
               <div>
-                <InputFeild label="Display name" className="mt-0" />
-                <InputFeild label="Email" />
-                <InputFeild label="Password" />
+                <InputFeild
+                  label="Display name"
+                  type="text"
+                  name="displayName"
+                  register={register}
+                  errors={errors}
+                  validation={{ required: '이름을 입력해주세요' }}
+                  className="mt-0"
+                />
+                <InputFeild
+                  label="Email"
+                  type="text"
+                  name="email"
+                  register={register}
+                  errors={errors}
+                  validation={{ required: '이메일을 입력해주세요' }}
+                />
+                <InputFeild
+                  label="Password"
+                  type="password"
+                  name="password"
+                  register={register}
+                  errors={errors}
+                  validation={{ required: '비밀번호를 입력해주세요' }}
+                />
               </div>
               <div className="mb-4 text-left">
                 <p className="my-2 text-sm text-gray-500">
