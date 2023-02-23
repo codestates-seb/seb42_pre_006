@@ -11,7 +11,9 @@ function AnswerEdit() {
   const { answerId } = useParams();
   const navigator = useNavigate()
 
-
+  useEffect(() => {
+    window.scrollTo(0,0)
+  }, [])
 
   useEffect(() => {
     const handleAnswerData = async() => {
