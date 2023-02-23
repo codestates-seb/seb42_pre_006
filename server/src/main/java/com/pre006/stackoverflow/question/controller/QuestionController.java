@@ -99,6 +99,7 @@ public class QuestionController {
         // todo: jwt 에서 memberId 파싱
 
         questionService.deleteQuestion(questionId);
+        log.info("# DELETE question-id : " + questionId);
 
         return ResponseEntity.noContent().build();
     }

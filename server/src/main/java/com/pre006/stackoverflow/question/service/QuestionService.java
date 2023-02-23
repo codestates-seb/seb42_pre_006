@@ -85,11 +85,7 @@ public class QuestionService {
 
         Question deleteQuestion = findVerifiedQuestion(questionId);
 
-        // todo: 제목, 내용, 수정코멘트 등에도 dummy data 넣을건지 고민
-
-        deleteQuestion.setQuestionStatus(Question.QuestionStatus.QUESTION_DELETE);
-
-        questionRepository.save(deleteQuestion);
+        questionRepository.delete(deleteQuestion);
     }
     public void viewCountValidation(Question question,
                                     HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
