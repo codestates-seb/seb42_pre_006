@@ -1,26 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useContext } from 'react';
 
 import AnswersInfo from './AnswersInfo';
 import MainAnswer from './MainAnswer';
 import PostAnswerBox from './PostAnswerBox';
+import { AnswerContext } from '../../../context/answer-context';
 
 function QuesitonAnswer() {
-  const [answers, setAnswers] = useState('');
 
-  useEffect(() => {
-    const handleAnswerData = async() => {
-      try {
-        const response = await axios.get('/answer');
-        const { data } = response;
-        setAnswers(data);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    handleAnswerData();
-  }, []);
-
+  const { answers } = useContext(AnswerContext)
 
   return (
     <div className="mt-16">

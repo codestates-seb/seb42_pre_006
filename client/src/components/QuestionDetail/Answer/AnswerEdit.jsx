@@ -7,7 +7,6 @@ import 'react-quill/dist/quill.snow.css';
 
 function AnswerEdit() {
   const [quillValue, setQuillValue] = useState('');
-  // const [answers, setAnswers] = useState('');
   const { answerId } = useParams();
   const navigator = useNavigate()
 
