@@ -13,16 +13,21 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 import java.net.URI;
 import java.util.List;
 
 @Slf4j
 @RestController
 @CrossOrigin
+@Validated
 @RequestMapping("/questions")
 public class QuestionController {
     private final static String QUESTION_DEFAULT_URL = "/questions";
@@ -37,7 +42,7 @@ public class QuestionController {
     }
 
     @PostMapping
-    public ResponseEntity postQuestion(@RequestBody QuestionDto.PostDto requestBody) {
+    public ResponseEntity postQuestion(@Valid @RequestBody QuestionDto.PostDto requestBody) {
         Question createQuestion = questionService.createQuestion(mapper.postDtoToQuestion(requestBody));
         QuestionDto.ResponseDto response = mapper.questionToResponseDto(createQuestion);
 
@@ -47,7 +52,7 @@ public class QuestionController {
     }
 
     @GetMapping("/{question-id}")
-    public ResponseEntity getQuestion(@PathVariable("question-id") Long questionId,
+    public ResponseEntity getQuestion(@Positive @PathVariable("question-id") Long questionId,
                                       HttpServletRequest servletRequest,
                                       HttpServletResponse servletResponse) {
         Question findQuestion = questionService.findQuestion(questionId);
@@ -59,8 +64,8 @@ public class QuestionController {
     }
 
     @GetMapping
-    public ResponseEntity getQuestions(@RequestParam("page") int page,
-                                       @RequestParam("size") int size) {
+    public ResponseEntity getQuestions(@Positive @RequestParam("page") int page,
+                                       @Positive @RequestParam("size") int size) {
         Page<Question> questionPage = questionService.findQuestions(page - 1, size);
         List<Question> questions = questionPage.getContent();
 
@@ -71,7 +76,8 @@ public class QuestionController {
     }
 
     @GetMapping("/tagged/{tag-name}")
-    public ResponseEntity getQuestionsByTag(@PathVariable("tag-name") String tagName) {
+    public ResponseEntity getQuestionsByTag(@Size(max = 20, message = "글자수 초과")
+                                                @PathVariable("tag-name") String tagName) {
         Tag tag = tagService.findTag(tagName);
         List<Question> questions = mapper.tagToQuestions(tag);
         List<QuestionDto.ResponseDto> response = mapper.questionsToResponseDtos(questions);
@@ -81,8 +87,8 @@ public class QuestionController {
     }
 
     @PatchMapping("/{question-id}")
-    public ResponseEntity patchQuestion(@PathVariable("question-id") Long questionId,
-                                        @RequestBody QuestionDto.PatchDto requestBody) {
+    public ResponseEntity patchQuestion(@Positive @PathVariable("question-id") Long questionId,
+                                        @Valid @RequestBody QuestionDto.PatchDto requestBody) {
         requestBody.setQuestionId(questionId);
         Question updateQuestion = questionService.updateQuestion(mapper.patchDtoToQuestion(requestBody));
         QuestionDto.ResponseDto response = mapper.questionToResponseDto(updateQuestion);
@@ -95,7 +101,7 @@ public class QuestionController {
     }
 
     @DeleteMapping("/{question-id}")
-    public ResponseEntity deleteQuestion(@PathVariable("question-id") Long questionId) {
+    public ResponseEntity deleteQuestion(@Positive @PathVariable("question-id") Long questionId) {
         // todo: jwt 에서 memberId 파싱
 
         questionService.deleteQuestion(questionId);
