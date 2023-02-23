@@ -29,12 +29,13 @@ function App() {
         <Route path="/questions">
           <Route index element={<Questions />} />
           <Route path=":id" element={<QuestionDetail />} />
-          {isLoggedIn && <Route path=":id/edit" element={<QuestionEdit />} />}
         </Route>
         <Route path="/guide" element={<Guide />} />
-        <Route path="/detail" element={<QuestionDetail />} />
       </Route>
       <Route element={<MainLayout />}>
+        <Route path="/questions">
+          <Route path=":id/edit" element={<QuestionEdit />} />
+        </Route>
         <Route path="/tags" element={<Tags />} />
         <Route path="/users">
           <Route index element={<Users />} />
@@ -43,7 +44,6 @@ function App() {
             <Route path=":id/edit" element={<UserPersonalEdit />} />
           )}
         </Route>
-        <Route path="/edit" element={<QuestionEdit />} />
         <Route path="/answeredit/:answerId" element={<AnswerEdit />} />
       </Route>
       <Route element={<BaseLayout />}>
@@ -62,7 +62,6 @@ function App() {
           </>
         )}
       </Route>
-      <Route path="*" element={<Navigate replace to="/" />} />
     </Routes>
   );
 }
