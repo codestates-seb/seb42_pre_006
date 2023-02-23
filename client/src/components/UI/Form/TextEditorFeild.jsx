@@ -32,7 +32,7 @@ function TextEditorFeild({
   return (
     <div
       className={classNames(
-        'border border-gray-300 rounded-sm mt-2 h-40',
+        'border border-gray-300 rounded-sm mt-2',
         {
           'border-2 !border-danger': errors && errors[name]?.type,
         },
@@ -47,7 +47,7 @@ function TextEditorFeild({
         defaultValue={value}
         placeholder={placeholder}
         onChange={handleChangeTextEditor}
-        className="text-left h-[calc(100%-2.5rem)]"
+        className="text-left"
       />
     </div>
   );

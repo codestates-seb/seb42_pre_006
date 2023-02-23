@@ -7,7 +7,7 @@ import {
 } from 'react-icons/md';
 import { TbClock } from 'react-icons/tb';
 
-function QuestionVote() {
+function QuestionVote({ question }) {
   const [upVoteValue, setUpVoteValue] = useState(false);
   const [downVoteValue, setDownVoteValue] = useState(false);
   const [bookMark, setBookMark] = useState(false);
@@ -40,7 +40,7 @@ function QuestionVote() {
           </button>
         )}
         <div className="text-gray-500  font-medium text-xl">
-          0 {/* 투표수 반영 기능 작업 */}
+          {question.questionVoteCount}
         </div>
         {downVoteValue ? (
           <button className=" text-7xl " type="button">
