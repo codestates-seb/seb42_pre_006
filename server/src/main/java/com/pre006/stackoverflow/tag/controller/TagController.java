@@ -1,5 +1,6 @@
 package com.pre006.stackoverflow.tag.controller;
 
+import com.pre006.stackoverflow.global.SingleResponse;
 import com.pre006.stackoverflow.question.utils.UriCreator;
 import com.pre006.stackoverflow.tag.dto.TagDto;
 import com.pre006.stackoverflow.tag.entity.Tag;
@@ -41,9 +42,9 @@ public class TagController {
         return ResponseEntity.created(location).build();
     }
 
-    @GetMapping("/{tag-id}")
-    public ResponseEntity getTag(@Positive @PathVariable("tag-id") Long tagId) {
-        Tag tag = tagService.findTag(tagId);
+    @GetMapping("/{tag-name}")
+    public ResponseEntity getTag(@PathVariable("tag-name") String tagName) {
+        Tag tag = tagService.findTag(tagName);
         TagDto.ResponseDto response = mapper.tagToResponseDto(tag);
 
         return new ResponseEntity(response, HttpStatus.OK);
@@ -54,6 +55,7 @@ public class TagController {
         List<Tag> tags = tagService.findTags();
         List<TagDto.ResponseDto> response = mapper.tagsToResponseDtos(tags);
 
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity(
+                new SingleResponse<>(response), HttpStatus.OK);
     }
 }

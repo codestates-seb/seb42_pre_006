@@ -18,15 +18,14 @@ public class TagService {
     }
 
     public Tag createTag(Tag tag) {
-        // todo: 중복 태그 등록 안되게 할지 확인 필요
-        existVerifiedTag(tag.getTagName());
+        createTagValidation(tag.getTagName());
 
         return tagRepository.save(tag);
     }
 
-    public Tag findTag(long tagId) {
+    public Tag findTag(String tagName) {
 
-        return findVerifiedTag(tagId);
+        return findTagValidation(tagName);
     }
 
     public List<Tag> findTags() {
@@ -34,23 +33,28 @@ public class TagService {
         return tagRepository.findAll();
     }
 
-    private void existVerifiedTag(String tagName) {
+    private Optional<Tag> existVerifiedTag(String tagName) {
+        // 태그 이름으로 조회하여 결과 리턴해주는 메소드
         Optional<Tag> optionalTag = tagRepository.findByTagName(tagName);
 
-        if (optionalTag.isPresent())
+        return optionalTag;
+    }
+
+    private void createTagValidation(String tagName) {
+        // 태그 이름으로 조회했을 때, 등록된 태그가 있다면 Exception!
+        if (existVerifiedTag(tagName).isPresent())
             throw new RuntimeException("ALREADY_EXIST_TAG");
     }
 
-    private Tag findVerifiedTag(long tagId) {
-        Optional<Tag> optionalTag = tagRepository.findById(tagId);
-
-        return optionalTag.orElseThrow(() ->
-                new RuntimeException("NOT_EXIST_TAG"));
+    public Tag getQuestionTagsValidation(String tagName) {
+        // 태그 이름으로 조회했을 때,
+        // 등록된 태그가 있다면 Tag 객체를 리턴, 없다면 null 리턴
+        Optional<Tag> optionalTag = existVerifiedTag(tagName);
+        return optionalTag.isPresent() ? optionalTag.get() : null;
     }
 
-    public Tag isExistTag(String tagName) {
-        Optional<Tag> optionalTag = tagRepository.findByTagName(tagName);
-
-        return optionalTag.isPresent() ? optionalTag.get() : null;
+    public Tag findTagValidation(String tagName) {
+        return existVerifiedTag(tagName).orElseThrow(() ->
+                new RuntimeException("NOT_EXIST_TAG"));
     }
 }

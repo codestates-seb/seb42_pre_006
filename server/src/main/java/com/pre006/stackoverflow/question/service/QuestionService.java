@@ -136,7 +136,7 @@ public class QuestionService {
         // 해당 tag가 존재하는지 확인
         List<QuestionTag> questionTags = tags.stream()
                 .map(tag -> {
-                    Tag findTag = tagService.isExistTag(tag.getTagName());
+                    Tag findTag = tagService.getQuestionTagsValidation(tag.getTagName());
                     QuestionTag questionTag = new QuestionTag();
                     if (findTag != null) {
                         // 태그가 존재하는 경우
