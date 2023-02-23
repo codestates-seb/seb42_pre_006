@@ -51,17 +51,12 @@ public class QuestionService {
     public Question findQuestion(long questionId) {
         Question question = findVerifiedQuestion(questionId);
 
-        // todo: 조회한 질문의 상태가 '질문 삭제'인 경우 예외 처리
-
         return question;
     }
 
-    public Page<Question> findQuestions(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by("questionId").descending());
+    public List<Question> findQuestions() {
 
-        // todo: 삭제된 질문 filter 처리
-
-        return questionRepository.findAll(pageable);
+        return questionRepository.findAll();
     }
     public Question updateQuestion(Question question) {
         // todo: 수정 시 검증을 해야하는 부분이 있는지      ex) 내용이 완전히 같을 경우 ERROR

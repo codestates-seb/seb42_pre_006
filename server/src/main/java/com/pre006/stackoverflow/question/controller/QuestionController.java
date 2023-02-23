@@ -64,15 +64,11 @@ public class QuestionController {
     }
 
     @GetMapping
-    public ResponseEntity getQuestions(@Positive @RequestParam("page") int page,
-                                       @Positive @RequestParam("size") int size) {
-        Page<Question> questionPage = questionService.findQuestions(page - 1, size);
-        List<Question> questions = questionPage.getContent();
+    public ResponseEntity getQuestions() {
+        List<Question> questions = questionService.findQuestions();
+        List<QuestionDto.ResponseDto> response = mapper.questionsToResponseDtos(questions);
 
-        return new ResponseEntity(
-                new MultiResponseDto<>(mapper.questionsToResponseDtos(questions), questionPage),
-                HttpStatus.OK
-        );
+        return new ResponseEntity(response, HttpStatus.OK);
     }
 
     @GetMapping("/tagged/{tag-name}")
