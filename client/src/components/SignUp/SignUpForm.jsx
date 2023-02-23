@@ -6,6 +6,7 @@ import Button from '../UI/Button';
 import Card from '../UI/Card';
 import InputFeild from '../UI/Form/InputFeild';
 import FormGroup from '../UI/Form/FormGroup';
+import validate from '../../utils/validate';
 
 function SignUpForm() {
   const navigate = useNavigate();
@@ -41,7 +42,7 @@ function SignUpForm() {
             name="displayName"
             register={register}
             errors={errors}
-            validation={{ required: '이름을 입력해주세요' }}
+            validation={validate.displayName}
             className="mt-0"
           >
             <InputFeild type="text" />
@@ -52,7 +53,7 @@ function SignUpForm() {
             name="email"
             register={register}
             errors={errors}
-            validation={{ required: '이메일을 입력해주세요' }}
+            validation={validate.email}
           >
             <InputFeild type="text" />
           </FormGroup>
@@ -62,16 +63,10 @@ function SignUpForm() {
             name="password"
             register={register}
             errors={errors}
-            validation={{ required: '비밀번호를 입력해주세요' }}
+            validation={validate.password}
           >
             <InputFeild type="password" />
           </FormGroup>
-        </div>
-        <div className="mb-4 text-left">
-          <p className="my-2 text-sm text-gray-500">
-            Passwords must contain at least eight characters, including at least
-            1 letter and 1 number.
-          </p>
         </div>
         <Button variant="primary" size="md" block type="submit">
           Sign up
