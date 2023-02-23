@@ -36,9 +36,8 @@ function AnswerEdit() {
     }
   };
 
-  function onSubmitHandler(e) {
+  const onSubmitHandler = () => {
     if (quillValue.trim() === '' || quillValue.trim() ===`<p><br></p>`) {
-      e.preventDefault()
       alert('빈 칸을 작성해 주세요');
     } else {
       handleAnswerPost();
@@ -50,7 +49,6 @@ function AnswerEdit() {
     <div className=" flex flex-col items-start mt-16 px-8">
       <div className=" mb-4 text-lg text-left w-full">Answer Edit</div>
       <div className=" w-full">
-        <form onSubmit={onSubmitHandler}>
           <div className=" w-full">
             <ReactQuill
               className="text-left"
@@ -58,10 +56,9 @@ function AnswerEdit() {
               value={quillValue}
             />
           </div>
-          <Button variant="primary" size="md" className="flex mt-8">
+          <Button onClick={onSubmitHandler} variant="primary" size="md" className="flex mt-8">
             Post Your Answer
           </Button>
-        </form>
       </div>
     </div>
   );

@@ -7,7 +7,6 @@ import PostAnswerBox from './PostAnswerBox';
 
 function QuesitonAnswer() {
   const [answers, setAnswers] = useState('');
-  const [selectedAnswers, setSelectedAnswers] = useState(null)
 
   useEffect(() => {
     const handleAnswerData = async() => {
@@ -22,9 +21,6 @@ function QuesitonAnswer() {
     handleAnswerData();
   }, []);
 
-  const onChangeSelectedAnswers = (answer) => {
-    setSelectedAnswers(answer)
-  }
 
   return (
     <div className="mt-16">
@@ -33,7 +29,7 @@ function QuesitonAnswer() {
       {answers ? (
         <div>
           {answers.map((el) =>
-              <MainAnswer key={el.answerId} answerId={el.answerId} answerContent={el.answerContent} onClick={onChangeSelectedAnswers} selectedAnswers={selectedAnswers} />
+              <MainAnswer key={el.answerId} answerId={el.answerId} answerContent={el.answerContent} />
           )}
         </div>
       ) : null}
