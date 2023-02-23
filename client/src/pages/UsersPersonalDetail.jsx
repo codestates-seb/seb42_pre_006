@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import UsersPersonalPageHeader from '../components/UsersPersonalPage/UsersPersonalPageHeader';
 import Badge from '../components/UI/Badge';
@@ -30,22 +30,46 @@ function UsersPersonalDetail() {
           <UsersPersonalPageHeader user={user} />
           <div className="text-left my-10">
             <h3 className="text-2xl font-medium mb-4">About Me</h3>
-            <div className="border rounded-md p-4">
-              <div
-                className="my-2"
-                dangerouslySetInnerHTML={{ __html: user.aboutMe }}
-              />
-            </div>
+            {user.aboutMe ? (
+              <div className="border rounded-md p-4">
+                <div
+                  className="my-2"
+                  dangerouslySetInnerHTML={{ __html: user.aboutMe }}
+                />
+              </div>
+            ) : (
+              <div className="border rounded-md p-8 text-center bg-gray-100">
+                <p className="text-sm text-gray-500">
+                  Your about me section is currently blank.Would you <br />
+                  like to add one?
+                  <Link
+                    to={`/users/${user.memberId}/edit`}
+                    className="text-link"
+                  >
+                    Edit profile
+                  </Link>
+                </p>
+              </div>
+            )}
           </div>
           <div className="text-left my-10">
             <h3 className="text-2xl font-medium mb-4">Tags</h3>
-            <div className="border rounded-md">
-              {user.memberTitle.split(',').map((item, index) => (
-                <div key={index} className="border-t first:border-0 p-4">
-                  <Badge variant="tags">{item}</Badge>
-                </div>
-              ))}
-            </div>
+
+            {user.memberTitle ? (
+              <div className="border rounded-md">
+                {user.memberTitle?.split(',').map((item, index) => (
+                  <div key={index} className="border-t first:border-0 p-4">
+                    <Badge variant="tags">{item}</Badge>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="border rounded-md p-8 text-center bg-gray-100">
+                <p className="text-sm text-gray-500">
+                  You have not cast any Tgas
+                </p>
+              </div>
+            )}
           </div>
         </article>
       )}

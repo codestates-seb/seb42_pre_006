@@ -14,7 +14,6 @@ function UsersPersonalPageHeader({ user }) {
   return (
     <section className="relative">
       <div className="flex items-center">
-        {/* TODO: 마이페이지 사진작업 -> 데이터에서 사진 주소 불러오기 */}
         <img
           className="rounded w-28 h-28 shadow-gray-200 shadow-xl"
           src="https://source.unsplash.com/random/200x200"
@@ -28,10 +27,12 @@ function UsersPersonalPageHeader({ user }) {
               <MdEmail className="mr-2" />
               <span>{user.email}</span>
             </p>
-            <p className="flex items-center">
-              <MdLocationPin className="mr-2" />
-              <span>{user.location}</span>
-            </p>
+            {user.location && (
+              <p className="flex items-center">
+                <MdLocationPin className="mr-2" />
+                <span>{user.location}</span>
+              </p>
+            )}
           </div>
           <ul className="flex text-[#6a737c] text-sm">
             <li className="flex justify-center items-center mr-2">
