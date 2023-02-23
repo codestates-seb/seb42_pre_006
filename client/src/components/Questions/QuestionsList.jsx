@@ -1,6 +1,77 @@
+// import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { IoMdArrowDropdown } from 'react-icons/io';
+// import axios from 'axios';
+import Button from '../UI/Button';
+
 function QuestionsList() {
+  // const [data, setData] = useState(null);
+
+  // useEffect(() => {
+  //   axios.get('/questions/12').then(res => {
+  //     setData(res.data.questionContent);
+  //     console.log(res.data);
+  //   });
+  // }, []);
+
   return (
     <section>
+      <div className="mb-3">
+        <div className="flex content-center justify-between mb-6">
+          <h1 className="text-3xl font-medium ml-6">All Questions</h1>
+
+          {/* TODO: 버튼 라우터기능 작업 -> [질문작성페이지]로 이동 */}
+          <Link to="/ask">
+            <Button variant="primary" size="md">
+              Ask Question
+            </Button>
+          </Link>
+        </div>
+
+        <div className=" flex content-center justify-between">
+          {/* TODO: 질문갯수 업데이트기능 작업 -> 데이터갯수로 실시간 상태변경 */}
+          {/* <div dangerouslySetInnerHTML={{ __html: data }} /> */}
+          <span className="text-lg ml-6">123,456,789 questions</span>
+          {/* TODO: 질문리스트 데이터 랜더링기능 작업 -> 더미 데이터 실시간 업데이트 */}
+          <div className=" border border-[#6a737c] rounded text-xs">
+            <button
+              type="button"
+              className="bg-[#e3e6e8] text-[#3b4045] py-2 px-2  rounded-l border-r border-[#6a737c]"
+            >
+              Newest
+            </button>
+            <button
+              type="button"
+              className="text-[#6a737c] py-2 px-2 border-r border-[#6a737c]  hover:bg-[#edeff1]"
+            >
+              Active
+            </button>
+            <button
+              type="button"
+              className="text-[#6a737c] py-2 px-2 border-r border-[#6a737c] hover:bg-[#edeff1]"
+            >
+              Bountied
+              <span className="bg-[#0074cc] font-semibold text-white py-0 px-1 rounded mx-1">
+                292
+              </span>
+            </button>
+            <button
+              type="button"
+              className="text-[#6a737c] py-2 px-2 border-r border-[#6a737c] hover:bg-[#edeff1]"
+            >
+              Unanswered
+            </button>
+            <button
+              type="button"
+              className="text-[#6a737c] py-2 px-2 hover:bg-[#edeff1]"
+            >
+              More
+              <IoMdArrowDropdown className="inline" />
+            </button>
+          </div>
+        </div>
+      </div>
+
       {/* TODO: 질문리스트 데이터 랜더링기능 작업 -> 더미 데이터 실시간 업데이트 */}
       <ul className="border-t text-left">
         <li className="border-b py-6 px-8 bg-[#FDF7E2] relative">
@@ -53,59 +124,38 @@ function QuestionsList() {
             </span>
           </div>
         </li>
-
-        <li className="border-b py-6 px-8 relative">
-          <div className="text-xs mb-2">
-            <span className="mr-2 font-medium">2 votes</span>
-            <span className="mr-2">1 answers</span>
-            <span>10 views</span>
-          </div>
-
-          <h4 className="text-lg text-[#0063bf] font-medium cursor-pointer hover:text-[#0A95FF]">
-            Azure Python Function - Writing a video file to tmp folder is saving
-            file with zero bytes
-          </h4>
-          <p className="text-sm truncate">
-            I have an Azure python function that loads the video from Azure blob
-            storage, and saves it locally in tmp folder. In local environment
-            everything works correctly. But when I deploy this code to Azure
-            Function, the file is created but no information is written to it.
-            The file size is 0.
-          </p>
-
-          <div className="mt-2">
-            <button
-              type="button"
-              className="mr-2 text-sm text-[#39739d] bg-[#E1ECF4] px-2 py-1 rounded hover:bg-[#cfdbe5]"
-            >
-              tag1
-            </button>
-            <button
-              type="button"
-              className="mr-2 text-sm text-[#39739d] bg-[#E1ECF4] px-2 py-1 rounded hover:bg-[#cfdbe5]"
-            >
-              tag2
-            </button>
-            <button
-              type="button"
-              className="text-sm text-[#39739d] bg-[#E1ECF4] px-2 py-1 rounded hover:bg-[#cfdbe5]"
-            >
-              tag3
-            </button>
-          </div>
-
-          <div className="absolute right-8 bottom-8">
-            <img
-              className="w-4 h-4 inline mr-1"
-              src="https://static-00.iconduck.com/assets.00/tailwind-css-icon-512x307-1v56l8ed.png"
-              alt="user_image"
-            />
-            <span className="text-xs">
-              Park Coffee <strong>450</strong> asked 1 min ago
-            </span>
-          </div>
-        </li>
       </ul>
+
+      <div>
+        {/* TODO: 페이지네이션 기능작업 */}
+        <ul className="ml-8 my-20 flex text-sm">
+          <li className="border rounded mx-0.5 flex content-center justify-center hover:bg-[#D6D9DC]">
+            <button type="button" className="px-2 py-1">
+              Prev
+            </button>
+          </li>
+          <li className="border rounded mx-1 hover:bg-[#D6D9DC]">
+            <button type="button" className="px-2 py-1">
+              1
+            </button>
+          </li>
+          <li className="border rounded mx-1 bg-[#F48224] text-white font-medium border-[#F48224]">
+            <button type="button" className="px-2 py-1">
+              2
+            </button>
+          </li>
+          <li className="border rounded mx-1 hover:bg-[#D6D9DC]">
+            <button type="button" aria-current="page" className="px-2 py-1">
+              3
+            </button>
+          </li>
+          <li className="border rounded mx-1 hover:bg-[#D6D9DC]">
+            <button type="button" className="px-2 py-1">
+              Next
+            </button>
+          </li>
+        </ul>
+      </div>
     </section>
   );
 }

@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
 import { MdAllInbox } from 'react-icons/md';
 import { ImTrophy } from 'react-icons/im';
 import { BsFillQuestionCircleFill } from 'react-icons/bs';
@@ -44,12 +43,10 @@ function UserNav() {
   const isLoggedInComponent = (
     <>
       <div className="mx-1 mr-4">
-        <Link to="/users/1">
-          <UserNavItem>
-            <FaUserCircle className=" text-violet-900" />
-            <span className="ml-2 leading-none font-semibold">1</span>
-          </UserNavItem>
-        </Link>
+        <UserNavItem>
+          <FaUserCircle className=" text-violet-900" />
+          <span className="ml-2 leading-none font-semibold">1</span>
+        </UserNavItem>
       </div>
       <div className="mx-1">
         <UserNavItem>
