@@ -28,17 +28,17 @@ function AnswerEdit() {
 
   const handleAnswerPost = async () => {
     try {
-      const response = await axios.patch(`/answer/${answerId}`, {
+      await axios.patch(`/answer/${answerId}`, {
         answerContent: quillValue,
       });
-      console.log(response);
     } catch (error) {
       console.error(error);
     }
   };
 
-  function onSubmitHandler() {
-    if (quillValue === '') {
+  function onSubmitHandler(e) {
+    if (quillValue.trim() === '' || quillValue.trim() ===`<p><br></p>`) {
+      e.preventDefault()
       alert('빈 칸을 작성해 주세요');
     } else {
       handleAnswerPost();
