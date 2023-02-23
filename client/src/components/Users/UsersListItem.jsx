@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 function UsersListItem({ user }) {
   return (
-    <li className="text-sm flex justify-start items-top">
+    <li className="text-sm flex justify-start items-top py-2">
       <Link to={`/users/${user.memberId}`}>
         <img
           className="w-14 h-14 rounded mr-1"
