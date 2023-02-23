@@ -45,7 +45,7 @@ public class Member {
     private String aboutMe;
 
     @Enumerated(value = EnumType.STRING)
-    @Column(length = 20, nullable = false)
+    @Column(length = 20)
     private MemberStatus memberStatus = MemberStatus.MEMBER_ACTIVE;
 
     @ElementCollection(fetch =  FetchType.EAGER)
