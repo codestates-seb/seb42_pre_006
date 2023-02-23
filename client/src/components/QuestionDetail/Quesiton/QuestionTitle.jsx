@@ -1,3 +1,4 @@
+import dateFormat from '../../../utils/dateFormat';
 import Button from '../../UI/Button';
 
 function QuestionTitle({ question }) {
@@ -12,11 +13,11 @@ function QuestionTitle({ question }) {
       <div className=" flex justify-start text-sm">
         <div className=" mb-2 mr-4">
           <span className=" text-slate-500 mr-2">Asked</span>
-          <span>{question.createAt}</span>
+          <span>{dateFormat(question.createAt)}</span>
         </div>
         <div className=" mb-2 mr-4">
           <span className=" text-slate-500 mr-2">Modified</span>
-          <span>{question.modifiedAt}</span>
+          <span>{dateFormat(question.modifiedAt)}</span>
         </div>
         <div className=" mb-2 mr-4">
           <span className=" text-slate-500 mr-2">Viewed</span>
