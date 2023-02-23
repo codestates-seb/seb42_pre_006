@@ -1,15 +1,14 @@
-import React from 'react'
-import AnswerVote from './AnswerVote'
-import QuestionBody from '../Quesiton/QuestionBody'
+import React from 'react';
+import AnswerBody from './AnswerBody';
+import AnswerVote from './AnswerVote';
 
-function MainAnswer({ answerId, answerContent,onClick }) {
-
-    return (
-        <div className=' flex mt-3'>
-            <AnswerVote/>
-            <QuestionBody answerId={answerId} answerContent={answerContent} onClick={onClick} />
-        </div>
-    )
+function MainAnswer({ answer, onClick }) {
+  return (
+    <div className=" flex mt-3">
+      <AnswerVote />
+      <AnswerBody answer={answer} onClick={onClick} />
+    </div>
+  );
 }
 
-export default MainAnswer
+export default MainAnswer;

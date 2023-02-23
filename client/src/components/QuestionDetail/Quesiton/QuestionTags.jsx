@@ -1,14 +1,29 @@
-function QuestionBodyTags() {
+import axios from 'axios';
+import { useEffect } from 'react';
+import Badge from '../../UI/Badge';
+
+function QuestionBodyTags({ questionId }) {
+  const handleGetTags = async () => {
+    try {
+      const response = axios.get(`/questions/${questionId}/tags`);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    handleGetTags();
+
+    return () => {};
+  }, []);
+
   return (
-    <div className=" flex text-xs mt-5">
-      <div className=" mt-2 mb-2 mr-2 px-1.5 py-1 rounded bg-blue-100 text-cyan-700 hover:bg-blue-200 hover:text-cyan-900">
-        php
-      </div>
-      <div className=" mt-2 mb-2 mr-2 px-1.5 py-1 rounded bg-blue-100 text-cyan-700 hover:bg-blue-200 hover:text-cyan-900">
-        mariadb
-      </div>
+    <div className="flex flex-wrap gap-2">
+      <Badge variant="tags">php</Badge>
+      <Badge variant="tags">mariadb</Badge>
     </div>
   );
-};
+}
 
 export default QuestionBodyTags;

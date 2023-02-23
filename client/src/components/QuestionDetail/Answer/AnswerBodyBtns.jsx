@@ -3,13 +3,13 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../UI/Button';
 
-function QuestionBodyBtns({ questionId }) {
+function AnswerBodyBtns({ id }) {
   const navigate = useNavigate();
   const handleDeleteQueston = async () => {
     try {
-      const response = axios.delete(`/questions/${questionId}`);
+      const response = axios.delete(`/answer/${id}`);
       if (response) {
-        navigate('/questions', { replace: true });
+        navigate('/answer', { replace: true });
       }
     } catch (error) {
       console.error(error);
@@ -27,7 +27,7 @@ function QuestionBodyBtns({ questionId }) {
       <Button text size="sm">
         Share
       </Button>
-      <Button to={`/questions/${questionId}/edit`} text size="sm">
+      <Button to={`/answer/${id}/edit`} text size="sm">
         Edit
       </Button>
       <Button text size="sm" variant="danger" onClick={handleConfirmDelete}>
@@ -37,4 +37,4 @@ function QuestionBodyBtns({ questionId }) {
   );
 }
 
-export default QuestionBodyBtns;
+export default AnswerBodyBtns;
