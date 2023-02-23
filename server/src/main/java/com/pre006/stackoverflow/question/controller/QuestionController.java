@@ -1,5 +1,7 @@
 package com.pre006.stackoverflow.question.controller;
 
+import com.pre006.stackoverflow.answer.dto.AnswerDto;
+import com.pre006.stackoverflow.answer.mapper.AnswerMapper;
 import com.pre006.stackoverflow.global.SingleResponse;
 import com.pre006.stackoverflow.question.dto.QuestionDto;
 import com.pre006.stackoverflow.question.entity.Question;
@@ -7,7 +9,9 @@ import com.pre006.stackoverflow.question.mapper.QuestionMapper;
 import com.pre006.stackoverflow.global.response.MultiResponseDto;
 import com.pre006.stackoverflow.question.service.QuestionService;
 import com.pre006.stackoverflow.question.utils.UriCreator;
+import com.pre006.stackoverflow.tag.dto.TagDto;
 import com.pre006.stackoverflow.tag.entity.Tag;
+import com.pre006.stackoverflow.tag.mapper.TagMapper;
 import com.pre006.stackoverflow.tag.service.TagService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -34,11 +38,19 @@ public class QuestionController {
     private final QuestionService questionService;
     private final TagService tagService;
     private final QuestionMapper mapper;
+    private final AnswerMapper answerMapper;
+    private final TagMapper tagMapper;
 
-    public QuestionController(QuestionService questionService, TagService tagService, QuestionMapper mapper) {
+    public QuestionController(QuestionService questionService,
+                              TagService tagService,
+                              QuestionMapper mapper,
+                              AnswerMapper answerMapper,
+                              TagMapper tagMapper) {
         this.questionService = questionService;
         this.tagService = tagService;
         this.mapper = mapper;
+        this.answerMapper = answerMapper;
+        this.tagMapper = tagMapper;
     }
 
     @PostMapping
@@ -81,6 +93,27 @@ public class QuestionController {
 
         return new ResponseEntity<>(
                 new SingleResponse<>(response), HttpStatus.OK);
+    }
+
+    @GetMapping("/{question-id}/answers")
+    public ResponseEntity getAnswersByQuestionId(@Positive @PathVariable("question-id") Long questionId) {
+        Question question = questionService.findQuestion(questionId);
+        List<AnswerDto.Response> answers =
+                answerMapper.answersToAnswerResponses(question.getAnswers());
+        return new ResponseEntity(
+                new SingleResponse<>(answers), HttpStatus.OK
+        );
+    }
+
+    @GetMapping("/{question-id}/tags")
+    public ResponseEntity getTagsByQuestionId(@Positive @PathVariable("question-id") Long questionId) {
+        Question question = questionService.findQuestion(questionId);
+        List<Tag> tags = mapper.questionToTags(question);
+        List<TagDto.ResponseDto> response = tagMapper.tagsToResponseDtos(tags);
+
+        return new ResponseEntity(
+                new SingleResponse<>(response), HttpStatus.OK
+        );
     }
 
     @PatchMapping("/{question-id}")

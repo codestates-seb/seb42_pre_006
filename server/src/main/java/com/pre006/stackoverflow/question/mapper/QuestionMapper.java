@@ -40,6 +40,13 @@ public interface QuestionMapper {
                 .collect(Collectors.toList());
     }
 
+    default List<Tag> questionToTags(Question question) {
+
+        return question.getQuestionTags().stream()
+                .map(questionTag -> questionTag.getTag())
+                .collect(Collectors.toList());
+    }
+
     Question patchDtoToQuestion(QuestionDto.PatchDto requestBody);
 
     QuestionDto.ResponseDto questionToResponseDto(Question question);
