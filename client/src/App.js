@@ -5,7 +5,7 @@ import QuestionAsk from './pages/QuestionAsk';
 import Questions from './pages/Questions';
 import QuestionEdit from './pages/QuestionEdit';
 import AnswerEdit from './components/QuestionDetail/Answer/AnswerEdit';
-import UsersPersonalPage from './pages/UsersPersonalPage';
+import UsersPersonalDetail from './pages/UsersPersonalDetail';
 import Tags from './pages/Tags';
 import Users from './pages/Users';
 import BaseLayout from './components/layouts/BaseLayout';
@@ -16,6 +16,7 @@ import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import QuestionDetail from './pages/QuestionDetail';
 import { AuthContext } from './context/auth-context';
+import UserPersonalEdit from './pages/UserPersonalEdit';
 
 function App() {
   const { isLoggedIn } = useContext(AuthContext);
@@ -32,9 +33,11 @@ function App() {
         <Route path="/tags" element={<Tags />} />
         <Route path="/users">
           <Route index element={<Users />} />
-          <Route path=":id" element={<UsersPersonalPage />} />
+          <Route path=":id" element={<UsersPersonalDetail />} />
+          {isLoggedIn && (
+            <Route path=":id/edit" element={<UserPersonalEdit />} />
+          )}
         </Route>
-        {/* <Route path="/users/1" element={<UsersPersonalPage />} /> */}
         <Route path="/edit" element={<QuestionEdit />} />
         <Route path="/answeredit/:answerId" element={<AnswerEdit />} />
       </Route>
@@ -54,6 +57,7 @@ function App() {
           </>
         )}
       </Route>
+      <Route path="*" element={<Navigate replace to="/" />} />
     </Routes>
   );
 }

@@ -26,6 +26,7 @@ function Button({
   rounded,
   children,
   className,
+  disabled,
   to,
   onClick,
 }) {
@@ -38,6 +39,7 @@ function Button({
     { 'gap-2': !!icon },
     { 'rounded-full': !!rounded },
     className,
+    { '!bg-gray-300 !border-gray-300 ': disabled },
   );
   const LinkButton = (
     <Link to={to} className={classNameValues}>
@@ -50,6 +52,7 @@ function Button({
     <button
       type={type === 'button' ? 'button' : 'submit'}
       className={classNameValues}
+      disabled={disabled}
       onClick={onClick}
     >
       {icon}
