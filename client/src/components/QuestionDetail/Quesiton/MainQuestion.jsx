@@ -1,13 +1,13 @@
-import QuestionVote from "./QuestionVote";
-import QuestionBody from "./QuestionBody";
+import QuestionVote from './QuestionVote';
+import QuestionBody from './QuestionBody';
 
-function MainQuestion() {
-    return (
-        <div className=" flex ">
-            <QuestionVote />
-            <QuestionBody />
-        </div>
-    )
+function MainQuestion({ question }) {
+  return (
+    <div className=" flex ">
+      <QuestionVote question={question} />
+      <QuestionBody question={question} />
+    </div>
+  );
 }
 
-export default MainQuestion
+export default MainQuestion;

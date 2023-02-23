@@ -1,9 +1,10 @@
-function QuestionBodyTxt({ answerContent }) {
-
+function QuestionBodyTxt({ questionContent }) {
   return (
-      <div className=" text-left" dangerouslySetInnerHTML={{ __html: answerContent }} />
-      // <div>{answerContent}</div>
+    <div
+      className=" text-left"
+      dangerouslySetInnerHTML={{ __html: questionContent }}
+    />
   );
-};
+}
 
 export default QuestionBodyTxt;

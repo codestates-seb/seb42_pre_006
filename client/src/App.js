@@ -26,7 +26,11 @@ function App() {
     <Routes>
       <Route element={<MainLayout hasSidebar />}>
         <Route path="/" element={<Home />} />
-        <Route path="/questions" element={<Questions />} />
+        <Route path="/questions">
+          <Route index element={<Questions />} />
+          <Route path=":id" element={<QuestionDetail />} />
+          {isLoggedIn && <Route path=":id/edit" element={<QuestionEdit />} />}
+        </Route>
         <Route path="/guide" element={<Guide />} />
         <Route path="/detail" element={<QuestionDetail />} />
       </Route>
