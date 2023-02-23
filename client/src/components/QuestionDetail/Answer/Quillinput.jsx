@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import axios from 'axios';
 import ReactQuill from 'react-quill';
 import Button from '../../UI/Button';
@@ -7,13 +7,9 @@ import 'react-quill/dist/quill.snow.css';
 function Quillinput() {
   const [quillValue, setQuillValue] = useState('');
 
-  const url = 'http://ec2-3-38-211-158.ap-northeast-2.compute.amazonaws.com:8080'
-  console.log(quillValue);
-  // const config = {"Content-Type": 'application/json'};
-
-  async function getPost() {
+ const handleAnswerPost = async() => {
     try {
-      const response = await axios.post(`${url}/answer`, {
+      const response = await axios.post('/answer', {
         answerContent: quillValue,
       });
       console.log(response);
@@ -23,33 +19,52 @@ function Quillinput() {
     }
   }
 
-  function onSubmit() {
+  const onSubmitHandler = () => {
     if (quillValue === '') {
       alert('빈 칸을 작성해 주세요');
     } else {
-      getPost();
+      handleAnswerPost();
       setQuillValue('');
+      window.location.reload();
     }
   }
+
+
+  const modules = useMemo(
+    () => ({
+        toolbar: { // 툴바에 넣을 기능들을 순서대로 나열하면 된다.
+            container: [
+                ["bold", "italic", "underline", "strike", "blockquote"],
+                [{ size: ["small", false, "large", "huge"] }, { color: [] }],
+                [
+                    { list: "ordered" },
+                    { list: "bullet" },
+                    { indent: "-1" },
+                    { indent: "+1" },
+                    { align: [] },
+                ],
+                ["image", "video"],
+            ],
+        },
+    }), []);
 
   return (
     <div className=" w-full">
       {/* TODO: 에디터 modules 수정 작업 -> [textarea] 확장, [focus, outline] css 적용하기  */}
-      <form onSubmit={onSubmit}>
+      {/* <form onSubmit={onSubmitHandler}> */}
         <div className=" w-full">
           <ReactQuill
             className="text-left"
             onChange={setQuillValue}
             value={quillValue}
+            modules={modules}
           />
         </div>
 
-        <button type="submit">button</button>
-
-        <Button variant="primary" size="md" className="flex mt-8">
+        <Button onClick={onSubmitHandler} variant="primary" size="md" className="flex mt-8">
           Post Your Answer
         </Button>
-      </form>
+      {/* </form> */}
     </div>
   );
 }

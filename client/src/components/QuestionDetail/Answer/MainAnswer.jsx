@@ -1,11 +1,13 @@
+import React from 'react'
 import AnswerVote from './AnswerVote'
 import QuestionBody from '../Quesiton/QuestionBody'
 
-function MainAnswer({ answerContent }) {
+function MainAnswer({ answerId, answerContent,onClick }) {
+
     return (
         <div className=' flex mt-3'>
             <AnswerVote/>
-            <QuestionBody answerContent={answerContent} />
+            <QuestionBody answerId={answerId} answerContent={answerContent} onClick={onClick} />
         </div>
     )
 }

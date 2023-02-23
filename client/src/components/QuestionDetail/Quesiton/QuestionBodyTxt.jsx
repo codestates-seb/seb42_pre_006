@@ -1,11 +1,8 @@
 function QuestionBodyTxt({ answerContent }) {
 
   return (
-    <section>
-      <div className=" text-left">
-        {answerContent}
-      </div>
-    </section>
+      <div className=" text-left" dangerouslySetInnerHTML={{ __html: answerContent }} />
+      // <div>{answerContent}</div>
   );
 };
 
