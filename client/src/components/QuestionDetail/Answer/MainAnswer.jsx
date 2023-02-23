@@ -1,13 +1,13 @@
-// answer vote와 questionbody 불러오기
-
+import React from 'react'
 import AnswerVote from './AnswerVote'
 import QuestionBody from '../Quesiton/QuestionBody'
 
-function MainAnswer() {
+function MainAnswer({ answerId, answerContent,onClick }) {
+
     return (
         <div className=' flex mt-3'>
             <AnswerVote/>
-            <QuestionBody  />
+            <QuestionBody answerId={answerId} answerContent={answerContent} onClick={onClick} />
         </div>
     )
 }

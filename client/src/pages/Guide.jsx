@@ -4,18 +4,22 @@ import { MdAccountBox } from 'react-icons/md';
 import Badge from '../components/UI/Badge';
 import Button from '../components/UI/Button';
 import Card from '../components/UI/Card';
-import InputFeild from '../components/UI/InputFeild';
+import EmptyData from '../components/UI/EmptyData';
+import FormGroup from '../components/UI/Form/FormGroup';
+import InputFeild from '../components/UI/Form/InputFeild';
+import TextEditorFeild from '../components/UI/Form/TextEditorFeild';
 import Pagination from '../components/UI/Pagination';
 import Title from '../components/UI/Title';
 
 function Guide() {
   const {
     register,
+    setValue,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = data => {
+  const handleSubmitButton = data => {
     console.log(data);
   };
 
@@ -57,6 +61,9 @@ function Guide() {
             </Button>
             <Button variant="default" size="md">
               Default
+            </Button>
+            <Button variant="default" size="md" disabled={Boolean(true)}>
+              Disabled
             </Button>
           </div>
           <h3>- text</h3>
@@ -161,50 +168,75 @@ function Guide() {
         <header>
           <h2 className="text-2xl font-semibold">Input Feild</h2>
         </header>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="my-4">
+        <form onSubmit={handleSubmit(handleSubmitButton)}>
+          <FormGroup
+            label="Display Name"
+            id="displayName"
+            name="displayName"
+            errors={errors}
+            validation={{ required: '필수 입력 항목입니다' }}
+            register={register}
+          >
+            <InputFeild type="text" />
+          </FormGroup>
+          <FormGroup
+            label="Display Name"
+            id="displayName"
+            name="displayName"
+            errors={{
+              displayName: {
+                type: 'required',
+                message: '필수 입력 항목입니다',
+              },
+            }} // errors={errors}
+            validation={{ required: '필수 입력 항목입니다' }}
+            register={register}
+          >
+            <InputFeild type="text" placeholder="JavaScript, React, Vue" />
+          </FormGroup>
+          <FormGroup
+            label="Display Name"
+            id="displayName"
+            name="displayName"
+            errors={errors}
+            validation={{ required: '필수 입력 항목입니다' }}
+            register={register}
+          >
             <InputFeild
-              label="Email"
-              labelDetail="Be specific and imagine you’re asking a question to another person. Minimum 15 characters."
-              placeholder="placeholder"
-              name="email"
               type="text"
-              register={register}
-              validation={{ required: '필수 입력 항목입니다' }}
-              errors={errors}
+              placeholder="JavaScript, React, Vue"
+              disabled={Boolean(true)}
             />
-          </div>
-          <div className="my-4">
-            <InputFeild
-              label="Password"
-              labelDetail="Be specific and imagine you’re asking a question to another person. Minimum 15 characters."
-              placeholder="placeholder"
-              name="password"
-              type="password"
-              register={register}
-              errors={{
-                password: {
-                  type: 'required',
-                  message: '필수 입력 항목입니다',
-                },
-              }} // errors={errors} 로 작성
-              validation={{ required: '필수 입력 항목입니다' }}
-            />
-          </div>
-          <div className="my-4">
-            <InputFeild
-              label="Display Name"
-              labelDetail="Be specific and imagine you’re asking a question to another person. Minimum 15 characters."
-              placeholder="placeholder"
-              type="text"
-              name="displayName"
-              register={register}
-              errors={errors}
-              disabled
-            />
-          </div>
-          <div className="my-4 text-right">
-            <Button variant="primary" size="md" className="w-40">
+          </FormGroup>
+          <FormGroup
+            label="About Me"
+            id="aboutMe"
+            name="aboutMe"
+            errors={errors}
+            validation={{ required: '필수 입력 항목입니다' }}
+            register={register}
+            setValue={setValue}
+          >
+            <TextEditorFeild />
+          </FormGroup>
+          <FormGroup
+            label="About Me"
+            id="aboutMe"
+            name="aboutMe"
+            errors={{
+              aboutMe: {
+                type: 'required',
+                message: '필수 입력 항목입니다',
+              },
+            }} // errors={errors}
+            validation={{ required: '필수 입력 항목입니다' }}
+            register={register}
+            setValue={setValue}
+          >
+            <TextEditorFeild />
+          </FormGroup>
+          <div className="text-left">
+            <Button variant="primary" type="submit">
               Submit
             </Button>
           </div>
@@ -221,6 +253,14 @@ function Guide() {
             onClick={handleClickPage}
             limit={10}
           />
+        </div>
+      </section>
+      <section className="py-10 border-t">
+        <header>
+          <h2 className="text-2xl font-semibold">Empty Data</h2>
+        </header>
+        <div className="my-4 text-center">
+          <EmptyData />
         </div>
       </section>
     </article>

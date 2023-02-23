@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import Button from '../components/UI/Button';
 import Card from '../components/UI/Card';
-import InputFeild from '../components/UI/InputFeild';
+import InputFeild from '../components/UI/Form/InputFeild';
 import { ReactComponent as LogoSymbol } from '../assets/images/symbol.svg';
 import SocialLogin from '../components/UI/SocialLogin';
 import { AuthContext } from '../context/auth-context';
+import FormGroup from '../components/UI/Form/FormGroup';
 
 function Login() {
   const { handleLogin } = useContext(AuthContext);
@@ -22,7 +23,7 @@ function Login() {
     },
   });
 
-  const onSubmit = () => {
+  const handleSubmitLogin = () => {
     handleLogin();
   };
 
@@ -37,14 +38,10 @@ function Login() {
             <SocialLogin />
           </div>
           <Card className="mt-4 mb-10">
-            <form onSubmit={handleSubmit(onSubmit)}>
-              {/* <input
-                {...register('email', {
-                  required: '이메일을 입력해주세요',
-                })}
-              /> */}
-              <InputFeild
+            <form onSubmit={handleSubmit(handleSubmitLogin)}>
+              <FormGroup
                 label="Email"
+                id="email"
                 name="email"
                 register={register}
                 errors={errors}
@@ -52,8 +49,10 @@ function Login() {
                   required: '이메일을 입력해주세요',
                 }}
                 className="mt-0"
-              />
-              <InputFeild
+              >
+                <InputFeild type="text" placeholder="email" />
+              </FormGroup>
+              <FormGroup
                 label="Password"
                 name="password"
                 type="password"
@@ -62,8 +61,10 @@ function Login() {
                 validation={{
                   required: '비밀번호를 입력해주세요',
                 }}
-              />
-              <Button variant="primary" size="md" block>
+              >
+                <InputFeild type="password" placeholder="password" />
+              </FormGroup>
+              <Button variant="primary" size="md" block type="submit">
                 Log in
               </Button>
             </form>

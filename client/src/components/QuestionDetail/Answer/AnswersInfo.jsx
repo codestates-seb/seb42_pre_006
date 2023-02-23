@@ -1,13 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function AnswersInfo() {
-  const [answerLength, serAnswerLength] = useState(0);
-
-  axios.get('/answer').then(res => {
-    serAnswerLength(res.data.length);
-  });
-
+  const [answerLength, serAnswerLength] = useState(0)
+  
+  useEffect(() => {
+    const handleAnswerDate = async() => {
+      try {
+        const response = await axios.get('/answer')
+          serAnswerLength(response.data.length)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+    handleAnswerDate()
+  }, [answerLength])
+  
   return (
     <div className="flex justify-between">
       <div className="text-lg">{answerLength} Answers</div>

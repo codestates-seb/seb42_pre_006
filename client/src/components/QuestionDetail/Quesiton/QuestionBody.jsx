@@ -3,13 +3,13 @@ import QuestionTags from "./QuestionTags";
 import QuestionBodyBtns from "./QuestionBodyBtns";
 import QuestionUserinfo from "./QuestionUserinfo";
 
-function QuestionBody() {
+function QuestionBody({ answerId, answerContent }) {
   return (
-    <div className=" mt-5 flex flex-col">
-      <QuestionBodyTxt />
+    <div className=" mt-5 flex flex-col w-full">
+      <QuestionBodyTxt answerContent={answerContent} />
       <QuestionTags />
-      <div className="flex justify-between mt-7">
-        <QuestionBodyBtns />
+      <div className="flex w-full justify-between mt-7">
+        <QuestionBodyBtns answerId={answerId} />
         <QuestionUserinfo />
       </div>
     </div>

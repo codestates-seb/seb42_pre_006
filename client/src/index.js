@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import AuthProvider from './context/auth-context';
+import AnswerProvider from './context/answer-context';
 
 axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 axios.defaults.headers.post['Content-Type'] = 'application/json';
@@ -13,9 +14,11 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <AuthProvider>
-        <App />
-      </AuthProvider>
+      <AnswerProvider>
+        <AuthProvider>
+          <App />
+        </AuthProvider>
+      </AnswerProvider>
     </BrowserRouter>
   </React.StrictMode>,
 );

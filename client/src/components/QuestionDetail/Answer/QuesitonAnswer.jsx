@@ -1,17 +1,29 @@
-// 모든 answer 파일 합치기
+import React, { useContext } from 'react';
 
-import AnswersInfo from './AnswersInfo'
-import MainAnswer from './MainAnswer'
-import PostAnswerBox from './PostAnswerBox'
+import AnswersInfo from './AnswersInfo';
+import MainAnswer from './MainAnswer';
+import PostAnswerBox from './PostAnswerBox';
+import { AnswerContext } from '../../../context/answer-context';
 
 function QuesitonAnswer() {
-    return (
-        <div className='mt-16'>
-            <AnswersInfo />
-            <MainAnswer/>
-            <PostAnswerBox />
+
+  const { answers } = useContext(AnswerContext)
+
+  return (
+    <div className="mt-16">
+      <AnswersInfo />
+
+      {answers ? (
+        <div>
+          {answers.map((el) =>
+              <MainAnswer key={el.answerId} answerId={el.answerId} answerContent={el.answerContent} />
+          )}
         </div>
-    )
+      ) : null}
+
+      <PostAnswerBox />
+    </div>
+  );
 }
 
-export default QuesitonAnswer
+export default QuesitonAnswer;

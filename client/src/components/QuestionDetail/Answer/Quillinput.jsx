@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useMemo } from 'react';
 import axios from 'axios';
 import ReactQuill from 'react-quill';
 import Button from '../../UI/Button';
@@ -7,44 +7,64 @@ import 'react-quill/dist/quill.snow.css';
 function Quillinput() {
   const [quillValue, setQuillValue] = useState('');
 
-  const BASE_URL = 'http://localhost:8080';
-
-  const questionInput = useCallback(async () => {
+ const handleAnswerPost = async() => {
     try {
-      await axios.post(`${BASE_URL}/answer`, {
-        answerContent: 'Test Post 02',
+      const response = await axios.post('/answer', {
+        answerContent: quillValue,
       });
-      console.log('good!');
-      console.log('quillValue');
-      setQuillValue('');
+      console.log(response);
+      // serAnswerLength(response.data.length)
     } catch (error) {
-      console.log('error');
+      console.error(error);
     }
-  });
-
-  function onQuillChange(e) {
-    setQuillValue(e.target.value);
-    console.log(quillValue);
   }
+
+  const onSubmitHandler = () => {
+    if (quillValue === '') {
+      alert('빈 칸을 작성해 주세요');
+    } else {
+      handleAnswerPost();
+      setQuillValue('');
+      window.location.reload();
+    }
+  }
+
+
+  const modules = useMemo(
+    () => ({
+        toolbar: { // 툴바에 넣을 기능들을 순서대로 나열하면 된다.
+            container: [
+                ["bold", "italic", "underline", "strike", "blockquote"],
+                [{ size: ["small", false, "large", "huge"] }, { color: [] }],
+                [
+                    { list: "ordered" },
+                    { list: "bullet" },
+                    { indent: "-1" },
+                    { indent: "+1" },
+                    { align: [] },
+                ],
+                ["image", "video"],
+            ],
+        },
+    }), []);
 
   return (
     <div className=" w-full">
       {/* TODO: 에디터 modules 수정 작업 -> [textarea] 확장, [focus, outline] css 적용하기  */}
-      <div className=" w-full">
-        <ReactQuill
-          className="text-left"
-          onChange={() => onQuillChange()}
-          value={quillValue}
-        />
-      </div>
+      {/* <form onSubmit={onSubmitHandler}> */}
+        <div className=" w-full">
+          <ReactQuill
+            className="text-left"
+            onChange={setQuillValue}
+            value={quillValue}
+            modules={modules}
+          />
+        </div>
 
-      <button onClick={questionInput} type="button">
-        button
-      </button>
-
-      <Button variant="primary" size="md" className="flex mt-8">
-        Post Your Answer
-      </Button>
+        <Button onClick={onSubmitHandler} variant="primary" size="md" className="flex mt-8">
+          Post Your Answer
+        </Button>
+      {/* </form> */}
     </div>
   );
 }
