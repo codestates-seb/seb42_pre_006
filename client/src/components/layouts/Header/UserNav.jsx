@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { MdAllInbox } from 'react-icons/md';
 import { ImTrophy } from 'react-icons/im';
 import { BsFillQuestionCircleFill } from 'react-icons/bs';
-import { HiChatBubbleBottomCenterText } from 'react-icons/hi2';
 import { FaUserCircle } from 'react-icons/fa';
 import Button from '../../UI/Button';
 import { AuthContext } from '../../../context/auth-context';
@@ -66,10 +65,10 @@ function UserNav() {
           <BsFillQuestionCircleFill />
         </UserNavItem>
       </div>
-      <div className="mx-1">
-        <UserNavItem onClick={handleLogout}>
-          <HiChatBubbleBottomCenterText />
-        </UserNavItem>
+      <div className="ml-2">
+        <Button variant="secondary" onClick={handleLogout}>
+          Logout
+        </Button>
       </div>
     </>
   );
