@@ -1,35 +1,29 @@
+import React, { useState } from 'react';
+import Pagination from '../UI/Pagination';
+
 function QuestionsPagination() {
+  const [page, setPage] = useState(1);
+
+  // const totalElements = Number(pageInfo.totalElements)
+  // console.log(totalElements)
+  // const totalPages = Number(pageInfo.totalPages)
+
+
+  
+  const handleClickPage = pageNum => setPage(pageNum);
+
+
   return (
-    <section>
-      {/* TODO: 페이지네이션 기능작업 */}
-      <ul className="ml-8 my-20 flex text-sm">
-        <li className="border rounded mx-0.5 flex content-center justify-center hover:bg-[#D6D9DC]">
-          <button type="button" className="px-2 py-1">
-            Prev
-          </button>
-        </li>
-        <li className="border rounded mx-1 hover:bg-[#D6D9DC]">
-          <button type="button" className="px-2 py-1">
-            1
-          </button>
-        </li>
-        <li className="border rounded mx-1 bg-[#F48224] text-white font-medium border-[#F48224]">
-          <button type="button" className="px-2 py-1">
-            2
-          </button>
-        </li>
-        <li className="border rounded mx-1 hover:bg-[#D6D9DC]">
-          <button type="button" aria-current="page" className="px-2 py-1">
-            3
-          </button>
-        </li>
-        <li className="border rounded mx-1 hover:bg-[#D6D9DC]">
-          <button type="button" className="px-2 py-1">
-            Next
-          </button>
-        </li>
-      </ul>
-    </section>
+    <>
+      <div className="my-4 text-center">
+        <Pagination
+          total={50}
+          page={page}
+          onClick={handleClickPage}
+          limit={10}
+        />
+      </div>
+    </>
   );
 }
 

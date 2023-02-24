@@ -17,6 +17,7 @@ import SignUp from './pages/SignUp';
 import QuestionDetail from './pages/QuestionDetail';
 import { AuthContext } from './context/auth-context';
 import UserPersonalEdit from './pages/UserPersonalEdit';
+import QuestionsPagination from './components/Questions/QuestionsPagination';
 
 function App() {
   const { isLoggedIn } = useContext(AuthContext);
@@ -28,6 +29,7 @@ function App() {
         <Route path="/questions" element={<Questions />} />
         <Route path="/guide" element={<Guide />} />
         <Route path="/detail" element={<QuestionDetail />} />
+        <Route path="/page" element={<QuestionsPagination />} />
       </Route>
       <Route element={<MainLayout />}>
         <Route path="/tags" element={<Tags />} />

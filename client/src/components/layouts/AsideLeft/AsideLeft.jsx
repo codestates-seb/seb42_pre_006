@@ -38,9 +38,9 @@ function Aside() {
         <li>
           <AsideNavItem to="/edit">Edit</AsideNavItem>
         </li>
-        {/* <li>
-          <AsideNavItem to="/answeredit">AnswerEdit</AsideNavItem>
-        </li> */}
+        <li>
+          <AsideNavItem to="/page">Pagenations</AsideNavItem>
+        </li>
       </ul>
     </aside>
   );
