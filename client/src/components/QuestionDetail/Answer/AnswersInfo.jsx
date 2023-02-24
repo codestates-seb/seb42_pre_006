@@ -14,7 +14,7 @@ function AnswersInfo() {
       }
     };
     handleAnswerDate();
-  }, [answerLength]);
+  }, []);
 
   return (
     <div className="flex justify-between">
