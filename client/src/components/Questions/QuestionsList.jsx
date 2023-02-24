@@ -6,6 +6,7 @@ function QuestionsList({
   question: {
     questionId,
     questionTitle,
+    questionContent,
     questionStatus,
     viewCount,
     questionVoteCount,
@@ -14,6 +15,8 @@ function QuestionsList({
     modifiedAt,
   },
 }) {
+  const content = questionContent.replace(/(<([^>]+)>)/gi, '').substring(0, 30);
+
   return (
     <ul className=" text-left">
       <li className="flex flex-wrap w-full h-full border-b py-6 px-8">
@@ -29,12 +32,7 @@ function QuestionsList({
             <h4 className="flex text-lg text-[#0063bf] font-medium cursor-pointer hover:text-[#0A95FF]">
               <Link to={`/questions/${questionId}`}>{questionTitle}</Link>
             </h4>
-            <p className="flex text-sm">
-              Now I somehow need to preserve relations, so for example, if I
-              have a table users that has person_id (bigint) column, this should
-              get migrated to person_id (uuid) and maintain the relationship.
-              How can I do this without losing any data?
-            </p>
+            <div>{content}</div>
           </div>
 
           <div className="flex justify-between items-center">

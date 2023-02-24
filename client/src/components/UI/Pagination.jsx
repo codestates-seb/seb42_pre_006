@@ -6,6 +6,7 @@ function Pagination({ total, page, limit = 10, onClick }) {
   const numPages = Math.ceil(total / limit);
 
   const handleClickPage = pageNum => {
+    window.scrollTo(0, 0);
     onClick(pageNum);
   };
 
