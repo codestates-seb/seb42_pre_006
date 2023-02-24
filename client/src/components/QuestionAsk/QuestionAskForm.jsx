@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -8,6 +9,8 @@ function QuestionAskForm() {
   const [titleValue, setTitleValue] = useState('');
   const [contentValue, setContentValue] = useState('');
   const [tagValue, setTagValue] = useState([]);
+
+  const navigate = useNavigate();
 
   const handleTitle = event => {
     setTitleValue(event.target.value);
@@ -33,49 +36,51 @@ function QuestionAskForm() {
         questionContent: contentValue,
         tags: [
           { tagName: tagValue },
-          { tagName: 'html5' },
-          { tagName: 'java' },
-          { tagName: 'react' },
+          { tagName: tagValue },
+          { tagName: tagValue },
+          { tagName: tagValue },
         ],
       });
+      if (questionPost) {
+        navigate('/questions', { replace: true });
+      }
       console.log(questionPost.data);
       console.log(titleValue);
+      console.log(questionPost.data.questionId);
     } catch (error) {
       console.error(error);
     }
   };
 
-  const modules = {
-    toolbar: {
-      container: [
-        [{ header: [1, 2, 3, 4, 5, 6, false] }],
-        [{ font: [] }],
-        [{ align: [] }],
-        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-        [{ list: 'ordered' }, { list: 'bullet' }, 'link'],
-        [
-          {
-            color: [
-              '#000000',
-              '#e60000',
-              '#ff9900',
-              '#ffff00',
-              '#008a00',
-              '#0066cc',
-              '#9933ff',
-              'custom-color',
-            ],
-          },
-          { background: [] },
-        ],
-        ['image', 'video'],
-        ['clean'],
-      ],
-    },
-  };
+  // const modules = {
+  //   toolbar: {
+  //     container: [
+  //       [{ header: [1, 2, 3, 4, 5, 6, false] }],
+  //       [{ font: [] }],
+  //       [{ align: [] }],
+  //       ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+  //       [{ list: 'ordered' }, { list: 'bullet' }, 'link'],
+  //       [
+  //         {
+  //           color: [
+  //             '#000000',
+  //             '#e60000',
+  //             '#ff9900',
+  //             '#ffff00',
+  //             '#008a00',
+  //             '#0066cc',
+  //             '#9933ff',
+  //             'custom-color',
+  //           ],
+  //         },
+  //         { background: [] },
+  //       ],
+  //     ],
+  //   },
+  // };
 
   return (
-    <section>
+    <>
       <h1 className="text-3xl font-semibold px-8 py-8 text-left">
         Ask a public question
       </h1>
@@ -103,14 +108,13 @@ function QuestionAskForm() {
           Introduce the problem and expand on what you put in the title. Minimum
           20 characters.
         </p>
-        {/* TODO: 에디터 modules 수정 작업 -> [textarea] 확장, [focus, outline] css 적용하기  */}
         <ReactQuill
           className="text-left"
           name="content"
           theme="snow"
-          modules={modules}
           value={contentValue}
           onChange={handleContent}
+          // modules={modules}
         />
       </div>
 
@@ -120,7 +124,6 @@ function QuestionAskForm() {
           Add up to 5 tags to describe what your question is about. Start typing
           to see suggestions.
         </p>
-        {/* TODO: 태그 기능작업 -> 태그추가,삭제 및 검색어로 태그종류찾기(드롭다운) */}
         <input
           className="w-full border rounded px-2 py-2 text-sm focus:border focus:border-[#58A4DE] outline-offset-4 outline-[#DDEAF7]"
           type="text"
@@ -132,17 +135,14 @@ function QuestionAskForm() {
       </div>
 
       <div className="px-8 mb-28 flex">
-        {/* TODO: 버튼 라우터기능 작업 -> [Post your question]버튼 클릭시 [질문상세페이지]로 이동, 버튼 타입 [submit]으로 변경 */}
         <Button onClick={handlePost} type="submit" variant="primary" size="md">
           Post Your Answer
         </Button>
-        {/* TODO: 버튼 기능작업 -> [Cancel]버튼 클릭시 정말 닫을건지 확인하는 모달 창? 프롬프트창? 띄우기 */}
         <Button to="/questions" type="button" variant="danger" size="sm" text>
           Cancel
         </Button>
-        {/* QUEST: Review post question 페이지 구현 X -> 유효성 검사 실시해야하는지? */}
       </div>
-    </section>
+    </>
   );
 }
 
