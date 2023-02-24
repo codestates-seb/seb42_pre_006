@@ -1,7 +1,7 @@
 function AnswerBodyTxt({ content }) {
   return (
     <div
-      className="text-left min-h-[16rem]"
+      className="text-left min-h-[4rem]"
       dangerouslySetInnerHTML={{ __html: content }}
     />
   );

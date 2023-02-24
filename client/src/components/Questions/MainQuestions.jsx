@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import QuestionsList from './QuestionsList';
+import EmptyData from '../UI/EmptyData';
+import Pagination from '../UI/Pagination';
 // import QuestionsPagination from './QuestionsPagination'
 
 function MainQuestions() {
   const [questionValue, setQuestionValue] = useState(0);
+  const [page, setPage] = useState(1);
 
-  const questionValueData = questionValue.data
-  // const { questionValuePageInfo } = questionValue.pageInfo
+  const { data: questionValueData, pageInfo } = questionValue;
 
   useEffect(() => {
     const handleQuestionDate = async () => {
       try {
-        const response = await axios.get('/questions?page=1&size=10');
+        const response = await axios.get(`/questions?page=${page}&size=10`);
         const { data } = response;
         setQuestionValue(data);
       } catch (error) {
@@ -20,28 +22,30 @@ function MainQuestions() {
       }
     };
     handleQuestionDate();
-  }, [questionValue]);
+  }, [page]);
+
+  const handleClickPage = pageNum => {
+    setPage(pageNum);
+  };
 
   return (
     <>
       {questionValue ? (
         <div className="border-t">
-          {questionValueData.map(el => (
-            <QuestionsList
-              key={el.questionId}
-              questionId={el.questionId}
-              questionTitle={el.questionTitle}
-              questionStatus={el.questionStatus}
-              viewCount={el.viewCount}
-              questionVoteCount={el.questionVoteCount}
-              // memberId={el.member.memberId}
-              // displayName={el.member.displayName}
-              createdAt={el.createdAt}
-            />
+          {questionValueData.map(question => (
+            <QuestionsList key={question.questionId} question={question} />
           ))}
+          <div className="my-4 text-center">
+            <Pagination
+              total={pageInfo.totalElements}
+              page={page}
+              onClick={handleClickPage}
+            />
+          </div>
         </div>
-      ) : null}
-      {/* <QuestionsPagination pageInfo={questionValuePageInfo} /> */}
+      ) : (
+        <EmptyData />
+      )}
     </>
   );
 }
