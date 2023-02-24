@@ -1,26 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import Button from '../components/UI/Button';
+import QuestionProvider from '../context/question-context';
 
 function QuestionEdit() {
   const [titleValue, setTitleValue] = useState('');
   const [contentValue, setContentValue] = useState('');
   const [tagValue, setTagValue] = useState([]);
 
-  const { questionId } = useParams();
-  const navigator = useNavigate();
+  const params = useParams();
+  // const navigator = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     const handleQuestionData = async () => {
       try {
-        const response = await axios.get(`/questions/${questionId}`);
+        const response = await axios.get(`/questions/${params.id}`);
         const { data } = response;
-        setTitleValue(data.titleValue);
-        setContentValue(data.contentValue);
-        setTagValue(data.tagValue);
+        setTitleValue(data.questionTitle);
+        setContentValue(data.questionContent);
+        setTagValue(data.tags);
       } catch (error) {
         console.error(error);
       }
@@ -28,9 +33,9 @@ function QuestionEdit() {
     handleQuestionData();
   }, []);
 
-  const handleQuestionPost = async () => {
+  const handleQuestionEdit = async () => {
     try {
-      await axios.patch(`/questions/${questionId}/edit`, {
+      await axios.patch(`/questions/${params.id}`, {
         questionTitle: titleValue,
         questionContent: contentValue,
         tags: [
@@ -45,17 +50,8 @@ function QuestionEdit() {
     }
   };
 
-  const onSubmitHandler = () => {
-    if (titleValue.trim() === '' || titleValue.trim() === `<p><br></p>`) {
-      alert('빈 칸을 작성해 주세요');
-    } else {
-      handleQuestionPost();
-      navigator(`/questions/${questionId}/`);
-    }
-  };
-
   return (
-    <article className="flex">
+    <QuestionProvider className="flex">
       <div className="flex-1">
         <div className="px-8 py-3">
           <h2 className="font-semibold text-left">Title</h2>
@@ -87,12 +83,7 @@ function QuestionEdit() {
         </div>
 
         <div className="flex px-8 mt-6 mb-28">
-          <Button
-            onClick={onSubmitHandler}
-            to="/questions"
-            variant="primary"
-            size="md"
-          >
+          <Button onClick={handleQuestionEdit} variant="primary" size="md">
             Edit
           </Button>
           <Link to="/">
@@ -123,7 +114,7 @@ function QuestionEdit() {
           </ul>
         </div>
       </div>
-    </article>
+    </QuestionProvider>
   );
 }
 
