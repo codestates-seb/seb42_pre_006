@@ -44,6 +44,30 @@ public class Member {
     @Lob
     private String aboutMe;
 
+    @Enumerated(value = EnumType.STRING)
+    @Column(length = 20)
+    private MemberStatus memberStatus = MemberStatus.MEMBER_ACTIVE;
+
+    @ElementCollection(fetch =  FetchType.EAGER)
+    private List<String> roles;
+
+    public enum MemberStatus {
+        MEMBER_ACTIVE("활동중"),
+        MEMBER_SLEEP("휴면 상태"),
+        MEMBER_QUIT("탈퇴 상태");
+
+        @Getter
+        private String status;
+
+        MemberStatus(String status) {
+            this.status = status;
+        }
+    }
+    public enum MemberRole {
+        ROLE_USER,
+        ROLE_ADMIN
+    }
+
     @OneToMany(mappedBy = "member")
     private List<Question> questions = new ArrayList<>();
 
