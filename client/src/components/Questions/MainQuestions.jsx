@@ -17,6 +17,7 @@ function MainQuestions() {
         const response = await axios.get(`/questions?page=${page}&size=10`);
         const { data } = response;
         setQuestionValue(data);
+        console.log(data);
       } catch (error) {
         console.error(error);
       }
