@@ -1,6 +1,5 @@
 package com.pre006.stackoverflow.member.controller;
 
-import com.pre006.stackoverflow.global.SingleResponse;
 import com.pre006.stackoverflow.member.dto.MemberDto;
 import com.pre006.stackoverflow.member.entitiy.Member;
 import com.pre006.stackoverflow.member.mapper.MemberMapper;
@@ -21,12 +20,11 @@ import java.util.List;
 @SuppressWarnings("rawtypes")
 @RestController
 @Validated
-@CrossOrigin
-@RequestMapping("/api/v1/members")
+@RequestMapping("api/v1/members")
 public class MemberController {
     private final MemberService memberService;
     private final MemberMapper memberMapper;
-    private static final String BASE_URL = "/api/v1/members";
+    private static final String BASE_URL = "api/v1/members";
 
     public MemberController(MemberService memberService, MemberMapper memberMapper) {
         this.memberService = memberService;
