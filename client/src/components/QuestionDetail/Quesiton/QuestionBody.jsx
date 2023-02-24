@@ -9,7 +9,7 @@ function QuestionBody({ question }) {
       {question && (
         <div className=" mt-5 flex flex-col w-full">
           <QuestionBodyTxt questionContent={question.questionContent} />
-          <QuestionTags />
+          <QuestionTags questionId={question.questionId} />
           <div className="flex w-full justify-between mt-7">
             <QuestionBodyBtns questionId={question.questionId} />
             <QuestionUserinfo question={question} />
