@@ -54,9 +54,10 @@ public class QuestionService {
         return question;
     }
 
-    public List<Question> findQuestions() {
+    public Page<Question> findQuestions(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("questionId").descending());
 
-        return questionRepository.findAll();
+        return questionRepository.findAll(pageable);
     }
     public Question updateQuestion(Question question) {
         // todo: 수정 시 검증을 해야하는 부분이 있는지      ex) 내용이 완전히 같을 경우 ERROR
