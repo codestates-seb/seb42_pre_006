@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import './theme.scss';
+import './theme.css';
 import './quillCustom.css';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import QuestionAsk from './pages/QuestionAsk';
