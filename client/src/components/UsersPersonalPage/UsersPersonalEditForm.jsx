@@ -6,6 +6,7 @@ import Button from '../UI/Button';
 import FormGroup from '../UI/Form/FormGroup';
 import TextEditorFeild from '../UI/Form/TextEditorFeild';
 import InputFeild from '../UI/Form/InputFeild';
+import validate from '../../utils/validate';
 
 function UsersPersonalEditForm({ user }) {
   const navigate = useNavigate();
@@ -67,13 +68,7 @@ function UsersPersonalEditForm({ user }) {
         id="displayName"
         name="displayName"
         errors={errors}
-        validation={{
-          required: '사용자명을 입력해주세요',
-          minLength: {
-            value: 8,
-            message: '8글자 이상 입력해주세요',
-          },
-        }}
+        validation={validate.displayName}
         register={register}
       >
         <InputFeild type="text" />

@@ -8,6 +8,7 @@ import { ReactComponent as LogoSymbol } from '../assets/images/symbol.svg';
 import SocialLogin from '../components/UI/SocialLogin';
 import { AuthContext } from '../context/auth-context';
 import FormGroup from '../components/UI/Form/FormGroup';
+import validate from '../utils/validate';
 
 function Login() {
   const { handleLogin } = useContext(AuthContext);
@@ -45,9 +46,7 @@ function Login() {
                 name="email"
                 register={register}
                 errors={errors}
-                validation={{
-                  required: '이메일을 입력해주세요',
-                }}
+                validation={validate.email}
                 className="mt-0"
               >
                 <InputFeild type="text" placeholder="email" />
@@ -58,9 +57,7 @@ function Login() {
                 type="password"
                 register={register}
                 errors={errors}
-                validation={{
-                  required: '비밀번호를 입력해주세요',
-                }}
+                validation={validate.password}
               >
                 <InputFeild type="password" placeholder="password" />
               </FormGroup>
