@@ -1,12 +1,15 @@
 package com.pre006.stackoverflow.question.mapper;
 
+import com.pre006.stackoverflow.answer.dto.AnswerDto;
 import com.pre006.stackoverflow.question.dto.QuestionDto;
 import com.pre006.stackoverflow.question.entity.Question;
 import com.pre006.stackoverflow.tag.dto.TagDto;
 import com.pre006.stackoverflow.tag.entity.QuestionTag;
 import com.pre006.stackoverflow.tag.entity.Tag;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,6 +52,7 @@ public interface QuestionMapper {
 
     Question patchDtoToQuestion(QuestionDto.PatchDto requestBody);
 
+    @Mapping(source = "answersCount", target = "answersCount")
     QuestionDto.ResponseDto questionToResponseDto(Question question);
 
     List<QuestionDto.ResponseDto> questionsToResponseDtos(List<Question> questions);
@@ -61,4 +65,7 @@ public interface QuestionMapper {
                         questionTag.getQuestion())
                 .collect(Collectors.toList());
     }
+
+    QuestionDto.AnswersResponseDto<AnswerDto.Response> responseToAnswersResponseDto
+            (List<AnswerDto.Response> data, int answersCount);
 }

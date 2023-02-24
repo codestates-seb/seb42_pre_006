@@ -57,6 +57,14 @@ public class Question extends Auditable {
     @Transient
     private List<Tag> tags = new ArrayList<>();
 
+    @Transient
+    private int answersCount;
+
+    public int getAnswersCount() {
+        answersCount = answers.size();
+        return answersCount;
+    }
+
     public void setAnswer(Answer answer) {
         this.answers.add(answer);
         if (answer.getQuestion() != this) {

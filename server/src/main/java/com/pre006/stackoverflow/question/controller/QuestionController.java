@@ -103,8 +103,10 @@ public class QuestionController {
         Question question = questionService.findQuestion(questionId);
         List<AnswerDto.Response> answers =
                 answerMapper.answersToAnswerResponses(question.getAnswers());
+        QuestionDto.AnswersResponseDto response =
+                mapper.responseToAnswersResponseDto(answers, answers.size());
         return new ResponseEntity(
-                new SingleResponse<>(answers), HttpStatus.OK
+                new SingleResponse<>(response), HttpStatus.OK
         );
     }
 

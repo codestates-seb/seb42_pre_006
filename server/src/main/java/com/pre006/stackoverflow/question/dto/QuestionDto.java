@@ -1,5 +1,6 @@
 package com.pre006.stackoverflow.question.dto;
 
+import com.pre006.stackoverflow.global.response.PageInfo;
 import com.pre006.stackoverflow.tag.dto.TagDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -52,10 +53,20 @@ public class QuestionDto {
         private String questionStatus;
         private int viewCount;
         private int questionVoteCount;
+        private int answersCount;
         private LocalDateTime createAt;
         private LocalDateTime modifiedAt;
         private String editComment;
+        private List<TagDto.ResponseDto> tags;
 
         // todo: Member Response Dto
+    }
+
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    public static class AnswersResponseDto<T> {
+        private List<T> data;
+        int answersCount;
     }
 }
