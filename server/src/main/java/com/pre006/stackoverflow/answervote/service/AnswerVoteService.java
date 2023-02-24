@@ -13,17 +13,19 @@ public class AnswerVoteService {
     private final AnswerVoteRepository answerVoteRepository;
 
     public AnswerVoteService(AnswerVoteRepository answerVoteRepository) {
-        this.answerVoteRepository = answerVoteRepository;
 
+        this.answerVoteRepository = answerVoteRepository;
     }
 
     public AnswerVote createAnswerVote(AnswerVote answerVote){
+        answerVote.isAnswerVoteStatus();
         return answerVoteRepository.save(answerVote);
     }
 
     public AnswerVote updateAnswerVote(AnswerVote answerVote){
         AnswerVote findAnswerVote = findVerifiedAnswerVote(answerVote.getAnswerVoteId());
 
+        Optional.ofNullable(answerVote.isAnswerVoteStatus()).isPresent();
 
         return answerVoteRepository.save(findAnswerVote);
     }

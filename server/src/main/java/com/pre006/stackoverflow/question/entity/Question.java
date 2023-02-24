@@ -5,6 +5,8 @@ import com.pre006.stackoverflow.member.entitiy.Member;
 import com.pre006.stackoverflow.global.audit.Auditable;
 import com.pre006.stackoverflow.questionvote.entity.QuestionVote;
 
+import com.pre006.stackoverflow.tag.entity.QuestionTag;
+import com.pre006.stackoverflow.tag.entity.Tag;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -49,7 +51,26 @@ public class Question extends Auditable {
     @OneToMany(mappedBy = "question")
     private List<Answer> answers = new ArrayList<>();
 
-    // todo: Tag 연관 관계 매핑
+    @OneToMany(mappedBy = "question", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<QuestionTag> questionTags = new ArrayList<>();
+
+    @Transient
+    private List<Tag> tags = new ArrayList<>();
+
+    @Transient
+    private int answersCount;
+
+    public int getAnswersCount() {
+        answersCount = answers.size();
+        return answersCount;
+    }
+
+    public void setAnswer(Answer answer) {
+        this.answers.add(answer);
+        if (answer.getQuestion() != this) {
+            answer.setQuestion(this);
+        }
+    }
 
     public void setMember(Member member){
         this.member = member;

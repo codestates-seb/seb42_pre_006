@@ -2,7 +2,10 @@ package com.pre006.stackoverflow.question.service;
 
 import com.pre006.stackoverflow.question.entity.Question;
 import com.pre006.stackoverflow.question.repository.QuestionRepository;
-import org.apache.catalina.security.SecurityUtil;
+import com.pre006.stackoverflow.tag.entity.QuestionTag;
+import com.pre006.stackoverflow.tag.entity.Tag;
+import com.pre006.stackoverflow.tag.service.TagService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,35 +22,40 @@ import java.time.LocalTime;
 import java.time.ZoneOffset;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Transactional
 @Service
 public class QuestionService {
     private final QuestionRepository questionRepository;
+    private final TagService tagService;
 
-    public QuestionService(QuestionRepository questionRepository) {
+    public QuestionService(QuestionRepository questionRepository, TagService tagService) {
         this.questionRepository = questionRepository;
+        this.tagService = tagService;
     }
 
     public Question createQuestion(Question question) {
         // todo: 저장하기 전 검증할 내용 없는지 확인
+
+        List<Tag> tags = question.getTags();
+        if (tags != null) {
+            List<QuestionTag> questionTags = getQuestionTags(question, tags);
+            question.setQuestionTags(questionTags);
+        }
+
         return questionRepository.save(question);
     }
 
     public Question findQuestion(long questionId) {
         Question question = findVerifiedQuestion(questionId);
 
-        // todo: 조회한 질문의 상태가 '질문 삭제'인 경우 예외 처리
-
         return question;
     }
 
     public Page<Question> findQuestions(int page, int size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("questionId").descending());
-
-        // todo: 삭제된 질문 filter 처리
 
         return questionRepository.findAll(pageable);
     }
@@ -72,11 +80,7 @@ public class QuestionService {
 
         Question deleteQuestion = findVerifiedQuestion(questionId);
 
-        // todo: 제목, 내용, 수정코멘트 등에도 dummy data 넣을건지 고민
-
-        deleteQuestion.setQuestionStatus(Question.QuestionStatus.QUESTION_DELETE);
-
-        questionRepository.save(deleteQuestion);
+        questionRepository.delete(deleteQuestion);
     }
     public void viewCountValidation(Question question,
                                     HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
@@ -117,5 +121,26 @@ public class QuestionService {
                 new RuntimeException("NOT_EXIST_QUESTION"));
 
         return findQuestion;
+    }
+
+    private List<QuestionTag> getQuestionTags(Question question, List<Tag> tags) {
+        // 해당 tag가 존재하는지 확인
+        List<QuestionTag> questionTags = tags.stream()
+                .map(tag -> {
+                    Tag findTag = tagService.getQuestionTagsValidation(tag.getTagName());
+                    QuestionTag questionTag = new QuestionTag();
+                    if (findTag != null) {
+                        // 태그가 존재하는 경우
+                        questionTag.setTag(findTag);
+                    } else {
+                        // 태그가 존재하지 않는 경우
+                        Tag createdTag = tagService.createTag(tag);
+                        questionTag.setTag(createdTag);
+                    }
+                    questionTag.setQuestion(question);
+                    return questionTag;
+                }).collect(Collectors.toList());
+
+        return questionTags;
     }
 }
