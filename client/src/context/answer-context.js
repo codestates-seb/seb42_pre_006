@@ -6,6 +6,7 @@ export const AnswerContext = createContext();
 function AnswerProvider({ children }) {
   const [answers, setAnswers] = useState('');
 
+  // Answer 하나 받아오기
   useEffect(() => {
     const handleAnswerData = async () => {
       try {
@@ -18,6 +19,22 @@ function AnswerProvider({ children }) {
     };
     handleAnswerData();
   }, []);
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
 
   const value = useMemo(
     () => ({
