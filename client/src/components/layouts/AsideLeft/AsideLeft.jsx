@@ -29,18 +29,6 @@ function Aside() {
         <li>
           <AsideNavItem to="/guide">Guide</AsideNavItem>
         </li>
-        <li>
-          <AsideNavItem to="/detail">Detail</AsideNavItem>
-        </li>
-        <li>
-          <AsideNavItem to="/ask">Ask</AsideNavItem>
-        </li>
-        <li>
-          <AsideNavItem to="/edit">Edit</AsideNavItem>
-        </li>
-        <li>
-          <AsideNavItem to="/page">Pagenations</AsideNavItem>
-        </li>
       </ul>
     </aside>
   );

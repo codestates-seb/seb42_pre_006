@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import './theme.scss';
+import './quillCustom.css';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import QuestionAsk from './pages/QuestionAsk';
 import Questions from './pages/Questions';
@@ -17,7 +18,6 @@ import SignUp from './pages/SignUp';
 import QuestionDetail from './pages/QuestionDetail';
 import { AuthContext } from './context/auth-context';
 import UserPersonalEdit from './pages/UserPersonalEdit';
-import QuestionsPagination from './components/Questions/QuestionsPagination';
 
 function App() {
   const { isLoggedIn } = useContext(AuthContext);
@@ -26,12 +26,16 @@ function App() {
     <Routes>
       <Route element={<MainLayout hasSidebar />}>
         <Route path="/" element={<Home />} />
-        <Route path="/questions" element={<Questions />} />
+        <Route path="/questions">
+          <Route index element={<Questions />} />
+          <Route path=":id" element={<QuestionDetail />} />
+        </Route>
         <Route path="/guide" element={<Guide />} />
-        <Route path="/detail" element={<QuestionDetail />} />
-        <Route path="/page" element={<QuestionsPagination />} />
       </Route>
       <Route element={<MainLayout />}>
+        <Route path="/questions">
+          <Route path=":id/edit" element={<QuestionEdit />} />
+        </Route>
         <Route path="/tags" element={<Tags />} />
         <Route path="/users">
           <Route index element={<Users />} />
@@ -40,7 +44,6 @@ function App() {
             <Route path=":id/edit" element={<UserPersonalEdit />} />
           )}
         </Route>
-        <Route path="/edit" element={<QuestionEdit />} />
         <Route path="/answeredit/:answerId" element={<AnswerEdit />} />
       </Route>
       <Route element={<BaseLayout />}>
@@ -59,7 +62,6 @@ function App() {
           </>
         )}
       </Route>
-      <Route path="*" element={<Navigate replace to="/" />} />
     </Routes>
   );
 }
