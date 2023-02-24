@@ -29,10 +29,7 @@ function App() {
         <Route path="/questions">
           <Route index element={<Questions />} />
           <Route path=":id" element={<QuestionDetail />} />
-<<<<<<< Updated upstream
-=======
           <Route path=":id/edit" element={<QuestionEdit />} />
->>>>>>> Stashed changes
         </Route>
         <Route path="/guide" element={<Guide />} />
       </Route>
