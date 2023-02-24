@@ -1,6 +1,7 @@
 package com.pre006.stackoverflow.answervote.entity;
 
 import com.pre006.stackoverflow.answer.entity.Answer;
+import com.pre006.stackoverflow.global.audit.Auditable;
 import com.pre006.stackoverflow.member.entitiy.Member;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @Table(name = "ANSWER_VOTE")
-public class AnswerVote {
+public class AnswerVote extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long answerVoteId;

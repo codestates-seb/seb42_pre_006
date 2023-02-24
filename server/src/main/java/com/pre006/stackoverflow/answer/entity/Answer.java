@@ -1,6 +1,7 @@
 package com.pre006.stackoverflow.answer.entity;
 
 import com.pre006.stackoverflow.answervote.entity.AnswerVote;
+import com.pre006.stackoverflow.global.audit.Auditable;
 import com.pre006.stackoverflow.member.entitiy.Member;
 import com.pre006.stackoverflow.question.entity.Question;
 import lombok.Getter;
@@ -17,19 +18,13 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Table(name = "ANSWER")
-public class Answer {
+public class Answer extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long answerId;
 
     @Column(nullable = false, columnDefinition = "TEXT")
     private String answerContent;
-
-    @Column(nullable = false)
-    private LocalDateTime createdAt = LocalDateTime.now();
-
-    @Column(nullable = false)
-    private LocalDateTime modifiedAt = LocalDateTime.now();
 
     @Column(nullable = false)
     private int voteCount;
