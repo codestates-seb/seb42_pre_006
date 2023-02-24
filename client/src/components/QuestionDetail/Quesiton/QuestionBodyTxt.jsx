@@ -1,7 +1,7 @@
 function QuestionBodyTxt({ questionContent }) {
   return (
     <div
-      className=" text-left"
+      className="text-left min-h-[16rem]"
       dangerouslySetInnerHTML={{ __html: questionContent }}
     />
   );

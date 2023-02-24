@@ -29,6 +29,7 @@ function App() {
         <Route path="/questions">
           <Route index element={<Questions />} />
           <Route path=":id" element={<QuestionDetail />} />
+          <Route path=":id/edit" element={<QuestionEdit />} />
         </Route>
         <Route path="/guide" element={<Guide />} />
       </Route>
