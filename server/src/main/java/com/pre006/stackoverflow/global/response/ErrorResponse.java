@@ -1,6 +1,8 @@
 package com.pre006.stackoverflow.global.response;
 
+import com.pre006.stackoverflow.global.exception.CustomLogicException;
 import lombok.Getter;
+import lombok.ToString;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 
@@ -9,44 +11,48 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@ToString
 @Getter
 public class ErrorResponse {
     private int status;
     private String message;
-    private List<FieldError> fieldErrors;
-    private List<ConstraintViolationError> violationErrors;
+    private final List<FieldError> filedErrors;
+    private final List<ConstraintViolationError> violationErrors;
 
-    public ErrorResponse(int status, String message) {
-        this.status = status;
-        this.message = message;
+    private ErrorResponse(final List<FieldError> filedErrors,
+                          final List<ConstraintViolationError> violationErrors) {
+        this.filedErrors = filedErrors;
+        this.violationErrors = violationErrors;
     }
 
-    public ErrorResponse(List<FieldError> fieldErrors,
-                         List<ConstraintViolationError> violationErrors) {
-        this.fieldErrors = fieldErrors;
+    public ErrorResponse(int status, String message, List<FieldError> filedErrors, List<ConstraintViolationError> violationErrors) {
+        this.status = status;
+        this.message = message;
+        this.filedErrors = filedErrors;
         this.violationErrors = violationErrors;
     }
 
     public static ErrorResponse of(BindingResult bindingResult) {
-        return new ErrorResponse(FieldError.of(bindingResult), null);
+        return new ErrorResponse(400, "bad-request", FieldError.of(bindingResult), null);
     }
-
     public static ErrorResponse of(Set<ConstraintViolation<?>> violations) {
         return new ErrorResponse(null, ConstraintViolationError.of(violations));
     }
-
-    public static ErrorResponse of(HttpStatus httpStatus, String message) {
-        return new ErrorResponse(httpStatus.value(), message);
+    public static ErrorResponse of(CustomLogicException e) {
+        return new ErrorResponse(e.getExceptionCode().getCode(), e.getExceptionCode().getMessage(), null, null);
+    }
+    public static ErrorResponse of(HttpStatus status, String message) {
+        return new ErrorResponse(status.value(), message, null, null);
     }
 
     @Getter
     public static class FieldError {
-        private String Field;
+        private String field;
         private Object rejectedValue;
         private String reason;
 
-        public FieldError(String field, Object rejectedValue, String reason) {
-            Field = field;
+        private FieldError(String field, Object rejectedValue, String reason) {
+            this.field = field;
             this.rejectedValue = rejectedValue;
             this.reason = reason;
         }
@@ -54,13 +60,13 @@ public class ErrorResponse {
         public static List<FieldError> of(BindingResult bindingResult) {
             final List<org.springframework.validation.FieldError> fieldErrors =
                     bindingResult.getFieldErrors();
-
             return fieldErrors.stream()
                     .map(error -> new FieldError(
                             error.getField(),
-                            error.getRejectedValue() == null ? "" : error.getRejectedValue().toString(),
-                            error.getDefaultMessage()
-                    )).collect(Collectors.toList());
+                            error.getRejectedValue() == null ?
+                                    "" : error.getRejectedValue().toString(),
+                            error.getDefaultMessage()))
+                    .collect(Collectors.toList());
         }
     }
 
@@ -70,7 +76,7 @@ public class ErrorResponse {
         private Object rejectedValue;
         private String reason;
 
-        public ConstraintViolationError(String propertyPath, Object rejectedValue, String reason) {
+        private ConstraintViolationError(String propertyPath, Object rejectedValue,String reason) {
             this.propertyPath = propertyPath;
             this.rejectedValue = rejectedValue;
             this.reason = reason;
@@ -86,4 +92,5 @@ public class ErrorResponse {
                     )).collect(Collectors.toList());
         }
     }
+
 }
