@@ -1,25 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { IoMdArrowDropdown } from 'react-icons/io';
-import axios from 'axios';
 import Button from '../UI/Button';
 
-function QuestionsHeader() {
-  const [questionLength, setQuestionLength] = useState(0)
-  
-  useEffect(() => {
-    const handleQuestionDate = async() => {
-      try {
-        const response = await axios.get('/questions?page=1&size=10')
-        const { data } = response
-        setQuestionLength(data.pageInfo.totalElements)
-      } catch (error) {
-        console.error(error)
-      }
-    }
-    handleQuestionDate()
-  }, [questionLength])
-
+function QuestionsHeader({ total }) {
   return (
     <section className="mb-3">
       <div className="flex content-center justify-between mb-6">
@@ -33,7 +17,7 @@ function QuestionsHeader() {
       </div>
 
       <div className=" flex content-center justify-between">
-        <span className="text-lg ml-6">{questionLength} questions</span>
+        <span className="text-lg ml-6">{total} questions</span>
         {/* TODO: 질문리스트 데이터 랜더링기능 작업 -> 더미 데이터 실시간 업데이트 */}
         {/* 필터 */}
         <div className=" border border-[#6a737c] rounded text-xs">
