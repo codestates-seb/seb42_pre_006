@@ -1,9 +1,11 @@
-import QuestionsList from '../components/Questions/QuestionsList';
+import QuestionsHeader from '../components/Questions/QuestionsHeader';
+import MainQuestions from '../components/Questions/MainQuestions';
 
 function Questions() {
   return (
     <article className="mr-6">
-      <QuestionsList />
+      <QuestionsHeader />
+      <MainQuestions />
     </article>
   );
 }
