@@ -15,12 +15,11 @@ function QuestionsList() {
   // }, []);
 
   return (
-    <section>
+    <>
       <div className="mb-3">
         <div className="flex content-center justify-between mb-6">
           <h1 className="text-3xl font-medium ml-6">All Questions</h1>
 
-          {/* TODO: 버튼 라우터기능 작업 -> [질문작성페이지]로 이동 */}
           <Link to="/ask">
             <Button variant="primary" size="md">
               Ask Question
@@ -29,10 +28,8 @@ function QuestionsList() {
         </div>
 
         <div className=" flex content-center justify-between">
-          {/* TODO: 질문갯수 업데이트기능 작업 -> 데이터갯수로 실시간 상태변경 */}
           {/* <div dangerouslySetInnerHTML={{ __html: data }} /> */}
           <span className="text-lg ml-6">123,456,789 questions</span>
-          {/* TODO: 질문리스트 데이터 랜더링기능 작업 -> 더미 데이터 실시간 업데이트 */}
           <div className=" border border-[#6a737c] rounded text-xs">
             <button
               type="button"
@@ -72,7 +69,6 @@ function QuestionsList() {
         </div>
       </div>
 
-      {/* TODO: 질문리스트 데이터 랜더링기능 작업 -> 더미 데이터 실시간 업데이트 */}
       <ul className="border-t text-left">
         <li className="border-b py-6 px-8 bg-[#FDF7E2] relative">
           <div className="text-xs mb-2">
@@ -127,7 +123,6 @@ function QuestionsList() {
       </ul>
 
       <div>
-        {/* TODO: 페이지네이션 기능작업 */}
         <ul className="ml-8 my-20 flex text-sm">
           <li className="border rounded mx-0.5 flex content-center justify-center hover:bg-[#D6D9DC]">
             <button type="button" className="px-2 py-1">
@@ -156,7 +151,7 @@ function QuestionsList() {
           </li>
         </ul>
       </div>
-    </section>
+    </>
   );
 }
 

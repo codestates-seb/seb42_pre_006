@@ -2,7 +2,7 @@ import React from 'react';
 // import axios from 'axios';
 import Button from '../../UI/Button';
 
-function QuestionBodyBtns({ answerId }) {
+function QuestionBodyBtns({ questionId }) {
   // const handleAnswerDelete = async el => {
   //   try {
   //     await axios.delete(`/answer/${el}`);
@@ -25,7 +25,7 @@ function QuestionBodyBtns({ answerId }) {
       <Button text size="sm">
         Share
       </Button>
-      <Button to={`/answer/${answerId}/edit`} text size="sm">
+      <Button to={`/questions/${questionId}/edit`} text size="sm">
         Edit
       </Button>
       <Button text size="sm" variant="danger">
