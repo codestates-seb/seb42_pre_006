@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React from 'react';
 import Button from './Button';
 
-function Pagination({ total, page, limit = 19, onClick }) {
+function Pagination({ total, page, limit = 10, onClick }) {
   const numPages = Math.ceil(total / limit);
 
   const handleClickPage = pageNum => {
