@@ -1,11 +1,11 @@
 package com.pre006.stackoverflow.question.service;
 
+import com.pre006.stackoverflow.member.service.MemberService;
 import com.pre006.stackoverflow.question.entity.Question;
 import com.pre006.stackoverflow.question.repository.QuestionRepository;
 import com.pre006.stackoverflow.tag.entity.QuestionTag;
 import com.pre006.stackoverflow.tag.entity.Tag;
 import com.pre006.stackoverflow.tag.service.TagService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -30,15 +30,20 @@ import java.util.stream.Collectors;
 public class QuestionService {
     private final QuestionRepository questionRepository;
     private final TagService tagService;
+    private final MemberService memberService;
 
-    public QuestionService(QuestionRepository questionRepository, TagService tagService) {
+    public QuestionService(QuestionRepository questionRepository, TagService tagService,
+                           MemberService memberService) {
         this.questionRepository = questionRepository;
         this.tagService = tagService;
+        this.memberService = memberService;
     }
 
-    public Question createQuestion(Question question) {
-        // todo: 저장하기 전 검증할 내용 없는지 확인
+    public Question createQuestion(Question question, long memberId) {
+        // 존재하는 회원인지 확인
+        memberService.findVerifiedMember(memberId);
 
+        // 유저가 질문을 등록할 때, 태그도 같이 등록하는 경우
         List<Tag> tags = question.getTags();
         if (tags != null) {
             List<QuestionTag> questionTags = getQuestionTags(question, tags);
@@ -59,9 +64,10 @@ public class QuestionService {
 
         return questionRepository.findAll(pageable);
     }
-    public Question updateQuestion(Question question) {
-        // todo: 수정 시 검증을 해야하는 부분이 있는지      ex) 내용이 완전히 같을 경우 ERROR
-        // todo: 질문 상태 수정을 해당 로직에서 처리할건지
+    public Question updateQuestion(Question question, long memberId) {
+        // 수정을 요청한 유저가 작성자인지 확인
+        if (question.getMember().getMemberId() != memberId)
+            throw new RuntimeException("ACCESS_DENIED");        // 403
 
         Question findQuestion = findVerifiedQuestion(question.getQuestionId());
 
@@ -75,10 +81,12 @@ public class QuestionService {
         return questionRepository.save(findQuestion);
     }
 
-    public void deleteQuestion(long questionId) {
-        // todo: 삭제를 요청한 유저가 작성자인지 확인
-
+    public void deleteQuestion(long questionId, long memberId) {
         Question deleteQuestion = findVerifiedQuestion(questionId);
+
+        // 삭제를 요청한 유저가 작성자인지 확인
+        if (deleteQuestion.getMember().getMemberId() != memberId)
+            throw new RuntimeException("ACCESS_DENIED");        // 403
 
         questionRepository.delete(deleteQuestion);
     }
@@ -89,9 +97,9 @@ public class QuestionService {
         Cookie cookie = null;
         if (servletRequest.getCookies() != null) {
             cookie = Arrays.stream(servletRequest.getCookies())
-                    .filter(c -> c.getName().equals("postView"))    // postView 쿠키가 있는지 필터링
-                    .findFirst()    // filter 조건에 일치하는 가장 앞에 있는 요소 1를 Optional 로 리턴. 없으면 empty 리턴
-                    .map(c -> {     // Optional 에 Cookie 가 있으면 꺼내서 수정
+                    .filter(c -> c.getName().equals("postView"))
+                    .findFirst()
+                    .map(c -> {
                         if (!c.getValue().contains("[" + id + "]")) {
                             question.addViewCount();
                             c.setValue(c.getValue() + "[" + id + "]");
@@ -116,15 +124,14 @@ public class QuestionService {
     public Question findVerifiedQuestion(long questionId) {
         Optional<Question> optionalQuestion = questionRepository.findById(questionId);
 
-        // todo : Custom ErrorResponse 필요
         Question findQuestion = optionalQuestion.orElseThrow(() ->
-                new RuntimeException("NOT_EXIST_QUESTION"));
+                new RuntimeException("NOT_FOUND_QUESTION"));        // 404
 
         return findQuestion;
     }
 
     private List<QuestionTag> getQuestionTags(Question question, List<Tag> tags) {
-        // 해당 tag가 존재하는지 확인
+        // 유저가 질문을 등록할 때, 입력한 태그가 존재하는지 확인
         List<QuestionTag> questionTags = tags.stream()
                 .map(tag -> {
                     Tag findTag = tagService.getQuestionTagsValidation(tag.getTagName());
@@ -133,7 +140,7 @@ public class QuestionService {
                         // 태그가 존재하는 경우
                         questionTag.setTag(findTag);
                     } else {
-                        // 태그가 존재하지 않는 경우
+                        // 태그가 존재하지 않는 경우, 태그를 생성한 후 질문과 같이 등록한다
                         Tag createdTag = tagService.createTag(tag);
                         questionTag.setTag(createdTag);
                     }
