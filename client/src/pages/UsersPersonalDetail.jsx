@@ -44,7 +44,7 @@ function UsersPersonalDetail() {
                   like to add one?
                   <Link
                     to={`/users/${user.memberId}/edit`}
-                    className="text-link"
+                    className="text-link ml-2"
                   >
                     Edit profile
                   </Link>

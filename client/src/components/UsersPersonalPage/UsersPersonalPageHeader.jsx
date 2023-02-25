@@ -51,7 +51,7 @@ function UsersPersonalPageHeader({ user }) {
         </div>
       </div>
       {/** TODO: 로그인 및 회원 로그인 기능 구현후 본인 글에만 버튼 노출 */}
-      {isLoggedIn && user.memberId === 1 && !pathname.includes('edit') && (
+      {isLoggedIn && !pathname.includes('edit') && (
         <UsersPersonalPageHeaderButton />
       )}
     </section>
