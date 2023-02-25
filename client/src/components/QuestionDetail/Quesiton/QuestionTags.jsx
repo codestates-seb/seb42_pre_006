@@ -1,29 +1,20 @@
-import axios from 'axios';
-import { useEffect } from 'react';
+import React from 'react';
 import Badge from '../../UI/Badge';
 
-function QuestionBodyTags({ questionId }) {
-  const handleGetTags = async () => {
-    try {
-      const response = axios.get(`/questions/${questionId}/tags`);
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    handleGetTags();
-
-    return () => {};
-  }, []);
-
+function QuestionBodyTags({ tags }) {
   return (
-    <div className="flex flex-wrap gap-2">
-      <Badge variant="tags">php</Badge>
-      <Badge variant="tags">mariadb</Badge>
-    </div>
+    <>
+      {tags && tags.length > 0 && (
+        <div className="flex flex-wrap gap-2">
+          {tags.map(tag => (
+            <Badge variant="tags" key={tag.tagId} to={`/tags/${tag.tagName}`}>
+              {tag.tagName}
+            </Badge>
+          ))}
+        </div>
+      )}
+    </>
   );
 }
 
-export default QuestionBodyTags;
+export default React.memo(QuestionBodyTags);

@@ -8,7 +8,8 @@ import Button from '../UI/Button';
 function QuestionAskForm() {
   const [titleValue, setTitleValue] = useState('');
   const [contentValue, setContentValue] = useState('');
-  const [tagValue, setTagValue] = useState([]);
+  const [tagValue, setTagValue] = useState('');
+  const [errors, setErrors] = useState('');
 
   const navigate = useNavigate();
 
@@ -30,25 +31,31 @@ function QuestionAskForm() {
 
   const handlePost = async e => {
     e.preventDefault();
+    // *REFACTOR : 문자열 태그 배열로 전달 & 중복된 태그 제거
+    const tagArray = tagValue
+      .trim()
+      .split(' ')
+      .map(tag => ({ tagName: tag }));
+
+    // TODO: filter로 중복 제거해보기
+    const removeDuplicateTags = tagValue.trim().length > 0 && {
+      tags: [...new Set(tagArray.map(JSON.stringify))].map(JSON.parse),
+    };
+
+    const formData = {
+      questionTitle: titleValue,
+      questionContent: contentValue,
+      ...removeDuplicateTags,
+    };
+
     try {
-      const questionPost = await instance.post('/questions', {
-        questionTitle: titleValue,
-        questionContent: contentValue,
-        tags: [
-          { tagName: tagValue },
-          { tagName: tagValue },
-          { tagName: tagValue },
-          { tagName: tagValue },
-        ],
-      });
+      const questionPost = await instance.post('/questions', formData);
       if (questionPost) {
         navigate('/questions', { replace: true });
       }
-      console.log(questionPost.data);
-      console.log(titleValue);
-      console.log(questionPost.data.questionId);
     } catch (error) {
-      console.error(error);
+      console.log(error.response.data.filedErrors);
+      setErrors(error.response.data.filedErrors);
     }
   };
 
@@ -98,6 +105,12 @@ function QuestionAskForm() {
           onChange={handleTitle}
           value={titleValue}
         />
+        {errors &&
+          errors.map((error, index) => (
+            <p className="mt-1 text-sm text-danger text-left" key={index}>
+              {error.field === 'questionTitle' && error.reason}
+            </p>
+          ))}
       </div>
 
       <div className="border rounded px-8 py-8 mx-8 my-8 bg-white">
@@ -116,6 +129,12 @@ function QuestionAskForm() {
           onChange={handleContent}
           // modules={modules}
         />
+        {errors &&
+          errors.map((error, index) => (
+            <p className="mt-1 text-sm text-danger text-left" key={index}>
+              {error.field === 'questionContent' && error.reason}
+            </p>
+          ))}
       </div>
 
       <div className="border rounded px-8 py-8 mx-8 my-8 bg-white">
@@ -132,6 +151,12 @@ function QuestionAskForm() {
           onChange={handleTag}
           value={tagValue}
         />
+        {errors &&
+          errors.map((error, index) => (
+            <p className="mt-1 text-sm text-danger text-left" key={index}>
+              {error.field.includes('tags[0]') && error.reason}
+            </p>
+          ))}
       </div>
 
       <div className="px-8 mb-28 flex">

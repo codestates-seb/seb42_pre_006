@@ -4,7 +4,7 @@ import Button from '../../UI/Button';
 function QuestionTitle({ question }) {
   return (
     <article className=" flex flex-col">
-      <div className=" flex justify-between mb-2">
+      <div className=" flex justify-between mb-2 gap-2">
         <h1 className=" text-3xl text-left">{question.questionTitle}</h1>
         <Button to="/ask" variant="primary" size="md">
           Ask a question

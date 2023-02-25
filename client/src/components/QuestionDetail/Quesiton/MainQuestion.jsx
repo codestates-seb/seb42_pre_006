@@ -1,11 +1,11 @@
 import QuestionVote from './QuestionVote';
 import QuestionBody from './QuestionBody';
 
-function MainQuestion({ question }) {
+function MainQuestion({ question, tags }) {
   return (
-    <div className=" flex ">
+    <div className="flex">
       <QuestionVote question={question} />
-      <QuestionBody question={question} />
+      <QuestionBody question={question} tags={tags} />
     </div>
   );
 }

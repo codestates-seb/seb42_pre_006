@@ -18,6 +18,27 @@
   margin: 0 auto;
 }
 
+.line-clamp-1 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.line-clamp-4 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+}
+
 @layer components {
   /* btn */
   .btn {
@@ -59,7 +80,8 @@
   }
   /* badge */
   .badge {
-    @apply bg-white border border-gray-300 inline-flex items-center justify-center text-sm py-1 px-2 rounded-md text-inherit whitespace-nowrap gap-2;
+    min-width: 4rem;
+    @apply bg-white border border-gray-300 inline-flex items-center justify-center text-sm py-1 px-1 rounded-md text-inherit whitespace-nowrap gap-2;
   }
   .badge svg {
     @apply text-lg;

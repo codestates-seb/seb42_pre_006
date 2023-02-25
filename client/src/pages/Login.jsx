@@ -11,7 +11,7 @@ import FormGroup from '../components/UI/Form/FormGroup';
 import validate from '../utils/validate';
 
 function Login() {
-  const { handleLogin } = useContext(AuthContext);
+  const { handleLogin, errors: loginFaildMessage } = useContext(AuthContext);
 
   const {
     register,
@@ -20,12 +20,12 @@ function Login() {
   } = useForm({
     defaultValues: {
       email: 'codestates@gmail.com',
-      password: '123456',
+      password: 'codestates42@',
     },
   });
 
-  const handleSubmitLogin = () => {
-    handleLogin();
+  const handleSubmitLogin = formData => {
+    handleLogin(formData);
   };
 
   return (
@@ -65,6 +65,11 @@ function Login() {
                 Log in
               </Button>
             </form>
+            {loginFaildMessage && (
+              <p className="mt-2 text-sm text-danger text-left whitespace-pre-wrap">
+                {loginFaildMessage}
+              </p>
+            )}
           </Card>
           <div className="text-sm">
             <p>

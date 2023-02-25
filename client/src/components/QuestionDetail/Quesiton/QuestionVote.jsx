@@ -9,20 +9,17 @@ import {
 } from 'react-icons/md';
 import { TbClock } from 'react-icons/tb';
 
-function QuestionVote({ question }) {
+function QuestionVote({ question: { questionId, questionVoteCount } }) {
   const [bookMark, setBookMark] = useState(false);
   const [votesCount, setVotesCont] = useState(0);
 
   // TODO : 추후 API 관련 로직 수정하기
   const handleCountUpVotes = async () => {
     try {
-      const response = await axios.post(
-        `/questions/${question.questionId}/vote`,
-        {
-          questionVoteStatus: true,
-          memberId: 1,
-        },
-      );
+      const response = await axios.post(`/questions/${questionId}/vote`, {
+        questionVoteStatus: true,
+        memberId: 1,
+      });
       if (response.data) {
         setVotesCont(prevState => prevState + 1);
       }
@@ -35,13 +32,10 @@ function QuestionVote({ question }) {
 
   const handleCountDownVotes = async () => {
     try {
-      const response = await axios.post(
-        `/questions/${question.questionId}/vote`,
-        {
-          questionVoteStatus: false,
-          memberId: 1,
-        },
-      );
+      const response = await axios.post(`/questions/${questionId}/vote`, {
+        questionVoteStatus: false,
+        memberId: 1,
+      });
       if (response.data) {
         setVotesCont(prevState => prevState - 1);
       }
@@ -57,8 +51,8 @@ function QuestionVote({ question }) {
   };
 
   useEffect(() => {
-    setVotesCont(question.questionVoteCount);
-  }, []);
+    setVotesCont(questionVoteCount);
+  }, [questionVoteCount]);
 
   return (
     <article className=" flex flex-col justify-top items-center  text-gray-300  -ml-5 -mr-1">
