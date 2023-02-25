@@ -41,7 +41,7 @@ function QuestionDetail() {
         <>
           <QuestionTitle question={questionDetail} />
           <MainQuestion question={questionDetail} tags={tags} />
-          <QuesitonAnswer question={questionDetail} />
+          <QuesitonAnswer questionId={params.id} />
         </>
       )}
     </div>
