@@ -1,6 +1,6 @@
 package com.pre006.stackoverflow.tag.controller;
 
-import com.pre006.stackoverflow.global.SingleResponse;
+import com.pre006.stackoverflow.global.response.SingleResponse;
 import com.pre006.stackoverflow.question.utils.UriCreator;
 import com.pre006.stackoverflow.tag.dto.TagDto;
 import com.pre006.stackoverflow.tag.entity.Tag;

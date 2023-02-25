@@ -2,7 +2,8 @@ package com.pre006.stackoverflow.question.controller;
 
 import com.pre006.stackoverflow.answer.dto.AnswerDto;
 import com.pre006.stackoverflow.answer.mapper.AnswerMapper;
-import com.pre006.stackoverflow.global.SingleResponse;
+
+import com.pre006.stackoverflow.global.response.SingleResponse;
 import com.pre006.stackoverflow.question.dto.QuestionDto;
 import com.pre006.stackoverflow.question.entity.Question;
 import com.pre006.stackoverflow.question.mapper.QuestionMapper;
