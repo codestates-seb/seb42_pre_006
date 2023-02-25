@@ -1,10 +1,12 @@
 package com.pre006.stackoverflow.login.filter;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.pre006.stackoverflow.login.dto.LoginDto;
 import com.pre006.stackoverflow.login.token.AuthToken;
 import com.pre006.stackoverflow.login.token.AuthTokenProvider;
 import com.pre006.stackoverflow.member.entitiy.Member;
+import lombok.SneakyThrows;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -26,15 +28,23 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     }
 
     @Override
+    @SneakyThrows
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) {
-        Gson gson = new Gson();
-        LoginDto loginDto = null;
-        try {
-            loginDto = gson.fromJson(request.getReader(), LoginDto.class);
-        }catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword());
+//        Gson gson = new Gson();
+//        LoginDto loginDto = null;
+//        try {
+//            loginDto = gson.fromJson(request.getReader(), LoginDto.class);
+//        }catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword());
+//        return authenticationManager.authenticate(authenticationToken);
+        ObjectMapper objectMapper = new ObjectMapper();
+        LoginDto loginDto = objectMapper.readValue(request.getInputStream(), LoginDto.class);
+
+        UsernamePasswordAuthenticationToken authenticationToken =
+                new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword());
+
         return authenticationManager.authenticate(authenticationToken);
     }
 
