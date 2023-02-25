@@ -5,19 +5,15 @@ import AnswersInfo from './AnswersInfo';
 import MainAnswer from './MainAnswer';
 import PostAnswerBox from './PostAnswerBox';
 
-function QuesitonAnswer() {
+function QuesitonAnswer({ questionId }) {
   const [answers, setAnswers] = useState([]);
-  // const params = useParams();
 
   useEffect(() => {
     const handleAnswerData = async () => {
       try {
-        const response = await axios.get('/answer');
+        const response = await axios.get(`/questions/${questionId}/answers`);
         const { data } = response;
-        setAnswers(data);
-        if (data) {
-          console.log(data);
-        }
+        setAnswers(data.data);
       } catch (error) {
         console.error(error);
       }
@@ -27,15 +23,16 @@ function QuesitonAnswer() {
 
   return (
     <div className="mt-16">
-      <AnswersInfo />
-      {answers ? (
-        <div>
-          {answers.map(answer => (
-            <MainAnswer key={answer.answerId} answer={answer} />
-          ))}
-        </div>
-      ) : null}
-
+      {answers && answers.length > 0 && (
+        <>
+          <AnswersInfo answersCount={answers.answersCount} />
+          <div>
+            {answers?.map(answer => (
+              <MainAnswer key={answer.answerId} answer={answer} />
+            ))}
+          </div>
+        </>
+      )}
       <PostAnswerBox />
     </div>
   );
