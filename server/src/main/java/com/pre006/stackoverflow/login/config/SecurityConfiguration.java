@@ -1,5 +1,7 @@
 package com.pre006.stackoverflow.login.config;
 
+import com.pre006.stackoverflow.login.filter.CustomFilterConfigurer;
+import com.pre006.stackoverflow.login.token.AuthTokenProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,6 +18,11 @@ import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 public class SecurityConfiguration {
+
+    private final AuthTokenProvider authTokenProvider;
+    public SecurityConfiguration(AuthTokenProvider authTokenProvider) {
+        this.authTokenProvider = authTokenProvider;
+    }
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -25,6 +32,8 @@ public class SecurityConfiguration {
                 .cors(withDefaults())
                 .formLogin().disable()
                 .httpBasic().disable()
+                .apply(new CustomFilterConfigurer(authTokenProvider))
+                .and()
                 .authorizeHttpRequests(authorize -> authorize
                         .anyRequest().permitAll()
                 );
