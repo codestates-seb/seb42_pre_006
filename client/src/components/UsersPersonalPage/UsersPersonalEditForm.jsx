@@ -39,7 +39,23 @@ function UsersPersonalEditForm({ user }) {
     setValue('aboutMe', contents);
   };
 
-  const handleSaveUserFrom = async formData => {
+  const handleSaveUserFrom = async ({
+    displayName,
+    location,
+    memberTitle,
+    aboutMe,
+  }) => {
+    const tagArray = memberTitle.trim().split(' ');
+    const removeDuplicateTags =
+      memberTitle.trim().length > 0 && [...new Set(tagArray)].join(' ');
+
+    const formData = {
+      displayName,
+      location,
+      aboutMe,
+      memberTitle: removeDuplicateTags,
+    };
+
     try {
       const response = await axios.patch(`api/v1/members/${user.memberId}`, {
         ...formData,
@@ -88,10 +104,10 @@ function UsersPersonalEditForm({ user }) {
         id="memberTitle"
         name="memberTitle"
         errors={errors}
-        validation={{ required: 'Location을 입력해주세요' }}
+        validation={validate.tag}
         register={register}
       >
-        <InputFeild type="text" placeholder="JavaScript, React, Vue" />
+        <InputFeild type="text" placeholder="e.g. (wpf ios jquery)" />
       </FormGroup>
       <FormGroup
         label="About Me"
@@ -117,7 +133,7 @@ function UsersPersonalEditForm({ user }) {
         <Button
           variant="primary"
           type="submit"
-          disabled={!submitDisabled || Object.keys(errors).length > 0}
+          // disabled={!submitDisabled || Object.keys(errors).length > 0}
         >
           Save profile
         </Button>

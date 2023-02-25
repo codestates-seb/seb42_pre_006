@@ -54,10 +54,10 @@ function UsersPersonalDetail() {
           </div>
           <div className="text-left my-10">
             <h3 className="text-2xl font-medium mb-4">Tags</h3>
-
+            {/** 태그 출력으로 활용해보기 */}
             {user.memberTitle ? (
               <div className="border rounded-md">
-                {user.memberTitle?.split(',').map((item, index) => (
+                {user.memberTitle?.split(' ').map((item, index) => (
                   <div key={index} className="border-t first:border-0 p-4">
                     <Badge variant="tags">{item}</Badge>
                   </div>
