@@ -5,6 +5,8 @@ import com.pre006.stackoverflow.answer.excpetion.ExceptionCode;
 
 import com.pre006.stackoverflow.member.entitiy.Member;
 import com.pre006.stackoverflow.member.repository.MemberRepository;
+import com.pre006.stackoverflow.member.utils.AuthoritiesUtils;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,11 +15,23 @@ import java.util.Optional;
 @Service
 public class MemberService {
     private final MemberRepository memberRepository;
-    public MemberService(MemberRepository memberRepository) {
+    private final PasswordEncoder passwordEncoder;
+    private final AuthoritiesUtils authoritiesUtils;
+    public MemberService(MemberRepository memberRepository, PasswordEncoder passwordEncoder, AuthoritiesUtils authoritiesUtils) {
         this.memberRepository = memberRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.authoritiesUtils = authoritiesUtils;
     }
+
     public Member createMember(Member member){
-        return memberRepository.save(member);
+        String encryptedPassword = passwordEncoder.encode(member.getPassword());
+        member.setPassword(encryptedPassword);
+
+        List<String> roles = authoritiesUtils.createRoles(member.getEmail());
+        member.setRoles(roles);
+
+        Member savedMember = memberRepository.save(member);
+        return savedMember;
     }
     public Member updateMember(Member member) {
         Member findMember = findVerifiedMember(member.getMemberId());
