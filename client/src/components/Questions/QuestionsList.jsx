@@ -10,13 +10,14 @@ function QuestionsList({
     questionContent,
     viewCount,
     questionVoteCount,
+    answersCount,
+    tags,
     displayName,
     createAt,
     modifiedAt,
     member,
   },
 }) {
-  const answerCount = 1;
   const content = questionContent.replace(/(<([^>]+)>)/gi, '');
 
   return (
@@ -26,10 +27,10 @@ function QuestionsList({
         <div className="flex w-28 flex-col text-xs pr-4 text-right">
           <p className="mt-1 mb-2 font-medium">{questionVoteCount} votes</p>
           <p className="text-gray-600 mb-2">
-            {answerCount > 0 ? (
-              <Badge variant="answered">{answerCount} answers</Badge>
+            {answersCount > 0 ? (
+              <Badge variant="answered">{answersCount} answers</Badge>
             ) : (
-              <span> {answerCount} answers</span>
+              <span> {answersCount} answers</span>
             )}
           </p>
           <p className="text-gray-600">{viewCount} views</p>
@@ -48,24 +49,12 @@ function QuestionsList({
           <div className="flex justify-between items-center">
             {/* 태그 */}
             <div className="mt-2">
-              <button
-                type="button"
-                className="mr-2 text-sm text-[#39739d] bg-[#E1ECF4] px-2 py-1 rounded hover:bg-[#cfdbe5]"
-              >
-                tag1
-              </button>
-              <button
-                type="button"
-                className="mr-2 text-sm text-[#39739d] bg-[#E1ECF4] px-2 py-1 rounded hover:bg-[#cfdbe5]"
-              >
-                tag2
-              </button>
-              <button
-                type="button"
-                className="text-sm text-[#39739d] bg-[#E1ECF4] px-2 py-1 rounded hover:bg-[#cfdbe5]"
-              >
-                tag3
-              </button>
+              {tags &&
+                tags.map(tag => (
+                  <Badge variant="tags" to={`/tags/${tag.tagName}`}>
+                    {tag.tagName}
+                  </Badge>
+                ))}
             </div>
 
             {/* 프로필 */}

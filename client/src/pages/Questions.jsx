@@ -17,7 +17,7 @@ function Questions() {
     } catch (error) {
       console.error(error);
     }
-  }, []);
+  }, [page]);
 
   useEffect(() => {
     handleQuestionData();
