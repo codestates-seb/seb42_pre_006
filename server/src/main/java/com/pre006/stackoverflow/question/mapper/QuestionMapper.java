@@ -10,6 +10,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -52,9 +54,39 @@ public interface QuestionMapper {
 
     Question patchDtoToQuestion(QuestionDto.PatchDto requestBody);
 
-    @Mapping(source = "answersCount", target = "answersCount")
-    QuestionDto.ResponseDto questionToResponseDto(Question question);
+    default QuestionDto.ResponseDto questionToResponseDto(Question question) {
+        if (question == null) {
+            return null;
+        } else {
+            QuestionDto.ResponseDto responseDto = new QuestionDto.ResponseDto();
+            responseDto.setQuestionId(question.getQuestionId());
+            responseDto.setQuestionTitle(question.getQuestionTitle());
+            responseDto.setQuestionContent(question.getQuestionContent());
+            responseDto.setQuestionStatus(question.getQuestionStatus().status);
+            responseDto.setViewCount(question.getViewCount());
+            responseDto.setQuestionVoteCount(question.getQuestionVoteCount());
+            responseDto.setCreateAt(question.getCreateAt());
+            responseDto.setModifiedAt(question.getModifiedAt());
+            responseDto.setEditComment(question.getEditComment());
 
+            List<Tag> tags = question.getQuestionTags().stream()
+                            .map(questionTag -> questionTag.getTag())
+                                    .collect(Collectors.toList());
+
+            responseDto.setTags(tagsToResponseDtos(tags));
+            return responseDto;
+        }
+    }
+
+    default List<TagDto.ResponseDto> tagsToResponseDtos(List<Tag> tags) {
+        return tags.stream()
+                .map(tag -> {
+                    TagDto.ResponseDto responseDto = new TagDto.ResponseDto();
+                    responseDto.setTagId(tag.getTagId());
+                    responseDto.setTagName(tag.getTagName());
+                    return responseDto;
+                }).collect(Collectors.toList());
+    }
     List<QuestionDto.ResponseDto> questionsToResponseDtos(List<Question> questions);
 
     default List<Question> tagToQuestions(Tag tag) {

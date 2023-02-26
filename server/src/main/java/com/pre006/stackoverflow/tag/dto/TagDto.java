@@ -17,6 +17,7 @@ public class TagDto {
     }
 
     @AllArgsConstructor
+    @NoArgsConstructor
     @Getter
     @Setter
     public static class ResponseDto {
