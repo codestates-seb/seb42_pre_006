@@ -33,6 +33,13 @@ public class TagService {
         return tagRepository.findAll();
     }
 
+    public Tag updateTagInfo(Tag tag) {
+        Tag findTag = findVerifiedTag(tag.getTagId());
+
+        findTag.setTagInfo(tag.getTagInfo());
+        return tagRepository.save(findTag);
+    }
+
     private Optional<Tag> existVerifiedTag(String tagName) {
         // 태그 이름으로 조회하여 결과 리턴해주는 메소드
         Optional<Tag> optionalTag = tagRepository.findByTagName(tagName);
@@ -55,6 +62,13 @@ public class TagService {
 
     public Tag findTagValidation(String tagName) {
         return existVerifiedTag(tagName).orElseThrow(() ->
-                new RuntimeException("NOT_EXIST_TAG"));
+                new RuntimeException("NOT_FOUND_TAG"));
+    }
+
+    private Tag findVerifiedTag(long tagId) {
+        Optional<Tag> optionalTag = tagRepository.findById(tagId);
+
+        return optionalTag.orElseThrow(() ->
+                new RuntimeException("NOT_FOUND_TAG"));
     }
 }

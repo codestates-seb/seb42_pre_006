@@ -64,6 +64,7 @@ public interface QuestionMapper {
             responseDto.setQuestionContent(question.getQuestionContent());
             responseDto.setQuestionStatus(question.getQuestionStatus().status);
             responseDto.setViewCount(question.getViewCount());
+            responseDto.setAnswersCount(question.getAnswersCount());
             responseDto.setQuestionVoteCount(question.getQuestionVoteCount());
             responseDto.setCreateAt(question.getCreateAt());
             responseDto.setModifiedAt(question.getModifiedAt());

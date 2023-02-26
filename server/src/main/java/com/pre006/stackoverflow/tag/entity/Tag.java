@@ -21,8 +21,19 @@ public class Tag extends Auditable {
     @Column(nullable = false)
     private String tagName;
 
+    @Column(columnDefinition = "TEXT")
+    private String tagInfo;
+
+    @Column(nullable = false)
+    private Integer usageCount;
+
     @OneToMany(mappedBy = "tag")
     private List<QuestionTag> questionTags = new ArrayList<>();
+
+    public Integer getUsageCount() {
+        usageCount = questionTags.size();
+        return usageCount;
+    }
 
     public void setQuestionTag(QuestionTag questionTag) {
         this.questionTags.add(questionTag);

@@ -21,5 +21,13 @@ public class UriCreator {
                 .toUri();
     }
 
+    public static URI createUri(String tagName) {
+        return UriComponentsBuilder
+                .newInstance()
+                .path("/questions/tagged/{tag-name}")
+                .buildAndExpand(tagName)
+                .toUri();
+    }
+
 
 }
