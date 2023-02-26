@@ -1,8 +1,9 @@
 package com.pre006.stackoverflow.question.controller;
 
-import com.pre006.stackoverflow.answer.dto.AnswerDto;
 import com.pre006.stackoverflow.answer.mapper.AnswerMapper;
+import com.pre006.stackoverflow.answer.dto.AnswerDto;
 import com.pre006.stackoverflow.global.response.SingleResponse;
+import com.pre006.stackoverflow.member.entitiy.Member;
 import com.pre006.stackoverflow.question.dto.QuestionDto;
 import com.pre006.stackoverflow.question.entity.Question;
 import com.pre006.stackoverflow.question.mapper.QuestionMapper;
@@ -17,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -54,8 +56,14 @@ public class QuestionController {
     }
 
     @PostMapping
-    public ResponseEntity postQuestion(@Valid @RequestBody QuestionDto.PostDto requestBody) {
-        Question createQuestion = questionService.createQuestion(mapper.postDtoToQuestion(requestBody));
+    public ResponseEntity postQuestion(@Valid @RequestBody QuestionDto.PostDto requestBody,
+                                       @AuthenticationPrincipal Member member) {
+        long memberId = member.getMemberId();
+        Question createQuestion = questionService.createQuestion(
+                mapper.postDtoToQuestion(requestBody), memberId);
+
+        log.info("# CREATE question-id : " + createQuestion.getQuestionId());
+
         QuestionDto.ResponseDto response = mapper.questionToResponseDto(createQuestion);
 
         URI location = UriCreator.createUri(QUESTION_DEFAULT_URL, createQuestion.getQuestionId());
@@ -123,9 +131,15 @@ public class QuestionController {
 
     @PatchMapping("/{question-id}")
     public ResponseEntity patchQuestion(@Positive @PathVariable("question-id") Long questionId,
-                                        @Valid @RequestBody QuestionDto.PatchDto requestBody) {
+                                        @Valid @RequestBody QuestionDto.PatchDto requestBody,
+                                        @AuthenticationPrincipal Member member) {
+        long memberId = member.getMemberId();
         requestBody.setQuestionId(questionId);
-        Question updateQuestion = questionService.updateQuestion(mapper.patchDtoToQuestion(requestBody));
+        Question updateQuestion = questionService.updateQuestion(
+                mapper.patchDtoToQuestion(requestBody), memberId);
+
+        log.info("# UPDATE question-id : " + questionId);
+
         QuestionDto.ResponseDto response = mapper.questionToResponseDto(updateQuestion);
 
         URI location = UriCreator.createUri(QUESTION_DEFAULT_URL, updateQuestion.getQuestionId());
@@ -136,10 +150,11 @@ public class QuestionController {
     }
 
     @DeleteMapping("/{question-id}")
-    public ResponseEntity deleteQuestion(@Positive @PathVariable("question-id") Long questionId) {
-        // todo: jwt 에서 memberId 파싱
+    public ResponseEntity deleteQuestion(@Positive @PathVariable("question-id") Long questionId,
+                                         @AuthenticationPrincipal Member member) {
+        long memberId = member.getMemberId();
+        questionService.deleteQuestion(questionId, memberId);
 
-        questionService.deleteQuestion(questionId);
         log.info("# DELETE question-id : " + questionId);
 
         return ResponseEntity.noContent().build();
