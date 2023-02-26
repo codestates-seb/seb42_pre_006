@@ -23,6 +23,8 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class SecurityConfiguration {
     @Value("${config.domain}")
     private String domain;
+    @Value("${config.local-domain}")
+    private String local;
     private final AuthTokenProvider authTokenProvider;
     public SecurityConfiguration(AuthTokenProvider authTokenProvider) {
         this.authTokenProvider = authTokenProvider;
@@ -47,7 +49,7 @@ public class SecurityConfiguration {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList(domain));
+        configuration.setAllowedOrigins(Arrays.asList(domain, local));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PATCH", "DELETE", "OPTIONS"));
         configuration.setAllowCredentials(true);
         configuration.setMaxAge(3600L);
@@ -58,8 +60,6 @@ public class SecurityConfiguration {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
-
-
 
     @Bean
     public PasswordEncoder passwordEncoder() {
