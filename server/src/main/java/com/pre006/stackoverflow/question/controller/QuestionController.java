@@ -89,7 +89,7 @@ public class QuestionController {
 
     @GetMapping("/tagged/{tag-name}")
     public ResponseEntity getQuestionsByTag(@Size(max = 20, message = "글자수 초과")
-                                                @PathVariable("tag-name") String tagName) {
+                                            @PathVariable("tag-name") String tagName) {
         Tag tag = tagService.findTag(tagName);
         List<Question> questions = mapper.tagToQuestions(tag);
         List<QuestionDto.ResponseDto> response = mapper.questionsToResponseDtos(questions);

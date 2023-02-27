@@ -4,6 +4,7 @@ import com.pre006.stackoverflow.global.response.PageInfo;
 import com.pre006.stackoverflow.tag.dto.TagDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.Valid;
@@ -46,6 +47,7 @@ public class QuestionDto {
     @Getter
     @Setter
     @AllArgsConstructor
+    @NoArgsConstructor
     public static class ResponseDto {
         private long questionId;
         private String questionTitle;

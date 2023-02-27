@@ -3,6 +3,7 @@ package com.pre006.stackoverflow.question.entity;
 import com.pre006.stackoverflow.answer.entity.Answer;
 import com.pre006.stackoverflow.member.entitiy.Member;
 import com.pre006.stackoverflow.global.audit.Auditable;
+import com.pre006.stackoverflow.question.audit.QuestionAuditable;
 import com.pre006.stackoverflow.questionvote.entity.QuestionVote;
 
 import com.pre006.stackoverflow.tag.entity.QuestionTag;
@@ -12,6 +13,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +21,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-public class Question extends Auditable {
+public class Question extends QuestionAuditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long questionId;
@@ -40,6 +42,9 @@ public class Question extends Auditable {
     private int questionVoteCount;
 
     private String editComment;
+
+    @Column(nullable = false)
+    private LocalDateTime modifiedAt = LocalDateTime.now();
 
     @OneToMany(mappedBy = "question")
     private List<QuestionVote> questionVotes = new ArrayList<>();
