@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,22 +32,10 @@ public class Answer extends Auditable {
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
-    public void addMember(Member member) {
-        this.member = member;
-    }
-
     @ManyToOne
     @JoinColumn(name = "QUESTION_ID")
     private Question question;
 
-    public void addQuestion(Question question){
-        this.question = question;
-    }
-
     @OneToMany(mappedBy = "answer")
     private List<AnswerVote> answerVotes = new ArrayList<>();
 }
-//Member - question - answer
-
-
-

@@ -13,7 +13,7 @@ public class AnswerDto {
     public static class Post{
         @NotBlank(message = "내용을 적어주세요.")
         private String answerContent;
-        private long questionId;
+
     }
     @Getter
     @Setter

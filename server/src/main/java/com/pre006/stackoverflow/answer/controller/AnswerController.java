@@ -14,9 +14,9 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/answer")
+@RequestMapping("/")
 public class AnswerController {
-    private final static String ANSWER_DEFAULT_URL = "/answer";
+    private final static String ANSWER_DEFAULT_URL = "/";
     private final AnswerService answerService;
     private AnswerMapper mapper;
 
@@ -25,38 +25,40 @@ public class AnswerController {
         this.mapper = mapper;
     }
 
-    @PostMapping()
-    public ResponseEntity postAnswer(@RequestBody AnswerDto.Post post){
-        Answer answer = answerService.createAnswer(mapper.answerDtoToAnswer(post));
+    @PostMapping("questions/{question-id}/answers")
+    public ResponseEntity postAnswer(@PathVariable("question-id") long questionId,
+                                     @RequestBody AnswerDto.Post post){
+        Answer answer = answerService.createAnswer(mapper.answerDtoToAnswer(questionId, post));
         URI location = UriCreator.createUri(ANSWER_DEFAULT_URL, answer.getAnswerId());
 
         return ResponseEntity.created(location).build();
     }
 
-    @PatchMapping("/{answer-id}")
-    public ResponseEntity patchAnswer(@PathVariable("answer-id") long answerId,
+    @PatchMapping("questions/{question-id}/answers/{answer-id}")
+    public ResponseEntity patchAnswer(@PathVariable("question-id") long questionId,
+                                      @PathVariable("answer-id") long answerId,
                                       @RequestBody AnswerDto.Patch patch){
         patch.setAnswerId(answerId);
-        Answer answer = answerService.updateAnswer(mapper.answerDtoToAnswer(patch));
+        Answer answer = answerService.updateAnswer(mapper.answerDtoToAnswer(questionId, patch));
 
         return new ResponseEntity<>(mapper.answerToAnswerResponse(answer), HttpStatus.OK);
     }
 
-    @GetMapping
+    @GetMapping("answers")
     public ResponseEntity getAnswers(){
         List<Answer> answers = answerService.findAnswers();
 
         return new ResponseEntity<>(mapper.answersToAnswerResponses(answers), HttpStatus.OK);
     }
 
-    @GetMapping("/{answer-id}")
+    @GetMapping("answers/{answer-id}")
     public ResponseEntity getAnswer(@PathVariable("answer-id") long answerId){
         Answer answer = answerService.findAnswer(answerId);
 
         return new ResponseEntity<>(mapper.answerToAnswerResponse(answer), HttpStatus.OK);
     }
 
-    @DeleteMapping("/{answer-id}")
+    @DeleteMapping("answers/{answer-id}")
     public ResponseEntity deleteAnswer(@PathVariable("answer-id") long answerId){
         answerService.deleteAnswer(answerId);
         System.out.println("삭제가 완료됐습니다.");
