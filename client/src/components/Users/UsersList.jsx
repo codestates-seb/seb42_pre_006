@@ -15,13 +15,13 @@ function UsersList({ users, page, onClickPagination }) {
           <UsersListItem user={user} key={user.memberId} />
         ))}
       </ul>
-      <div className="text-right">
+      {/* <div className="text-right">
         <Pagination
           total={users.length}
           page={page}
           onClick={handleClickPage}
         />
-      </div>
+      </div> */}
     </section>
   );
 }

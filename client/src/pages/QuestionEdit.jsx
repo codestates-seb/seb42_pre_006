@@ -14,44 +14,29 @@ function QuestionEdit() {
   const params = useParams();
   const navigator = useNavigate();
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
-  const handleQuestionTags = useCallback(async () => {
-    try {
-      const response = await axios.get(`/questions/${params.id}/tags`);
-      const { data } = response;
-      setTagValue(data.data[0].tagName);
-      console.log(data);
-    } catch (error) {
-      console.error(error);
-    }
-  }, []);
-
-  useEffect(() => {
-    const handleQuestionData = async () => {
-      try {
-        const response = await axios.get(`/questions/${params.id}`);
-        const { data } = response;
-        setTitleValue(data.questionTitle);
-        setContentValue(data.questionContent);
-        // setTagValue(data.tags);
-        // console.log(data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    handleQuestionData();
-    handleQuestionTags();
-  }, []);
+  const handleChangeTags = e => {
+    setTagValue(e.target.value);
+  };
 
   const handleQuestionEdit = async () => {
+    const tagArray = tagValue
+      .trim()
+      .split(' ')
+      .map(tag => ({ tagName: tag }));
+
+    const removeDuplicateTags = tagValue.trim().length > 0 && {
+      tags: [...new Set(tagArray.map(JSON.stringify))].map(JSON.parse),
+    };
+
+    const formData = {
+      questionTitle: titleValue,
+      questionContent: contentValue,
+      ...removeDuplicateTags,
+    };
+
     try {
       const response = await axios.patch(`/questions/${params.id}`, {
-        questionTitle: titleValue,
-        questionContent: contentValue,
-        tags: tagValue,
+        ...formData,
       });
       console.log(tagValue);
       if (response) {
@@ -63,6 +48,31 @@ function QuestionEdit() {
     }
   };
 
+  const handleChangeTitle = e => {
+    setTitleValue(e.target.value);
+  };
+
+  useEffect(() => {
+    const handleQuestionData = async () => {
+      try {
+        const response = await axios.get(`/questions/${params.id}`);
+        const { data } = response;
+        setTitleValue(data.questionTitle);
+        setContentValue(data.questionContent);
+        setTagValue(
+          data.tags.reduce((acc, cur) => `${acc} ${cur.tagName}`, ''),
+        );
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    handleQuestionData();
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <article className="flex">
       <div className="flex-1">
@@ -72,7 +82,7 @@ function QuestionEdit() {
             className="w-full border rounded px-2 py-2 text-sm focus:border focus:border-[#58A4DE] outline-offset-4 outline-[#DDEAF7]"
             type="text"
             placeholder="e.g. Is there an R function for finding the index of an element in a vector?"
-            onChange={setTitleValue}
+            onChange={handleChangeTitle}
             value={titleValue}
           />
         </div>
@@ -87,14 +97,13 @@ function QuestionEdit() {
         <div className="px-8 py-3">
           <h2 className="font-semibold text-left">Tags</h2>
           <input
-            className="w-full border rounded px-2 py-2 text-sm focus:border focus:border-[#58A4DE] outline-offset-4 outline-[#DDEAF7]"
+            className="w-full border rounded px-2 py-2 text-sm focus:border bg-gray-100 focus:border-[#58A4DE] outline-offset-4 outline-[#DDEAF7]"
             type="text"
             name="tag"
             placeholder="e.g. (wpf ios jquery)"
-            onChange={e => {
-              setTagValue(e.target.value);
-            }}
+            onChange={handleChangeTags}
             value={tagValue}
+            disabled
           />
         </div>
 

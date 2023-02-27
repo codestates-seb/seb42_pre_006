@@ -7,7 +7,7 @@ function QuestionBodyBtns({ questionId }) {
   const navigate = useNavigate();
   const handleDeleteQueston = async () => {
     try {
-      const response = axios.delete(`/questions/${questionId}`);
+      const response = await axios.delete(`/questions/${questionId}`);
       if (response) {
         navigate('/questions', { replace: true });
       }
@@ -24,15 +24,15 @@ function QuestionBodyBtns({ questionId }) {
 
   return (
     <div className="h-6 flex text-gray-500 text-sm font-medium">
-      <Button text size="sm">
+      {/* <Button text size="sm">
         Share
-      </Button>
+      </Button> */}
       <Button to={`/questions/${questionId}/edit`} text size="sm">
         Edit
       </Button>
-      <Button text size="sm" variant="danger" onClick={handleConfirmDelete}>
+      {/* <Button text size="sm" variant="danger" onClick={handleConfirmDelete}>
         Delete
-      </Button>
+      </Button> */}
     </div>
   );
 }

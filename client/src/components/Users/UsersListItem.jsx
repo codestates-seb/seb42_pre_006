@@ -12,7 +12,7 @@ function UsersListItem({ user }) {
         />
       </Link>
       <div className="flex flex-col mx-2">
-        <span className="text-blue-700 text-base font-medium">
+        <span className="text-blue-700 text-base font-medium break-all">
           <Link to={`/users/${user.memberId}`}>{user.displayName}</Link>
         </span>
         {user.location && (

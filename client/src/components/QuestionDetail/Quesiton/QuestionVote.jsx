@@ -12,6 +12,8 @@ import { TbClock } from 'react-icons/tb';
 function QuestionVote({ question: { questionId, questionVoteCount } }) {
   const [bookMark, setBookMark] = useState(false);
   const [votesCount, setVotesCont] = useState(0);
+  const [flagUp, setFlagUp] = useState(false);
+  const [flagDown, setFlagDown] = useState(false);
 
   // TODO : 추후 API 관련 로직 수정하기
   const handleCountUpVotes = async () => {
@@ -21,11 +23,16 @@ function QuestionVote({ question: { questionId, questionVoteCount } }) {
         memberId: 1,
       });
       if (response.data) {
-        setVotesCont(prevState => prevState + 1);
+        if (!flagUp) {
+          setVotesCont(prevState => prevState + 1);
+          setFlagUp(prevState => !prevState);
+        }
       }
     } catch (error) {
       if (error.response.status === 400) {
-        alert('이미 투표 완료 하였습니다');
+        console.log(error.response);
+        setFlagUp(prevState => !prevState);
+        setVotesCont(prevState => prevState - 1);
       }
     }
   };
@@ -33,15 +40,20 @@ function QuestionVote({ question: { questionId, questionVoteCount } }) {
   const handleCountDownVotes = async () => {
     try {
       const response = await axios.post(`/questions/${questionId}/vote`, {
-        questionVoteStatus: false,
+        questionVoteStatus: true,
         memberId: 1,
       });
       if (response.data) {
-        setVotesCont(prevState => prevState - 1);
+        if (!flagDown) {
+          setVotesCont(prevState => prevState - 1);
+          setFlagDown(prevState => !prevState);
+        }
       }
     } catch (error) {
       if (error.response.status === 400) {
-        alert('이미 투표 완료 하였습니다');
+        console.log(error.response);
+        setFlagDown(prevState => !prevState);
+        setVotesCont(prevState => prevState + 1);
       }
     }
   };
@@ -58,11 +70,19 @@ function QuestionVote({ question: { questionId, questionVoteCount } }) {
     <article className=" flex flex-col justify-top items-center  text-gray-300  -ml-5 -mr-1">
       <div className="">
         <button type="button" onClick={handleCountUpVotes}>
-          <MdArrowDropUp className="-mb-6 text-7xl text-gray-300 hover:text-orange-400" />
+          <MdArrowDropUp
+            className={classNames('-mb-6 text-7xl text-gray-300', {
+              'text-orange-400': flagUp,
+            })}
+          />
         </button>
         <div className="text-gray-500  font-medium text-xl">{votesCount}</div>
         <button type="button" onClick={handleCountDownVotes}>
-          <MdArrowDropDown className="-mt-4 text-7xl text-gray-300 hover:text-orange-400" />
+          <MdArrowDropDown
+            className={classNames('-mt-4 text-7xl text-gray-300', {
+              'text-orange-400': flagDown,
+            })}
+          />
         </button>
       </div>
       <div>

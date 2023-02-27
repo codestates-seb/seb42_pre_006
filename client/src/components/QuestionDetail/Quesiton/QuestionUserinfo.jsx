@@ -8,10 +8,12 @@ function QuestionUserinfo({ question }) {
       </div>
       <div className="flex mt-1.5">
         <div className=" w-8 h-8 bg-white rounded overflow-hidden">
-          <img
-            src={`https://picsum.photos/id/${question.questionId}/200/200`}
-            alt={question.questionId}
-          />
+          {question.questionId && (
+            <img
+              src={`https://picsum.photos/id/${question.questionId}/200/200`}
+              alt={question.questionId}
+            />
+          )}
         </div>
         <div className="text-xs ml-2">
           <p className="text-cyan-700 hover:text-cyan-600 font-medium">

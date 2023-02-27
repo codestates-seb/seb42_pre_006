@@ -14,10 +14,11 @@ function UsersHeader() {
             className="border rounded px-2 py-2 text-sm focus:border focus:border-[#58A4DE] outline-offset-4 outline-[#DDEAF7] pl-10"
             type="text"
             placeholder="Filter by user"
+            disabled
           />
         </div>
 
-        <div className=" border border-[#6a737c] rounded text-sm">
+        {/* <div className=" border border-[#6a737c] rounded text-sm">
           <button
             type="button"
             className="bg-[#e3e6e8] text-[#3b4045] py-2 px-2  rounded-l border-r border-[#6a737c]"
@@ -48,7 +49,7 @@ function UsersHeader() {
           >
             Moderators
           </button>
-        </div>
+        </div> */}
       </div>
     </>
   );

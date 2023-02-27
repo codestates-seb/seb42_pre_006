@@ -20,7 +20,7 @@ function QuestionsHeader({ total }) {
         <span className="text-lg ml-6">{total} questions</span>
         {/* TODO: 질문리스트 데이터 랜더링기능 작업 -> 더미 데이터 실시간 업데이트 */}
         {/* 필터 */}
-        <div className=" border border-[#6a737c] rounded text-xs">
+        {/* <div className=" border border-[#6a737c] rounded text-xs">
           <button
             type="button"
             className="bg-[#e3e6e8] text-[#3b4045] py-2 px-2  rounded-l border-r border-[#6a737c]"
@@ -55,7 +55,7 @@ function QuestionsHeader({ total }) {
             More
             <IoMdArrowDropdown className="inline" />
           </button>
-        </div>
+        </div> */}
       </div>
     </section>
   );

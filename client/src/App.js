@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import './theme.css';
 import './quillCustom.css';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import QuestionAsk from './pages/QuestionAsk';
 import Questions from './pages/Questions';
 import QuestionEdit from './pages/QuestionEdit';
@@ -12,7 +12,6 @@ import Users from './pages/Users';
 import BaseLayout from './components/layouts/BaseLayout';
 import MainLayout from './components/layouts/MainLayout';
 import Guide from './pages/Guide';
-import Home from './pages/Home';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import QuestionDetail from './pages/QuestionDetail';
@@ -21,15 +20,19 @@ import UserPersonalEdit from './pages/UserPersonalEdit';
 
 function App() {
   const { isLoggedIn } = useContext(AuthContext);
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   return (
     <Routes>
       <Route element={<MainLayout hasSidebar />}>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Questions />} />
         <Route path="/questions">
           <Route index element={<Questions />} />
           <Route path=":id" element={<QuestionDetail />} />
-          <Route path=":id/edit" element={<QuestionEdit />} />
         </Route>
         <Route path="/guide" element={<Guide />} />
       </Route>
@@ -54,6 +57,10 @@ function App() {
             {/** 로그인 전 상태 */}
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route
+              path="/users/:id/edit"
+              element={<Navigate replace to="/login" />}
+            />
           </>
         ) : (
           <>
