@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import ReactQuill from 'react-quill';
@@ -38,12 +38,18 @@ function QuestionEdit() {
       const response = await axios.patch(`/questions/${params.id}`, {
         ...formData,
       });
+      console.log(tagValue);
       if (response) {
         navigator('/questions', { replace: true });
       }
+      console.log(response);
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const handleChangeTitle = e => {
+    setTitleValue(e.target.value);
   };
 
   useEffect(() => {
@@ -76,7 +82,7 @@ function QuestionEdit() {
             className="w-full border rounded px-2 py-2 text-sm focus:border focus:border-[#58A4DE] outline-offset-4 outline-[#DDEAF7]"
             type="text"
             placeholder="e.g. Is there an R function for finding the index of an element in a vector?"
-            onChange={setTitleValue}
+            onChange={handleChangeTitle}
             value={titleValue}
           />
         </div>
@@ -93,6 +99,7 @@ function QuestionEdit() {
           <input
             className="w-full border rounded px-2 py-2 text-sm focus:border bg-gray-100 focus:border-[#58A4DE] outline-offset-4 outline-[#DDEAF7]"
             type="text"
+            name="tag"
             placeholder="e.g. (wpf ios jquery)"
             onChange={handleChangeTags}
             value={tagValue}
