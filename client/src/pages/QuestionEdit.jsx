@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import Button from '../components/UI/Button';
-import QuestionProvider from '../context/question-context';
+// import QuestionProvider from '../context/question-context';
 
 function QuestionEdit() {
   const [titleValue, setTitleValue] = useState('');
@@ -12,7 +12,7 @@ function QuestionEdit() {
   const [tagValue, setTagValue] = useState([]);
 
   const params = useParams();
-  // const navigator = useNavigate();
+  const navigator = useNavigate();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -35,7 +35,7 @@ function QuestionEdit() {
 
   const handleQuestionEdit = async () => {
     try {
-      await axios.patch(`/questions/${params.id}`, {
+      const response = await axios.patch(`/questions/${params.id}`, {
         questionTitle: titleValue,
         questionContent: contentValue,
         tags: [
@@ -45,13 +45,16 @@ function QuestionEdit() {
           { tagName: tagValue },
         ],
       });
+      if (response) {
+        navigator('/questions', { replace: true });
+      }
     } catch (error) {
       console.error(error);
     }
   };
 
   return (
-    <QuestionProvider className="flex">
+    <article className="flex">
       <div className="flex-1">
         <div className="px-8 py-3">
           <h2 className="font-semibold text-left">Title</h2>
@@ -86,7 +89,7 @@ function QuestionEdit() {
           <Button onClick={handleQuestionEdit} variant="primary" size="md">
             Edit
           </Button>
-          <Link to="/">
+          <Link to="/questions">
             <Button variant="danger" size="sm" text>
               Cancel
             </Button>
@@ -114,7 +117,7 @@ function QuestionEdit() {
           </ul>
         </div>
       </div>
-    </QuestionProvider>
+    </article>
   );
 }
 

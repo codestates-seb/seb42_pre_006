@@ -73,6 +73,7 @@ function UsersPersonalEditForm({ user }) {
       const isNotChangeValues =
         JSON.stringify(getValues()) === JSON.stringify(userDefaultValues);
       setSubmitDisabled(!isNotChangeValues);
+      console.log(submitDisabled);
     });
     return () => subscription.unsubscribe();
   }, [watch, getValues]);
