@@ -19,21 +19,13 @@ public class AnswerVote extends Auditable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long answerVoteId;
     @Column(nullable = false)
-    private boolean answerVoteStatus;
+    private Boolean answerVoteStatus;
 
     @ManyToOne
     @JoinColumn(name = "ANSWER_ID")
     private Answer answer;
 
-    public void addAnswer(Answer answer){
-        this.answer = answer;
-    }
-
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
-
-    public void addMember(Member member){
-        this.member = member;
-    }
 }

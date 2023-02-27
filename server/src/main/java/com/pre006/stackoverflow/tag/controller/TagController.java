@@ -58,4 +58,16 @@ public class TagController {
         return new ResponseEntity(
                 new SingleResponse<>(response), HttpStatus.OK);
     }
+
+    @PatchMapping("/{tag-id}")
+    public ResponseEntity patchTag(@PathVariable("tag-id") Long tagId,
+                                   @RequestBody TagDto.PatchDto requestBody) {
+        requestBody.setTagId(tagId);
+        Tag tag = tagService.updateTagInfo(mapper.patchDtoToTag(requestBody));
+        TagDto.ResponseDto response = mapper.tagToResponseDto(tag);
+
+        URI location = UriCreator.createUri(tag.getTagName());
+
+        return ResponseEntity.ok().location(location).build();
+    }
 }
