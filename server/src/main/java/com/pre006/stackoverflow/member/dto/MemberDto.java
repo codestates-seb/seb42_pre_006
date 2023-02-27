@@ -32,13 +32,15 @@ public class MemberDto {
     @ToString
     @Builder
     public static class Patch{
-        @Pattern(regexp = "\"^[a-zA-Z0-9가-힣+_-]{6,}$\"")
+        @Pattern(regexp = "^[a-zA-Z0-9가-힣+_-]{6,}$")
         private String displayName;
 
         private String location;
         private String memberTitle;
         private String aboutMe;
         private Long memberId;
+
+        public void setMemberId(long memberId) {this.memberId = memberId;}
     }
     @Getter
     @Setter
