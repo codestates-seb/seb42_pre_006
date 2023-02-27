@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import ReactQuill from 'react-quill';
@@ -18,6 +18,17 @@ function QuestionEdit() {
     window.scrollTo(0, 0);
   }, []);
 
+  const handleQuestionTags = useCallback(async () => {
+    try {
+      const response = await axios.get(`/questions/${params.id}/tags`);
+      const { data } = response;
+      setTagValue(data.data[0].tagName);
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+
   useEffect(() => {
     const handleQuestionData = async () => {
       try {
@@ -25,12 +36,14 @@ function QuestionEdit() {
         const { data } = response;
         setTitleValue(data.questionTitle);
         setContentValue(data.questionContent);
-        setTagValue(data.tags);
+        // setTagValue(data.tags);
+        // console.log(data);
       } catch (error) {
         console.error(error);
       }
     };
     handleQuestionData();
+    handleQuestionTags();
   }, []);
 
   const handleQuestionEdit = async () => {
@@ -38,16 +51,13 @@ function QuestionEdit() {
       const response = await axios.patch(`/questions/${params.id}`, {
         questionTitle: titleValue,
         questionContent: contentValue,
-        tags: [
-          { tagName: tagValue },
-          { tagName: tagValue },
-          { tagName: tagValue },
-          { tagName: tagValue },
-        ],
+        tags: tagValue,
       });
+      console.log(tagValue);
       if (response) {
         navigator('/questions', { replace: true });
       }
+      console.log(response);
     } catch (error) {
       console.error(error);
     }
@@ -79,8 +89,11 @@ function QuestionEdit() {
           <input
             className="w-full border rounded px-2 py-2 text-sm focus:border focus:border-[#58A4DE] outline-offset-4 outline-[#DDEAF7]"
             type="text"
+            name="tag"
             placeholder="e.g. (wpf ios jquery)"
-            onChange={setTagValue}
+            onChange={e => {
+              setTagValue(e.target.value);
+            }}
             value={tagValue}
           />
         </div>
