@@ -72,6 +72,8 @@ public class QuestionService {
         Optional.ofNullable(question.getEditComment())
                 .ifPresent(editComment -> findQuestion.setEditComment(editComment));
 
+        findQuestion.setModifiedAt(LocalDateTime.now());
+
         return questionRepository.save(findQuestion);
     }
 
