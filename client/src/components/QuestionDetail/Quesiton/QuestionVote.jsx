@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import classNames from 'classnames';
+import React, { useEffect, useState } from 'react';
 import {
   MdArrowDropUp,
   MdArrowDropDown,
@@ -7,70 +9,92 @@ import {
 } from 'react-icons/md';
 import { TbClock } from 'react-icons/tb';
 
-function QuestionVote() {
-  const [upVoteValue, setUpVoteValue] = useState(false);
-  const [downVoteValue, setDownVoteValue] = useState(false);
+function QuestionVote({ question: { questionId, questionVoteCount } }) {
   const [bookMark, setBookMark] = useState(false);
+  const [votesCount, setVotesCont] = useState(0);
+  const [flagUp, setFlagUp] = useState(false);
+  const [flagDown, setFlagDown] = useState(false);
 
-  const onUpVoteValueHandler = () => {
-    setUpVoteValue(prev => !prev);
+  // TODO : 추후 API 관련 로직 수정하기
+  const handleCountUpVotes = async () => {
+    try {
+      const response = await axios.post(`/questions/${questionId}/vote`, {
+        questionVoteStatus: true,
+        memberId: 1,
+      });
+      if (response.data) {
+        if (!flagUp) {
+          setVotesCont(prevState => prevState + 1);
+          setFlagUp(prevState => !prevState);
+        }
+      }
+    } catch (error) {
+      if (error.response.status === 400) {
+        console.log(error.response);
+        setFlagUp(prevState => !prevState);
+        setVotesCont(prevState => prevState - 1);
+      }
+    }
   };
 
-  const onDownVoteValueHandler = () => {
-    setDownVoteValue(prev => !prev);
+  const handleCountDownVotes = async () => {
+    try {
+      const response = await axios.post(`/questions/${questionId}/vote`, {
+        questionVoteStatus: true,
+        memberId: 1,
+      });
+      if (response.data) {
+        if (!flagDown) {
+          setVotesCont(prevState => prevState - 1);
+          setFlagDown(prevState => !prevState);
+        }
+      }
+    } catch (error) {
+      if (error.response.status === 400) {
+        console.log(error.response);
+        setFlagDown(prevState => !prevState);
+        setVotesCont(prevState => prevState + 1);
+      }
+    }
   };
 
   const onBookMarkHandler = () => {
-    setBookMark(prev => !prev);
+    setBookMark(prevState => !prevState);
   };
+
+  useEffect(() => {
+    setVotesCont(questionVoteCount);
+  }, [questionVoteCount]);
 
   return (
     <article className=" flex flex-col justify-top items-center  text-gray-300  -ml-5 -mr-1">
       <div className="">
-        {upVoteValue ? (
-          <button className=" text-7xl " type="button">
-            <MdArrowDropUp
-              className=" -mb-6 text-orange-400"
-              onClick={onUpVoteValueHandler}
-            />
-          </button>
-        ) : (
-          <button className=" text-7xl " type="button">
-            <MdArrowDropUp className=" -mb-6" onClick={onUpVoteValueHandler} />
-          </button>
-        )}
-        <div className="text-gray-500  font-medium text-xl">
-          0 {/* 투표수 반영 기능 작업 */}
-        </div>
-        {downVoteValue ? (
-          <button className=" text-7xl " type="button">
-            <MdArrowDropDown
-              className=" -mt-4 -mb-5 text-orange-400"
-              onClick={onDownVoteValueHandler}
-            />
-          </button>
-        ) : (
-          <button className=" text-7xl " type="button">
-            <MdArrowDropDown
-              className=" -mt-4 -mb-5"
-              onClick={onDownVoteValueHandler}
-            />
-          </button>
-        )}
+        <button type="button" onClick={handleCountUpVotes}>
+          <MdArrowDropUp
+            className={classNames('-mb-6 text-7xl text-gray-300', {
+              'text-orange-400': flagUp,
+            })}
+          />
+        </button>
+        <div className="text-gray-500  font-medium text-xl">{votesCount}</div>
+        <button type="button" onClick={handleCountDownVotes}>
+          <MdArrowDropDown
+            className={classNames('-mt-4 text-7xl text-gray-300', {
+              'text-orange-400': flagDown,
+            })}
+          />
+        </button>
       </div>
       <div>
-        {bookMark ? (
-          <MdOutlineBookmark
-            className=" cursor-pointer text-2xl mb-2 text-orange-400"
-            onClick={onBookMarkHandler}
-          />
-        ) : (
-          <MdOutlineBookmarkBorder
-            className=" cursor-pointer text-2xl mb-2"
-            onClick={onBookMarkHandler}
-          />
-        )}
-
+        <button
+          type="button"
+          className={classNames('cursor-pointer text-2xl mb-2 ', {
+            'text-orange-400': bookMark,
+          })}
+          onClick={onBookMarkHandler}
+        >
+          {bookMark ? <MdOutlineBookmark /> : <MdOutlineBookmarkBorder />}
+        </button>
         <TbClock className=" text-2xl py-0.5 hover:text-blue-300" />
       </div>
     </article>

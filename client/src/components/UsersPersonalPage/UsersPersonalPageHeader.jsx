@@ -1,21 +1,39 @@
-import { MdCake } from 'react-icons/md';
+import { MdCake, MdEmail, MdLocationPin } from 'react-icons/md';
 import { AiOutlineClockCircle } from 'react-icons/ai';
 import { BiCalendar } from 'react-icons/bi';
-import UsersPersonalPageHeaderButton from './UsersPersonalPageHeaderButton';
+import { useLocation } from 'react-router-dom';
 
-function UsersPersonalPageHeader() {
+import { useContext } from 'react';
+import UsersPersonalPageHeaderButton from './UsersPersonalPageHeaderButton';
+import { AuthContext } from '../../context/auth-context';
+
+function UsersPersonalPageHeader({ user }) {
+  const { pathname } = useLocation();
+  const { isLoggedIn } = useContext(AuthContext);
+
   return (
     <section className="relative">
       <div className="flex items-center">
-        {/* TODO: 마이페이지 사진작업 -> 데이터에서 사진 주소 불러오기 */}
         <img
           className="rounded w-28 h-28 shadow-gray-200 shadow-xl"
-          src="https://lh3.googleusercontent.com/a/AEdFTp4WLLEwuSbw_4TUJ_Cv3mcv7u73xF8EnLmV2X2gZQ=k-s192"
-          alt="user images"
+          src="https://source.unsplash.com/random/200x200"
+          alt={user.displayName}
         />
 
         <div className="ml-4 text-left">
-          <h2 className="text-3xl font-medium mb-2">Mia Lee</h2>
+          <div className="mb-2">
+            <h2 className="text-3xl font-medium mb-2">{user.displayName}</h2>
+            <p className="flex items-center">
+              <MdEmail className="mr-2" />
+              <span>{user.email}</span>
+            </p>
+            {user.location && (
+              <p className="flex items-center">
+                <MdLocationPin className="mr-2" />
+                <span>{user.location}</span>
+              </p>
+            )}
+          </div>
           <ul className="flex text-[#6a737c] text-sm">
             <li className="flex justify-center items-center mr-2">
               <MdCake className="mr-1" />
@@ -25,7 +43,6 @@ function UsersPersonalPageHeader() {
               <AiOutlineClockCircle className="mr-1" />
               <span>Last seen this week</span>
             </li>
-            {/* TODO: 캘린더 링크작업 -> 링크 누르면 캘린더셀렉창 띄우기 */}
             <li className="flex justify-center items-center mr-2">
               <BiCalendar className="mr-1" />
               <span>Visited 4 days, 4 consecutive</span>
@@ -33,7 +50,10 @@ function UsersPersonalPageHeader() {
           </ul>
         </div>
       </div>
-      <UsersPersonalPageHeaderButton />
+      {/** TODO: 로그인 및 회원 로그인 기능 구현후 본인 글에만 버튼 노출 */}
+      {isLoggedIn && !pathname.includes('edit') && (
+        <UsersPersonalPageHeaderButton />
+      )}
     </section>
   );
 }

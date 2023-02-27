@@ -1,12 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { MdAccountBox } from 'react-icons/md';
 import Badge from '../components/UI/Badge';
 import Button from '../components/UI/Button';
 import Card from '../components/UI/Card';
-import InputFeild from '../components/UI/InputFeild';
+import EmptyData from '../components/UI/EmptyData';
+import FormGroup from '../components/UI/Form/FormGroup';
+import InputFeild from '../components/UI/Form/InputFeild';
+import TextEditorFeild from '../components/UI/Form/TextEditorFeild';
+import Pagination from '../components/UI/Pagination';
 import Title from '../components/UI/Title';
 
 function Guide() {
+  const {
+    register,
+    setValue,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const handleSubmitButton = data => {
+    console.log(data);
+  };
+
+  const [page, setPage] = useState(1);
+
+  const handleClickPage = pageNum => setPage(pageNum);
+
   return (
     <article className="text-left px-6">
       <header className="pb-6">
@@ -41,6 +61,9 @@ function Guide() {
             </Button>
             <Button variant="default" size="md">
               Default
+            </Button>
+            <Button variant="default" size="md" disabled={Boolean(true)}>
+              Disabled
             </Button>
           </div>
           <h3>- text</h3>
@@ -112,16 +135,16 @@ function Guide() {
             <Badge variant="dark">dark</Badge>
           </div>
           <div className="my-4 flex flex-wrap gap-2">
-            <Badge url="/" variant="tags">
+            <Badge to="/" variant="tags">
               tags
             </Badge>
-            <Badge url="/" variant="tags">
+            <Badge to="/" variant="tags">
               JavaScript
             </Badge>
-            <Badge url="/" variant="tags">
+            <Badge to="/" variant="tags">
               React
             </Badge>
-            <Badge url="/" variant="tags">
+            <Badge to="/" variant="tags">
               Vue
             </Badge>
           </div>
@@ -145,28 +168,99 @@ function Guide() {
         <header>
           <h2 className="text-2xl font-semibold">Input Feild</h2>
         </header>
-        <div className="my-4">
-          <InputFeild
-            label="Label"
-            labelDetail="Be specific and imagine you’re asking a question to another person. Minimum 15 characters."
-            placeholder="placeholder"
+        <form onSubmit={handleSubmit(handleSubmitButton)}>
+          <FormGroup
+            label="Display Name"
+            id="displayName"
+            name="displayName"
+            errors={errors}
+            validation={{ required: '필수 입력 항목입니다' }}
+            register={register}
+          >
+            <InputFeild type="text" />
+          </FormGroup>
+          <FormGroup
+            label="Display Name"
+            id="displayName"
+            name="displayName"
+            errors={{
+              displayName: {
+                type: 'required',
+                message: '필수 입력 항목입니다',
+              },
+            }} // errors={errors}
+            validation={{ required: '필수 입력 항목입니다' }}
+            register={register}
+          >
+            <InputFeild type="text" placeholder="JavaScript, React, Vue" />
+          </FormGroup>
+          <FormGroup
+            label="Display Name"
+            id="displayName"
+            name="displayName"
+            errors={errors}
+            validation={{ required: '필수 입력 항목입니다' }}
+            register={register}
+          >
+            <InputFeild
+              type="text"
+              placeholder="JavaScript, React, Vue"
+              disabled={Boolean(true)}
+            />
+          </FormGroup>
+          <FormGroup
+            label="About Me"
+            id="aboutMe"
+            name="aboutMe"
+            errors={errors}
+            validation={{ required: '필수 입력 항목입니다' }}
+            register={register}
+            setValue={setValue}
+          >
+            <TextEditorFeild />
+          </FormGroup>
+          <FormGroup
+            label="About Me"
+            id="aboutMe"
+            name="aboutMe"
+            errors={{
+              aboutMe: {
+                type: 'required',
+                message: '필수 입력 항목입니다',
+              },
+            }} // errors={errors}
+            validation={{ required: '필수 입력 항목입니다' }}
+            register={register}
+            setValue={setValue}
+          >
+            <TextEditorFeild />
+          </FormGroup>
+          <div className="text-left">
+            <Button variant="primary" type="submit">
+              Submit
+            </Button>
+          </div>
+        </form>
+      </section>
+      <section className="py-10 border-t">
+        <header>
+          <h2 className="text-2xl font-semibold">Pagination</h2>
+        </header>
+        <div className="my-4 text-center">
+          <Pagination
+            total={50}
+            page={page}
+            onClick={handleClickPage}
+            limit={10}
           />
         </div>
-        <div className="my-4">
-          <InputFeild
-            label="Label"
-            labelDetail="Be specific and imagine you’re asking a question to another person. Minimum 15 characters."
-            placeholder="placeholder"
-            isValidError
-          />
-        </div>
-        <div className="my-4">
-          <InputFeild
-            label="Label"
-            labelDetail="Be specific and imagine you’re asking a question to another person. Minimum 15 characters."
-            placeholder="placeholder"
-            disabled
-          />
+      </section>
+      <section className="py-10 border-t">
+        <header>
+          <h2 className="text-2xl font-semibold">Empty Data</h2>
+        </header>
+        <div className="my-4 text-center">
+          <EmptyData />
         </div>
       </section>
     </article>

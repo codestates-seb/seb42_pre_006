@@ -5,10 +5,8 @@ import { MdThumbsUpDown } from 'react-icons/md';
 import { AiFillTags } from 'react-icons/ai';
 import { ImTrophy } from 'react-icons/im';
 import IconDescListItem from '../components/SignUp/IconDescListItem';
-import Button from '../components/UI/Button';
-import Card from '../components/UI/Card';
-import InputFeild from '../components/UI/InputFeild';
 import SocialLogin from '../components/UI/SocialLogin';
+import SignUpForm from '../components/SignUp/SignUpForm';
 
 function SignUp() {
   return (
@@ -46,39 +44,7 @@ function SignUp() {
           <div className="mb-4">
             <SocialLogin />
           </div>
-          <Card className="mt-4 mb-10">
-            <form>
-              <div>
-                <InputFeild label="Display name" className="mt-0" />
-                <InputFeild label="Email" />
-                <InputFeild label="Password" />
-              </div>
-              <div className="mb-4 text-left">
-                <p className="my-2 text-sm text-gray-500">
-                  Passwords must contain at least eight characters, including at
-                  least 1 letter and 1 number.
-                </p>
-                <p className="my-2 text-sm text-gray-500">
-                  <label htmlFor="checkAgree" className="ml-2">
-                    <input type="checkbox" id="checkAgree" />
-                    Opt-in to receive occasional product updates, user research
-                    invitations, company announcements, and digests.
-                  </label>
-                </p>
-              </div>
-              <Button variant="primary" size="md" block>
-                Sign up
-              </Button>
-              <div className="mt-10 text-left">
-                <p className="text-xs">
-                  By clicking “Sign up”, you agree to our&nbsp;
-                  <span className=" text-blue-500">
-                    terms of service, privacy policy and cookie policy
-                  </span>
-                </p>
-              </div>
-            </form>
-          </Card>
+          <SignUpForm />
           <div className="text-sm">
             <p className="my-1">
               <span className="mr-2">Already have an account?</span>

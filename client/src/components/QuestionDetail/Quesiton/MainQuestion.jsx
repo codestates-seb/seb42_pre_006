@@ -1,15 +1,13 @@
-// 모든 Quesiton 합치기
+import QuestionVote from './QuestionVote';
+import QuestionBody from './QuestionBody';
 
-import QuestionVote from "./QuestionVote";
-import QuestionBody from "./QuestionBody";
-
-function MainQuestion() {
-    return (
-        <div className=" flex ">
-            <QuestionVote />
-            <QuestionBody />
-        </div>
-    )
+function MainQuestion({ question, tags }) {
+  return (
+    <div className="flex">
+      <QuestionVote question={question} />
+      <QuestionBody question={question} tags={tags} />
+    </div>
+  );
 }
 
-export default MainQuestion
+export default MainQuestion;
