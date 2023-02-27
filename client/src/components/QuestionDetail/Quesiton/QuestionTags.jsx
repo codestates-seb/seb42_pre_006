@@ -5,9 +5,9 @@ function QuestionBodyTags({ tags }) {
   return (
     <>
       {tags && tags.length > 0 && (
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2 mt-8">
           {tags.map(tag => (
-            <Badge variant="tags" key={tag.tagId} to={`/tags/${tag.tagName}`}>
+            <Badge variant="tags" key={tag.tagId}>
               {tag.tagName}
             </Badge>
           ))}

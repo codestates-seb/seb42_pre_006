@@ -9,15 +9,15 @@ import {
 } from 'react-icons/md';
 import { TbClock } from 'react-icons/tb';
 
-function AnswerVote({ answer }) {
+function AnswerVote({ answer: { answerId, answerStatus, answerVoteCount } }) {
   const [bookMark, setBookMark] = useState(false);
   const [votesCount, setVotesCont] = useState(0);
 
   // TODO : 추후 API 관련 로직 수정하기
   const handleCountUpVotes = async () => {
     try {
-      const response = await axios.post(`/answer/${answer.answerId}/vote`, {
-        questionVoteStatus: true,
+      const response = await axios.post(`/answers/${answerId}/answer-vote`, {
+        answerVoteStatus: true,
         memberId: 1,
       });
       if (response.data) {
@@ -32,8 +32,8 @@ function AnswerVote({ answer }) {
 
   const handleCountDownVotes = async () => {
     try {
-      const response = await axios.post(`/answer/${answer.questionId}/vote`, {
-        questionVoteStatus: false,
+      const response = await axios.post(`/answers/${answerId}/answer-vote`, {
+        answerVoteStatus: true,
         memberId: 1,
       });
       if (response.data) {
@@ -51,8 +51,8 @@ function AnswerVote({ answer }) {
   };
 
   useEffect(() => {
-    setVotesCont(0);
-  }, []);
+    setVotesCont(answerVoteCount);
+  }, [answerVoteCount]);
 
   return (
     <article className=" flex flex-col justify-top items-center  text-gray-300  -ml-5 -mr-1">

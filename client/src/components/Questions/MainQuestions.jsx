@@ -13,9 +13,11 @@ function MainQuestions({
     <>
       {questionValueData && questionValueData.length > 0 ? (
         <div className="border-t">
-          {questionValueData?.map(question => (
-            <QuestionsList key={question.questionId} question={question} />
-          ))}
+          <ul className=" text-left">
+            {questionValueData?.map(question => (
+              <QuestionsList key={question.questionId} question={question} />
+            ))}
+          </ul>
           <div className="my-4 text-center">
             <Pagination
               total={pageInfo?.totalElements}

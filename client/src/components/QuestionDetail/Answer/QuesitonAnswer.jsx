@@ -23,11 +23,11 @@ function QuesitonAnswer({ questionId }) {
 
   return (
     <div className="mt-16">
-      {answers && answers.length > 0 && (
+      {answers.data && answers.data.length > 0 && (
         <>
           <AnswersInfo answersCount={answers.answersCount} />
           <div>
-            {answers?.map(answer => (
+            {answers.data?.map(answer => (
               <MainAnswer key={answer.answerId} answer={answer} />
             ))}
           </div>
