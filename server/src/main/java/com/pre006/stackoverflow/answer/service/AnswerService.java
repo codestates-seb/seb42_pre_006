@@ -30,10 +30,10 @@ public class AnswerService {
 
     public Answer createAnswer(Answer answer){
         Question question = questionService.findVerifiedQuestion(answer.getQuestion().getQuestionId());
-        //Member member = memberService.findVerifiedMember(answer.getMember().getMemberId());
+        Member member = memberService.findVerifiedMember(answer.getMember().getMemberId());
 
         answer.setQuestion(question);
-        //answer.setMember(member);
+        answer.setMember(member);
         return answerRepository.save(answer);
     }
 
