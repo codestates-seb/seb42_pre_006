@@ -14,8 +14,8 @@ function SearchInput() {
     <div className="relative">
       <form>
         <div
-          className={classNames('flex items-center border p-1', {
-            'shadow-md shadow-sky-400 outline outline-2 outline-sky-400':
+          className={classNames('flex items-center border p-1 bg-gray-200', {
+            'shadow-md shadow-sky-400 outline outline-2 outline-sky-400 ':
               isExpanded,
           })}
         >
@@ -25,6 +25,7 @@ function SearchInput() {
             placeholder="Search..."
             className="w-full h-4 outline-none"
             onClick={handleFounsSearchInput}
+            disabled
           />
         </div>
       </form>
