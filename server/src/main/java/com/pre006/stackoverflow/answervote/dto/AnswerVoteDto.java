@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 
 public class AnswerVoteDto {
     @Getter
+    @Setter
     @AllArgsConstructor
     @NoArgsConstructor
     public static class Post{
@@ -24,9 +25,10 @@ public class AnswerVoteDto {
     @Getter
     @Builder
     public static class Response{
+        private long answerVoteId;
         private long answerId;
+        private long memberId;
         private boolean answerVoteStatus;
-        private long answerVoteCount;
         private LocalDateTime createdAt;
         private LocalDateTime modifiedAt;
 

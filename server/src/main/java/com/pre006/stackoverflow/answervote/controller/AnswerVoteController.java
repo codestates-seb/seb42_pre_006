@@ -1,33 +1,46 @@
 package com.pre006.stackoverflow.answervote.controller;
 
+import com.pre006.stackoverflow.answer.utils.UriCreator;
 import com.pre006.stackoverflow.answervote.dto.AnswerVoteDto;
+import com.pre006.stackoverflow.answervote.entity.AnswerVote;
+import com.pre006.stackoverflow.answervote.mapper.AnswerVoteMapper;
+import com.pre006.stackoverflow.answervote.repository.AnswerVoteRepository;
+import com.pre006.stackoverflow.answervote.service.AnswerVoteService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+
 @CrossOrigin
 @RestController
-@RequestMapping("/answer/{answer-id}/answer-vote")
+@RequestMapping("/answers")
 public class AnswerVoteController {
-    private final static String ANSWER_VOTE_DEFAULT_URL = "/answer/{answer-id}/answer-vote";
+    private final static String ANSWER_VOTE_DEFAULT_URL = "/answers";
+    private final AnswerVoteService answerVoteService;
+    private final AnswerVoteMapper mapper;
 
-    @PostMapping
+    public AnswerVoteController(AnswerVoteService answerVoteService, AnswerVoteMapper mapper) {
+        this.answerVoteService = answerVoteService;
+        this.mapper = mapper;
+    }
+
+    @PostMapping("/{answer-id}/answer-vote")
     public ResponseEntity postAnswerVote(@PathVariable("answer-id") Long answerId,
                                          @RequestBody AnswerVoteDto.Post post){
+        post.setAnswerId(answerId);
+        AnswerVote answerVote = answerVoteService.createAnswerVote(mapper.postDtoToAnswerVote(post));
+        long answerVoteId = answerVote.getAnswerVoteId();
+        URI location = UriCreator.createUri(ANSWER_VOTE_DEFAULT_URL, answerId, answerVoteId);
 
-        return new  ResponseEntity<>(HttpStatus.CREATED);
+        AnswerVoteDto.Response response = mapper.answerVoteToResponseDto(answerVote);
+
+        return ResponseEntity.created(location).body(response);
     }
-    @PatchMapping("/{answer-vote-id}")
-    public ResponseEntity patchAnswerVote(@PathVariable("answer-id") Long answerId,
-                                          @PathVariable("answer-vote-id") Long answerVoteId,
-                                          @RequestBody AnswerVoteDto.Patch patch){
 
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @DeleteMapping("/{answer-vote-id}")
-    public ResponseEntity deleteAnswerVote(@PathVariable("answer-id") Long answerId,
-                                           @PathVariable("answer-vote-id") Long answerVoteId){
+    @DeleteMapping("/{answer-vote-id}/answer-vote")
+    public ResponseEntity deleteAnswerVote(@PathVariable("answer-vote-id") Long answerVoteId){
+        answerVoteService.deleteAnswerVote(answerVoteId);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
