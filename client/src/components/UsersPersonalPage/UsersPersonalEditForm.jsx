@@ -11,6 +11,7 @@ import validate from '../../utils/validate';
 function UsersPersonalEditForm({ user }) {
   const navigate = useNavigate();
   const [submitDisabled, setSubmitDisabled] = useState(false);
+  const [serverErrorMessage, setServerErrorMessage] = useState('');
 
   const userDefaultValues = {
     displayName: user.displayName,
@@ -49,8 +50,11 @@ function UsersPersonalEditForm({ user }) {
     const removeDuplicateTags =
       memberTitle.trim().length > 0 && [...new Set(tagArray)].join(' ');
 
+    const changedDisplayName = getValues('displayName') !==
+      user.displayName && { displayName };
+
     const formData = {
-      displayName,
+      ...changedDisplayName,
       location,
       aboutMe,
       memberTitle: removeDuplicateTags,
@@ -65,6 +69,7 @@ function UsersPersonalEditForm({ user }) {
       }
     } catch (error) {
       console.error(error);
+      setServerErrorMessage(error.response.data.message);
     }
   };
 
@@ -73,8 +78,8 @@ function UsersPersonalEditForm({ user }) {
       const isNotChangeValues =
         JSON.stringify(getValues()) === JSON.stringify(userDefaultValues);
       setSubmitDisabled(!isNotChangeValues);
-      console.log(submitDisabled);
     });
+
     return () => subscription.unsubscribe();
   }, [watch, getValues]);
 
@@ -90,6 +95,11 @@ function UsersPersonalEditForm({ user }) {
       >
         <InputFeild type="text" />
       </FormGroup>
+      {serverErrorMessage && (
+        <p className="text-sm text-danger text-left -mt-3">
+          이미 존재하는 유저명입니다
+        </p>
+      )}
       <FormGroup
         label="Location"
         id="location"
@@ -131,11 +141,7 @@ function UsersPersonalEditForm({ user }) {
         />
       </FormGroup>
       <div className="text-left">
-        <Button
-          variant="primary"
-          type="submit"
-          // disabled={!submitDisabled || Object.keys(errors).length > 0}
-        >
+        <Button variant="primary" type="submit" disabled={!submitDisabled}>
           Save profile
         </Button>
         <Button variant="primary" text to={`/users/${user.memberId}`}>

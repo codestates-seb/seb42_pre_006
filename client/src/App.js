@@ -12,7 +12,6 @@ import Users from './pages/Users';
 import BaseLayout from './components/layouts/BaseLayout';
 import MainLayout from './components/layouts/MainLayout';
 import Guide from './pages/Guide';
-import Home from './pages/Home';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import QuestionDetail from './pages/QuestionDetail';
@@ -25,7 +24,7 @@ function App() {
   return (
     <Routes>
       <Route element={<MainLayout hasSidebar />}>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Questions />} />
         <Route path="/questions">
           <Route index element={<Questions />} />
           <Route path=":id" element={<QuestionDetail />} />
@@ -54,6 +53,10 @@ function App() {
             {/** 로그인 전 상태 */}
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route
+              path="/users/:id/edit"
+              element={<Navigate replace to="/login" />}
+            />
           </>
         ) : (
           <>

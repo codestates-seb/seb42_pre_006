@@ -16,11 +16,11 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       {/* <QuestionProvider> */}
-      <AnswerProvider>
-        <AuthProvider>
-          <App />
-        </AuthProvider>
-      </AnswerProvider>
+      {/* <AnswerProvider> */}
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+      {/* </AnswerProvider> */}
       {/* </QuestionProvider> */}
     </BrowserRouter>
   </React.StrictMode>,

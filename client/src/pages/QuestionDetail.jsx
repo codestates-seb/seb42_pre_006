@@ -35,6 +35,10 @@ function QuestionDetail() {
     handleGetTags();
   }, []);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className=" py-2 px-5">
       {questionDetail && (
