@@ -3,16 +3,21 @@ import com.pre006.stackoverflow.answer.excpetion.BusinessLogicException;
 import com.pre006.stackoverflow.answer.excpetion.ExceptionCode;
 
 
+import com.pre006.stackoverflow.global.exception.CustomLogicException;
 import com.pre006.stackoverflow.member.entitiy.Member;
+import com.pre006.stackoverflow.member.mapper.MemberMapper;
+import com.pre006.stackoverflow.member.repository.JpaMemberRepository;
 import com.pre006.stackoverflow.member.repository.MemberRepository;
 import com.pre006.stackoverflow.member.utils.AuthoritiesUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
@@ -24,6 +29,10 @@ public class MemberService {
     }
 
     public Member createMember(Member member){
+        Optional<Member> verifiedMember = memberRepository.findByDisplayName(member.getDisplayName());
+        if(verifiedMember.isPresent())
+            throw new CustomLogicException(com.pre006.stackoverflow.global.exception.ExceptionCode.DISPLAYNAME_EXISTS);
+
         String encryptedPassword = passwordEncoder.encode(member.getPassword());
         member.setPassword(encryptedPassword);
 
@@ -33,7 +42,13 @@ public class MemberService {
         Member savedMember = memberRepository.save(member);
         return savedMember;
     }
+
+
     public Member updateMember(Member member) {
+        Optional<Member> verifiedMember = memberRepository.findByDisplayName(member.getDisplayName());
+        if(verifiedMember.isPresent())
+            throw new CustomLogicException(com.pre006.stackoverflow.global.exception.ExceptionCode.DISPLAYNAME_EXISTS);
+
         Member findMember = findVerifiedMember(member.getMemberId());
         Optional.ofNullable(member.getPassword()).ifPresent(content -> findMember.setPassword(content));
         Optional.ofNullable(member.getDisplayName()).ifPresent(content -> findMember.setDisplayName(content));
@@ -49,6 +64,7 @@ public class MemberService {
     public List<Member> findMembers(){
         return memberRepository.findAll();
     }
+
 
     public void deleteMember(long memberId) {
         Member findMember = findVerifiedMember(memberId);

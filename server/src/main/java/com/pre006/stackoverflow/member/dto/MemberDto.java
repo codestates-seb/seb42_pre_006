@@ -39,6 +39,8 @@ public class MemberDto {
         private String memberTitle;
         private String aboutMe;
         private Long memberId;
+
+        public void setMemberId(long memberId) {this.memberId = memberId;}
     }
     @Getter
     @Setter

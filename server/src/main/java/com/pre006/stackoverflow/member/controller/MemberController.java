@@ -7,6 +7,8 @@ import com.pre006.stackoverflow.member.service.MemberService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,25 +41,28 @@ public class MemberController {
     }
 
     @GetMapping
-    public  ResponseEntity getMembers(){
-        List<Member> members = memberService.findMembers();
-        return new ResponseEntity<>(memberMapper.membersToMemberResponse(members), HttpStatus.OK);
+    public  ResponseEntity getMembers(@AuthenticationPrincipal User members){
+        List<Member> member = memberService.findMembers();
+        return new ResponseEntity<>(memberMapper.membersToMemberResponse(member), HttpStatus.OK);
     }
 
     @GetMapping("/{member-id}")
-    public ResponseEntity getMember(@PathVariable("member-id") long memberId){
+    public ResponseEntity getMember(@AuthenticationPrincipal User members,
+                                    @PathVariable("member-id") long memberId){
         Member member = memberService.findMember(memberId);
         return new ResponseEntity<>(memberMapper.memberToMemberResponse(member), HttpStatus.OK);
     }
     @PatchMapping("/{member-id}")
-    public ResponseEntity patchMember(@PathVariable("member-id") long memberId,
+    public ResponseEntity patchMember(@AuthenticationPrincipal User members,
+                                      @PathVariable("member-id") long memberId,
                                       @Valid @RequestBody MemberDto.Patch memberDto){
         memberDto.setMemberId(memberId);
         Member member = memberService.updateMember(memberMapper.memberDtoToMember(memberDto));
         return new ResponseEntity<>(memberMapper.memberToMemberResponse(member), HttpStatus.OK);
     }
     @DeleteMapping("/{member-id}")
-    public ResponseEntity deleteMember(@PathVariable("member-id") long memberId){
+    public ResponseEntity deleteMember(@AuthenticationPrincipal User members,
+                                       @PathVariable("member-id") long memberId){
         memberService.deleteMember(memberId);
         System.out.println("삭제 되었습니다.");
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
