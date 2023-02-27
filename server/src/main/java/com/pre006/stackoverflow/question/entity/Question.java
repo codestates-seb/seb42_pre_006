@@ -2,7 +2,6 @@ package com.pre006.stackoverflow.question.entity;
 
 import com.pre006.stackoverflow.answer.entity.Answer;
 import com.pre006.stackoverflow.member.entitiy.Member;
-import com.pre006.stackoverflow.global.audit.Auditable;
 import com.pre006.stackoverflow.question.audit.QuestionAuditable;
 import com.pre006.stackoverflow.questionvote.entity.QuestionVote;
 
@@ -70,6 +69,13 @@ public class Question extends QuestionAuditable {
         return answersCount;
     }
 
+    public int getQuestionVoteCount() {
+        questionVoteCount = questionVotes.stream()
+                .mapToInt(questionVote -> questionVote.getQuestionVoteStatus() ? 1 : -1)
+                .sum();
+        return questionVoteCount;
+    }
+
     public void setAnswer(Answer answer) {
         this.answers.add(answer);
         if (answer.getQuestion() != this) {
@@ -93,14 +99,6 @@ public class Question extends QuestionAuditable {
 
     public void addViewCount() {
         this.viewCount++;
-    }
-
-    public void addVoteCount() {
-        this.questionVoteCount++;
-    }
-
-    public void subVoteCount() {
-        this.questionVoteCount--;
     }
 
     public Question(String questionTitle, String questionContent) {
