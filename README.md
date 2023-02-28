@@ -19,7 +19,7 @@
 | | test account |
 | :--: | :--: |
 | ID | codestates@gmail.com |
-| PW | 123456789 |
+| PW | codestates42@ |
 
 
 <br><br><br><br>
