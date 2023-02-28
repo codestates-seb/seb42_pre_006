@@ -1,10 +1,10 @@
-<img src="https://capsule-render.vercel.app/api?type=Waving&color=8c66ff&height=280&section=header&fontColor=ffffff&animation=twinkling&text=🎈 동그란 코딩 속에 피어난 How is the life?&fontSize=40&fontAlignY=40" />
+<img src="https://capsule-render.vercel.app/api?type=Waving&color=8c66ff&height=280&section=header&fontColor=ffffff&animation=twinkling&text=🎈 동그란 코딩 속에 피어난 How is the life?&fontSize=40&fontAlignY=40" alt="동피난"/>
 
 <br><br>
 
 # 📌 Stack Overflow Clone
 
-<div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+<div align="center">
 
 [Stack Overflow Clone Site](https://github.com/kyechan99/capsule-render#wave)
 
@@ -19,7 +19,7 @@
 
 # 👩‍👩‍👧‍👦 Team
 
-<div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+<div align="center">
 
 ## 🖥️ Front-end
 | 전민정(팀장) | 김보라 | 이승미 |
