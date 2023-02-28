@@ -12,7 +12,7 @@
 
 <br><br>
 
-<strong>[🎈 Stack Overflow Clone Site](https://github.com/kyechan99/capsule-render#wave)</strong>
+<strong>[🎈 Stack Overflow Clone Site](http://seb42pre006.s3-website.ap-northeast-2.amazonaws.com/questions)</strong>
 
 <br>
 
